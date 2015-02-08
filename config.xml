@@ -7,21 +7,6 @@
     <author email="naitik@freelanceventure.in" href="http://nearbybestdeals.com">
         Nearby Best Deals team
 	</author>
-		
-	<preference name="SplashScreen" value="screen" />
-	<preference name="AutoHideSplashScreen" value="false" />
-	
-	<preference name="Fullscreen" value="true" />
-	<preference name="Orientation" value="portrait" />
-	<preference name="DisallowOverscroll" value="true"/>
-		
-    <gap:plugin name="org.apache.cordova.device" />    
-    <gap:plugin name="org.apache.cordova.dialogs" />
-    <gap:plugin name="org.apache.cordova.file" />    
-    <gap:plugin name="org.apache.cordova.geolocation" />
-    <gap:plugin name="org.apache.cordova.inappbrowser" />
-    <gap:plugin name="org.apache.cordova.media" />
-    <gap:plugin name="org.apache.cordova.splashscreen" />
 	
 	<gap:config-file platform="ios" parent="CFBundleShortVersionString">
     <string>100</string>
