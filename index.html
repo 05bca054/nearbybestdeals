@@ -1,0 +1,1071 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>App</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- critical -->
+		<!-- PhoneGap, jQuery, App, jQuery.Mobile -->
+		<script charset="utf-8" src="cordova.js"></script>
+		<script charset="utf-8" src="js/compressed/jquery.js"></script>
+		<script charset="utf-8" src="js/compressed/jquery-ui.js"></script>
+		<script charset="utf-8" src="js/index.js"></script>
+		<script charset="utf-8" src="js/coupon.js"></script>
+		<script charset="utf-8" type="text/javascript" src="js/config.js"></script>
+		<!--<script charset="utf-8" type="text/javascript" src="js/gps_gcm.js"></script>-->
+		<script charset="utf-8" type="text/javascript" src="js/android_notification.js"></script>
+		<script charset="utf-8" type='application/javascript' type="text/javascript" src="js/compressed/fastclick.js"></script>
+		<script charset="utf-8" type='application/javascript' type="text/javascript" src="js/jquery.countdown.min.js"></script>
+		<!--<script charset="utf-8" type='application/javascript' type="text/javascript" src="js/openfb.js"></script>-->
+		<script charset="utf-8" type="text/javascript" src="js/ios_notification.js"></script>
+		<script charset="utf-8" type="text/javascript" src="js/compressed/jq_validate.js"></script>
+		<script>
+			jQuery(document).bind("mobileinit", function () {
+				console.log("configuring jqm...");
+		 
+				// required for "phoning home" (load external assets, etc.)
+				jQuery.support.cors = true;
+				jQuery.mobile.allowCrossDomainPages = true;
+				
+				jQuery.mobile.page.prototype.options.domCache = true;
+				 
+				jQuery.mobile.phonegapNavigationEnabled = true;
+				jQuery.mobile.defaultDialogTransition = "pop";
+				jQuery.mobile.defaultPageTransition = "slidefade";
+				 
+				jQuery.mobile.loader.prototype.options.text = "loading";
+				jQuery.mobile.loader.prototype.options.textVisible = true;
+				jQuery.mobile.loader.prototype.options.theme = "a";
+				
+			});
+			
+			/*$(document).on({
+				ajaxSend: function () { $.mobile.loading('show'); },
+				ajaxStart: function () { $.mobile.loading('hide'); },
+				ajaxStop: function () { $.mobile.loading('show'); },
+				ajaxError: function () { $.mobile.loading('hide'); }
+			});*/
+			app.init();
+			
+		</script>
+		
+		<script charset="utf-8" src="js/JQM.js"></script>
+		<!-- critical -->
+		<!-- plugins -->
+		<!-- plugins-->
+		<!-- themes -->
+		<!-- jQuery Mobile, FontAwesome & App -->
+		<link rel="stylesheet" href="css/jquery.mobile-1.4.5.css" />
+		<link rel="stylesheet" href="css/font-awesome.css" />
+		<link rel="stylesheet" href="css/custom-icon.css" />
+		<style>
+			label.error {
+				color: red;
+				font-size: 16px;
+				font-weight: normal;
+				line-height: 1.4;
+				margin-top: 0.5em;
+				width: 100%;
+				float: none;
+			}
+			@media screen and (orientation: portrait) {
+				label.error {
+					margin-left: 0;
+					display: block;
+				}
+			}
+			@media screen and (orientation: landscape) {
+				label.error {
+					display: inline-block;
+					margin-left: 22%;
+				}
+			}
+			em {
+				color: red;
+				font-weight: bold;
+				padding-right: .25em;
+			}
+		</style>
+	</head>
+	<body>
+		<div data-role="page" id="gcm_reg">
+			<div data-role="header">
+				<h3>Registering device</h3>					
+			</div>
+			
+			<div role="main" class="ui-content">
+				<img src="img/icon.png" height="96" width="96" align="middle" alt="USA" class="ui-li-icon" style="margin-left: 35%;">
+				<ul id="app-status-ul" data-role="listview" data-inset="true">					
+					<li class="ui-btn ui-icon-clock ui-btn-icon-left" style=" text-align: center;">Please wait...</li>
+					<li class="ui-icon-action ui-btn-icon-right">Registering mobile..</li>
+				</ul>
+			</div>
+			
+			<div data-role="footer" data-position="fixed">
+			</div>
+		</div>
+		<!-- single coupon page-->
+		<div data-role="page" id="single_coupon">
+			<div data-role="header">
+				<!--<a href="#inside-single-coupon" data-icon="bullets" class="ui-btn-b" data-iconpos="notext">Menu</a>
+				<h3 style="margin: 0px;" id="coupon_merchant_name"></h3>-->				
+				<div class="ui-grid-a">
+					<div class="ui-block-a" style="width:13%;margin:1% 0% 0% 2%;">
+						<a href="#inside-single-coupon">
+							<img src="img/menu32.png">
+						</a>
+					</div>
+					<div class="ui-block-b" style="width:85%;padding:2% 0%;">
+						<h3 style="margin: 0% 0% 0% 10%" id="single_coupon_merchant"></h3>
+					</div>
+				</div>
+			</div>
+			
+			<!--Right panel-->
+			<div data-role="panel" id="inside-single-coupon" data-position="left" data-display="overlay" data-theme="b">
+				<ul data-role="listview">
+					<li data-icon="back"><a href="#" data-rel="close">Close</a></li>
+					<li><a href="#coupon" class="ui-link ui-btn ui-icon-home ui-btn-icon-left ui-btn-active ui-state-persist">Coupons<div class="ui-li-count count-coupon"></div></a></li>
+					<li>						
+						<div class='ui-sub-panel' id='submenu1'>
+						  <div class='ui-header' data-theme='b'>
+							<h1 class='ui-title'>Dealer</h1>
+						  </div>
+						  <div class="ui-content">
+							<!-- submenu contents here -->
+							<ul data-role="listview">
+								<li><a href="#" class="ui-link ui-btn ui-icon-plus ui-btn-icon-left addDealer">Add Dealer</a></li>
+								<li><a href="#listdealer" class="ui-link ui-btn ui-icon-grid ui-btn-icon-left">List Dealer<div class="ui-li-count dealer-count"></div></a></li>
+							</ul>
+						  </div>
+						</div>
+					</li>
+					<!--<li><a href="#nearbydeals" class="ui-link ui-btn ui-icon-location ui-btn-icon-left">Nearby Deals</a></li>-->					
+					<li><a href="#feedback" class="ui-link ui-btn ui-icon-mail ui-btn-icon-left">Contact us</a></li>
+					<li><a href="#profile" class="ui-link ui-btn ui-icon-gear ui-btn-icon-left">Profile settings</a></li>					
+					<li><a href="#contact_us" class="ui-link ui-btn ui-icon-info ui-btn-icon-left">Contact us</a></li>
+				</ul>
+			</div>
+			
+			<div role="main" class="ui-content">
+				<ul id="couponSingle" class="touch" data-role="listview" data-icon="false" data-split-icon="delete" data-inset="true">
+					<li class="ui-li-has-alt ui-first-child">
+						<div class="ui-grid-a ui-responsive">							
+							<div class="ui-block-a">
+								<a href="#" class="ui-link ui-btn ui-icon-location ui-btn-icon-left ui-btn-active ui-state-persist" id="single_coupon_distance">Locate Dealer</a>
+								<a href="#" class="ui-link ui-btn ui-icon-info ui-btn-icon-left ui-btn-active ui-state-persist merchant_info" id="single_coupon_merchantid">Merchant info</a>
+							</div>
+							<div class="ui-block-b" id="single_sharable">								
+								<!--<a href="#" onclick="window.plugins.socialsharing.share('Message and subject', 'The subject','http://freelanceventure.in/wp-content/uploads/2014/08/logo.png','https://www.google.com/maps/?saddr=22,73&daddr=23,73')" class="ui-link ui-btn ui-icon-info ui-btn-icon-left ui-btn-active ui-state-persist">Share</a>-->
+								<h3 style="text-align:center;">Share coupon : </h3>
+								<a href="#" class="facebook-share" style="padding:3%"><img src="img/facebook.jpg" height="32" width="32"/></a>
+								<a href="#" class="twitter-share" style="padding:3%"><img src="img/twitter.jpg" height="32" width="32"/></a>
+								<a href="#" class="whatsapp-share" style="padding:3%"><img src="img/whatsapp.jpg" height="32" width="32"/></a>
+								<!--<a href="#" class="mail-share"><img src="img/mail.png" height="32" width="32"/></a>-->
+								<a href="#" class="sms-share" style="padding:3%"><img src="img/sms.jpg" height="32" width="32"/></a>
+								<!--<a href="#" class="google-share"><img src="img/googleplus.jpg" height="32" width="32"/></a>-->
+								<!--<a href="#" onclick="window.plugins.socialsharing.share('Message, subject, image and link', 'The subject', 'https://www.google.nl/images/srpr/logo4w.png', 'https://www.google.com/maps/?saddr=22,73&daddr=23,73')" class="ui-link ui-btn ui-icon-info ui-btn-icon-left ui-btn-active ui-state-persist">Share on FB</a>-->
+								<!--<a onClick="fb_share();">FB SHARE </a>-->
+							</div>
+						</div>
+						
+						<div class="ui-grid-a ui-responsive">
+							<div class="ui-block-a">
+								<a href="#" class="ui-link ui-btn ui-icon-clock ui-btn-icon-left" id="single_coupon_exipry">1 day 20:15:30</a>
+							</div>
+							<div class="ui-block-b">
+								<a href="#" class="ui-link ui-btn ui-icon-shop ui-btn-icon-left" id="single_coupon_code">Code : rasasi15</a>
+							</div>
+						</div><!-- /grid-a -->
+						
+						<hr>
+						<div class="ui-grid-a">
+							<div class="ui-block-a" style="padding-top: 2%;width: 5%;">
+								<img style="padding:1%;" src="img/deals.png" align="middle" alt="USA">
+							</div>
+							<div class="ui-block-b" style="width:95%;">
+								<div class="ui-bar" style="height:30px;text-align:center;">
+									<b id="single_coupon_title">Perfume sale</b>
+								</div>
+							</div>
+						</div>
+						<hr>						
+					</li>
+				</ul>
+				<p>
+					<div id="single_coupon_desc">
+						15% discount on rasasi products
+					</div>
+				</p>
+				<!--<div class="ui-grid-a ui-responsive">
+					<div class="ui-block-a">
+						<div id="coupon_title" class="ui-bar ui-bar-a" style="height:60px"></div>
+					</div>
+					<div class="ui-block-b">
+						<div class="ui-bar ui-bar-a" style="height:60px">
+							<div id="coupon_code"></div>
+							<div id="coupon_expiry"></div>
+						</div>
+					</div>
+				</div><!-- /grid-a -->
+				
+				<div class="ui-grid-solo">
+				    <div class="ui-block-a" id="coupon_desc"></div>
+				</div>
+			</div>
+			
+			<div data-role="footer" data-position="fixed">
+				<div data-role="navbar" data-iconpos="left">
+					<ul>												
+						<li><a href="#coupon" data-icon="home">Coupons</a></li>
+					</ul>
+				</div><!-- /navbar -->		
+			</div>
+		</div>
+		
+		<div data-role="page" id="single_merchant">
+			<div data-role="header">
+				<div class="ui-grid-a">
+					<div class="ui-block-a" style="width:13%;margin:1% 0% 0% 2%;">
+						<a href="#inside-single-merchant">
+							<img src="img/menu32.png">
+						</a>
+					</div>
+					<div class="ui-block-b" style="width:85%;padding:2% 0%;">
+						<h3 style="margin: 0% 0% 0% 10%;" id="single_merchant_name"></h3>
+					</div>
+				</div>
+			</div>
+			
+			<!--Right panel-->
+			<div data-role="panel" id="inside-single-merchant" data-position="left" data-display="overlay" data-theme="b">
+				<ul data-role="listview">
+					<li data-icon="back"><a href="#" data-rel="close">Close</a></li>
+					<li><a href="#coupon" class="ui-link ui-btn ui-icon-home ui-btn-icon-left">Coupons<div class="ui-li-count count-coupon"></div></a></li>
+					<li>						
+						<div class='ui-sub-panel' id='submenu1'>
+						  <div class='ui-header' data-theme='b'>
+							<h1 class='ui-title'>Dealer</h1>
+						  </div>
+						  <div class="ui-content">
+							<!-- submenu contents here -->
+							<ul data-role="listview">
+								<li><a href="#" class="ui-link ui-btn ui-icon-plus ui-btn-icon-left addDealer">Add Dealer</a></li>
+								<li><a href="#listdealer" class="ui-link ui-btn ui-icon-grid ui-btn-icon-left ui-btn-active ui-state-persist">List Dealer<div class="ui-li-count dealer-count"></div></a></li>
+							</ul>
+						  </div>
+						</div>
+					</li>
+					<!--<li><a href="#nearbydeals" class="ui-link ui-btn ui-icon-location ui-btn-icon-left">Nearby Deals</a></li>-->					
+					<li><a href="#feedback" class="ui-link ui-btn ui-icon-mail ui-btn-icon-left">Feedback</a></li>
+					<li><a href="#profile" class="ui-link ui-btn ui-icon-gear ui-btn-icon-left">Profile settings</a></li>					
+					<!--<li>Exit</li>-->
+					<li><a href="#contact_us" class="ui-link ui-btn ui-icon-info ui-btn-icon-left">Contact us</a></li>
+				</ul>
+			</div>
+			
+			<div role="main" class="ui-content">
+				<div class="ui-grid-a ui-responsive">
+					<div class="ui-block-a">
+						<div class="ui-bar ui-bar-a" style="height:60px">							
+							<a href="tel:+91 9662 547 757" class="ui-btn ui-icon-phone ui-btn-icon-left ui-btn-active ui-state-persist" id="merchant_phone"></a>
+						</div>
+					</div>
+					<div class="ui-block-b">
+						<div class="ui-bar ui-bar-a" style="height:60px">
+							<a href="mailto:info@rajwadi.com" class="ui-btn ui-icon-mail ui-btn-icon-left ui-btn-active ui-state-persist" id="merchant_email"></a>
+						</div>
+					</div><!-- /grid-a -->
+					<div class="ui-block-c">
+						<div class="ui-bar ui-bar-a" style="height:60px">
+							<a href="#" class="ui-btn ui-icon-location ui-btn-icon-left ui-btn-active ui-state-persist" id="locate_merchant">Locate Dealer</a>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<h3>Brief Description</h3>
+				<hr>
+				<div class="ui-grid-solo">
+					<div class="ui-block-a" id="merchant_desc"></div>
+				</div>
+				<hr>
+				<h3>Address</h3>
+				<hr>
+				<div class="ui-grid-solo">
+				    <div class="ui-block-a" id="merchanr_addr"></div>
+				</div>
+			</div>
+			
+			<div data-role="footer" data-position="fixed">
+				<div data-role="navbar" data-iconpos="left">
+					<ul>											
+						<li><a href="#coupon" data-icon="home">Coupons</a></li>
+					</ul>
+				</div><!-- /navbar -->		
+			</div>
+		</div>
+		
+		<div data-role="page" id="nearby_single_coupon">
+			<div data-role="header">
+				<div class="ui-grid-a">
+					<div class="ui-block-a" style="width:13%;margin:1% 0% 0% 2%;">
+						<a href="#nearby-single-merchant">
+							<img src="img/menu32.png">
+						</a>
+					</div>
+					<div class="ui-block-b" style="width:85%;padding:2% 0%;">
+						<h3 style="margin: 0% 0% 0% 10%;" id="nearby_single_coupon_merchant"></h3>
+					</div>
+				</div>
+			</div>
+			
+			<!--Right panel-->
+			<div data-role="panel" id="nearby-single-merchant" data-position="left" data-display="overlay" data-theme="b">
+				<ul data-role="listview">
+					<li data-icon="back"><a href="#" data-rel="close">Close</a></li>
+					<li><a href="#coupon" class="ui-link ui-btn ui-icon-home ui-btn-icon-left">Coupons<div class="ui-li-count count-coupon"></div></a></li>
+					<li>						
+						<div class='ui-sub-panel' id='submenu1'>
+						  <div class='ui-header' data-theme='b'>
+							<h1 class='ui-title'>Dealer</h1>
+						  </div>
+						  <div class="ui-content">
+							<!-- submenu contents here -->
+							<ul data-role="listview">
+								<li><a href="#" class="ui-link ui-btn ui-icon-plus ui-btn-icon-left addDealer">Add Dealer</a></li>
+								<li><a href="#listdealer" class="ui-link ui-btn ui-icon-grid ui-btn-icon-left">List Dealer<div class="ui-li-count dealer-count"></div></a></li>
+							</ul>
+						  </div>
+						</div>
+					</li>
+					<!--<li><a href="#nearbydeals" class="ui-link ui-btn ui-icon-location ui-btn-icon-left ui-btn-active ui-state-persist">Nearby Deals</a></li>-->
+					<li><a href="#feedback" class="ui-link ui-btn ui-icon-mail ui-btn-icon-left">Feedback</a></li>
+					<li><a href="#profile" class="ui-link ui-btn ui-icon-gear ui-btn-icon-left">Profile settings</a></li>					
+					<!--<li>Exit</li>-->
+					<li><a href="#contact_us" class="ui-link ui-btn ui-icon-info ui-btn-icon-left">Contact us</a></li>
+				</ul>
+			</div>
+			
+			<div role="main" class="ui-content">
+				<ul id="nearbydealsSingle" class="touch" data-role="listview" data-icon="false" data-split-icon="delete" data-inset="true">
+					<li class="ui-li-has-alt ui-first-child">
+						<!--<div class="ui-grid-a ui-responsive">
+							<div class="ui-block-a"><h3 id="nearby_single_coupon_merchant">Nice n new Gifts</h3></div>
+							<div class="ui-block-b">
+								<a href="#" class="ui-link ui-btn ui-icon-location ui-btn-icon-left ui-btn-active ui-state-persist" id="nearby_single_coupon_distance">1 Miles</a>
+							</div>
+						</div>
+						<div class="ui-grid-a ui-responsive">
+							<div class="ui-block-a">							
+								<a href="#" class="ui-link ui-btn ui-icon-shop ui-btn-icon-left" id="nearby_single_coupon_code">Code : rasasi15</a>
+							</div>
+							<div class="ui-block-b">
+								<a href="#" class="ui-link ui-btn ui-icon-clock ui-btn-icon-left" id="nearby_single_coupon_exipry">1 day 20:15:30</a>
+							</div>
+						</div>
+						
+						<div class="ui-grid-a ui-responsive">
+							<div class="ui-block-a">
+								<div class="ui-bar" style="height:30px">
+									<b id="nearby_single_coupon_title">Perfume sale</b>
+								</div>
+							</div>
+							<div class="ui-block-b">
+								<a href="#" class="ui-link ui-btn ui-icon-info ui-btn-icon-left" id="nearby_single_coupon_merchantid">Merchant info</a>
+							</div>
+						</div>		
+						<div id="nearby_single_coupon_desc">
+							15% discount on rasasi products
+						</div>-->
+						
+						<div class="ui-grid-a ui-responsive">							
+							<div class="ui-block-a">
+								<a href="#" class="ui-link ui-btn ui-icon-location ui-btn-icon-left ui-btn-active ui-state-persist" id="nearby_single_coupon_distance"></a>
+							</div>
+							<div class="ui-block-b" id="nearby_single_sharable">
+								<a href="#" class="ui-link ui-btn ui-icon-info ui-btn-icon-left ui-btn-active ui-state-persist merchant_info" id="nearby_single_coupon_merchantid">Merchant info</a>
+								<h3 style="text-align:center;">Share coupon : </h3>
+								<a href="#" class="nearby-facebook-share" style="padding:3%"><img src="img/facebook.jpg" height="32" width="32"/></a>
+								<a href="#" class="nearby-twitter-share" style="padding:3%"><img src="img/twitter.jpg" height="32" width="32"/></a>
+								<a href="#" class="nearby-whatsapp-share" style="padding:3%"><img src="img/whatsapp.jpg" height="32" width="32"/></a>
+								<!--<a href="#" class="mail-share"><img src="img/mail.png" height="32" width="32"/></a>-->
+								<a href="#" class="nearby-sms-share" style="padding:3%"><img src="img/sms.jpg" height="32" width="32"/></a>
+							</div>
+						</div>
+						
+						<div class="ui-grid-a ui-responsive">							
+							<div class="ui-block-a">
+								<a href="#" class="ui-link ui-btn ui-icon-clock ui-btn-icon-left" id="nearby_single_coupon_exipry">1 day 20:15:30</a>
+							</div>
+							<div class="ui-block-b">
+								<a href="#" class="ui-link ui-btn ui-icon-shop ui-btn-icon-left" id="nearby_single_coupon_code">Code : rasasi15</a>
+							</div>
+						</div><!-- /grid-a -->
+						
+						<hr>
+						<div class="ui-grid-a">
+							<div class="ui-block-a" style="padding-top: 2%;width: 5%;">
+								<img style="padding:1%;" src="img/deals.png" align="middle" alt="USA">
+							</div>
+							<div class="ui-block-b" style="width:95%;">
+								<div class="ui-bar" style="height:30px;text-align:center;">
+									<b id="nearby_single_coupon_title">Perfume sale</b>
+								</div>
+							</div>
+						</div>
+						<hr>
+									
+						<div id="nearby_single_coupon_desc">
+							15% discount on rasasi products
+						</div>
+					</li>
+				</ul>
+			</div>
+			
+			<div data-role="footer" data-position="fixed">
+				<div data-role="navbar" data-iconpos="left">
+					<ul>											
+						<li><a href="#coupon" data-icon="home">Coupons</a></li>
+					</ul>
+				</div><!-- /navbar -->		
+			</div>
+		</div>
+		
+        <div data-role="page" id="registration">
+			
+			<div data-role="main" class="ui-content">
+				<form id="form1">
+					<hr>
+					<span style="color:red">*</span> denotes required fileds
+					<hr>
+					<label for="text-1">Full name:<span style="color:red">*</span></label>
+					<input data-clear-btn="true" name="f_name" id="f_name" value="" type="text" placeholder="Name">
+					
+					<label for="text-3">Mobile No.:<span style="color:red">*</span></label>
+					<input data-clear-btn="true" name="mob_no" id="mob_no" value="" type="text" placeholder="Mobile no.: 91 96625 47757">
+					
+					<label for="text-3">Email Addr.:<span style="color:red">*</span></label>
+					<input data-clear-btn="true" name="email" id="email" value="" type="text" placeholder="Email: abc@xyz.com">
+					<br>
+					
+					<p style="color:#3388cc;">If you enter merchant id which is not exist in sytem <b>you might not get any notification from them.</b></p>
+					<p style="color:green;"><b>You can also add dealers once you registered successfully.</b></p>
+					
+					<br>
+					<div class="ui-grid-a">
+						<div class="ui-block-a">
+							<label for="text-4">Dealer id :</label>
+							<input data-clear-btn="true" name="merchant_name" id="merchant_name" value="" type="text" data-rel="popup">
+						</div>
+						<div class="ui-block-b">							
+							<a href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-btn-inline ui-icon-check" data-inline="true" id="varify_merchant" style="margin-top: 15%;">Varify</a>
+						</div>
+					</div>
+					
+					<input value="Register" type="submit" data-inline="true" id="register">
+					<input value="Reset" type="reset" data-inline="true">
+				</form>
+			</div>
+        </div>
+        
+        <!--success page-->
+        <div data-role="page" id="nearbydeals">
+			
+			<div data-role="header">
+				<div class="ui-grid-a">
+					<div class="ui-block-a" style="width:13%;margin:1% 0% 0% 2%;">
+						<a href="#inside-success">
+							<img src="img/menu32.png">
+						</a>
+					</div>
+					<div class="ui-block-b" style="width:85%;padding:2% 0%;">
+						<h3 style="margin: 0% 0% 0% 10%;">Search Nearby Deals</h3>
+					</div>
+				</div>
+			</div>
+			
+			<!--Right panel-->
+			<div data-role="panel" id="inside-success" data-position="left" data-display="overlay" data-theme="b">
+				<ul data-role="listview">
+					<li data-icon="back"><a href="#" data-rel="close">Close</a></li>
+					<li><a href="#coupon" class="ui-link ui-btn ui-icon-home ui-btn-icon-left">Coupons<div class="ui-li-count count-coupon"></div></a></li>
+					<li>						
+						<div class='ui-sub-panel' id='submenu1'>
+						  <div class='ui-header' data-theme='b'>
+							<h1 class='ui-title'>Dealer</h1>
+						  </div>
+						  <div class="ui-content">
+							<!-- submenu contents here -->
+							<ul data-role="listview">
+								<li><a href="#" class="ui-link ui-btn ui-icon-plus ui-btn-icon-left addDealer">Add Dealer</a></li>
+								<li><a href="#listdealer" class="ui-link ui-btn ui-icon-grid ui-btn-icon-left">List Dealer<div class="ui-li-count dealer-count"></div></a></li>
+							</ul>
+						  </div>
+						</div>
+					</li>
+					<!--<li><a href="#nearbydeals" class="ui-link ui-btn ui-icon-location ui-btn-icon-left ui-btn-active ui-state-persist">Nearby Deals</a></li>-->
+					<li><a href="#feedback" class="ui-link ui-btn ui-icon-mail ui-btn-icon-left">Feedback</a></li>
+					<li><a href="#profile" class="ui-link ui-btn ui-icon-gear ui-btn-icon-left">Profile settings</a></li>					
+					<!--<li>Exit</li>-->
+					<li><a href="#contact_us" class="ui-link ui-btn ui-icon-info ui-btn-icon-left">Contact us</a></li>
+				</ul>
+			</div>
+									
+			<div data-role="main" class="ui-content">
+				<a href="#popupNearbyDeals" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-icon-search ui-btn-icon-left ui-btn-a" data-transition="pop" id="openNearByDeals">Nearby Deals</a>
+				<div data-role="popup" id="popupNearbyDeals" data-overlay-theme="a" class="ui-corner-all" data-inset="true">
+					 <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+				     <form id="deals" style="padding:0px 20px;">					
+						
+						<fieldset data-role="controlgroup" id="cat_set">
+							<legend>Categories:</legend>
+							<input name="categories[]" id="checkbox-v-2a" type="checkbox" value="1">
+							<label for="checkbox-v-2a">Restaurent</label>
+							<input name="categories[]" id="checkbox-v-2b" type="checkbox" value="2">
+							<label for="checkbox-v-2b">Apparel</label>
+							<input name="categories[]" id="checkbox-v-2c" type="checkbox" value="3">
+							<label for="checkbox-v-2c">Shoes</label>
+						</fieldset>				
+						<p style="color:#3388cc;">Note: Distance in terms of radius of your current(Device[GPS]) location.Actual distance to dealers in <b>Kilometers might be vary using navigation.</b></p>
+						<div class="ui-field-contain">
+							<label for="select-native-2">Deals Within(Distance in miles):</label>
+							<select name="distance" id="distance">
+								<option value="0.3">Half Kilometer</option>
+								<option value="0.6">1 Kilometer</option>
+								<option value="1.2">2 Kilometer</option>
+								<option value="1.8">3 Kilometer</option>
+								<option value="3.0">5 Kilometer</option>
+								<option value="6.0">10 Kilometer</option>
+								<option value="9.0">15 Kilometer</option>
+								<option value="15.0">25 Kilometer</option>
+							</select>
+						</div>
+							
+						<!--<a href="#" id="search" class="ui-link ui-btn ui-icon-location ui-btn-icon-left ui-btn-active ui-state-persist">Search</a>-->
+						<input value="Search" type="submit" data-inline="true" id="search">
+						<input value="Reset" type="reset" data-inline="true">
+					</form>				
+				</div>
+				<form class="ui-filterable">
+				    <input id="nearbydeals-input" data-type="search" placeholder="Dealer name,Coupon code or title...">
+				</form>
+				<h3 id="total-deals"></h3><br>
+				<ul id="nearbydealslist" class="touch" data-role="listview" data-icon="false" data-split-icon="delete" data-filter="true" data-input="#nearbydeals-input">
+				</ul>
+			</div>
+			
+			<div data-role="footer" data-position="fixed">				
+				<div data-role="navbar" data-iconpos="left">
+					<ul>					
+						<li><a href="#coupon" data-icon="home">Coupons</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div>
+		</div>
+        
+        <!--success page-->
+        <div data-role="page" id="feedback">
+			
+			<div data-role="header">
+				<div class="ui-grid-a">
+					<div class="ui-block-a" style="width:13%;margin:1% 0% 0% 2%;">
+						<a href="#inside-update">
+							<img src="img/menu32.png">
+						</a>
+					</div>
+					<div class="ui-block-b" style="width:85%;padding:2% 0%;">
+						<h3 style="margin: 0% 0% 0% 10%;">Feedback form</h3>
+					</div>
+				</div>
+			</div>
+			
+			<!--Right panel-->
+			<div data-role="panel" id="inside-update" data-position="left" data-display="overlay" data-theme="b">
+				<ul data-role="listview">
+					<li data-icon="back"><a href="#" data-rel="close">Close</a></li>
+					<li><a href="#coupon" class="ui-link ui-btn ui-icon-home ui-btn-icon-left">Coupons<div class="ui-li-count count-coupon"></div></a></li>
+					<li>
+						<div class='ui-sub-panel' id='submenu1'>
+						  <div class='ui-header' data-theme='b'>
+							<h1 class='ui-title'>Dealer</h1>
+						  </div>
+						  <div class="ui-content">
+							<!-- submenu contents here -->
+							<ul data-role="listview">
+								<li><a href="#" class="ui-link ui-btn ui-icon-plus ui-btn-icon-left addDealer">Add Dealer</a></li>
+								<li><a href="#listdealer" class="ui-link ui-btn ui-icon-grid ui-btn-icon-left">List Dealer<div class="ui-li-count dealer-count"></div></a></li>
+							</ul>
+						  </div>
+						</div>
+					</li>
+					<!--<li><a href="#nearbydeals" class="ui-link ui-btn ui-icon-location ui-btn-icon-left">Nearby Deals</a></li>-->					
+					<li><a href="#feedback" class="ui-link ui-btn ui-icon-mail ui-btn-icon-left ui-btn-active ui-state-persist">Feedback</a></li>
+					<li><a href="#profile" class="ui-link ui-btn ui-icon-gear ui-btn-icon-left">Profile settings</a></li>					
+					<!--<li>Exit</li>-->
+					<li><a href="#contact_us" class="ui-link ui-btn ui-icon-info ui-btn-icon-left">Contact us</a></li>
+				</ul>
+			</div>
+			
+			<div data-role="main" class="ui-content">
+				<form id="feedback_form">					
+					<p id="returnmessage"></p>
+					<div data-role="fieldcontain">
+						<label for="feedback_name">Name: <span style="color:red;">*</span></label>
+						<input type="text" id="feedback_name" name="feedback_name" placeholder="Name"/>						
+					</div>
+					<div data-role="fieldcontain">
+						<label for="feedback_email">Email: <span style="color:red;">*</span></label>
+						<input type="text" id="feedback_email" name="feedback_email" placeholder="Email: abc@xyz.com"/>						
+					</div>
+					
+					<div data-role="fieldcontain">
+						<label for="feedback_contact">Contact No: <span style="color:red;">*</span></label>
+						<input type="text" id="feedback_contact" name="feedback_contact" placeholder="Mobile no.: 91 96625 47757"/>
+					</div>
+					<div data-role="fieldcontain">
+						<label for="feedback_message">Message:<span style="color:red;">*</span></label>
+						<textarea id="feedback_message" name="feedback_message" placeholder="Message......."></textarea>
+					</div>					
+					<input type="submit" id="send_feedback" value="Send Message" data-inline="true"/>					
+					<input value="Reset" type="reset" data-inline="true">
+				</form>
+			</div>
+			
+			<div data-role="footer" data-position="fixed">				
+				<div data-role="navbar" data-iconpos="left">
+					<ul>																	
+						<li><a href="#coupon" data-icon="home">Coupons</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div>
+		</div>
+		
+		<div data-role="page" id="coupon">
+			<div data-role="header">
+				<div class="ui-grid-a">
+					<div class="ui-block-a" style="width:13%;margin:1% 0% 0% 2%;">
+						<a href="#inside-coupon">
+							<img src="img/menu32.png">
+						</a>
+					</div>
+					<div class="ui-block-b" style="width:85%;padding:2% 0%;">
+						<h3 style="margin: 0% 0% 0% 10%;">Active Coupons</h3>
+					</div>
+				</div>
+			</div><!-- /header -->
+			
+			<!--Right panel-->
+			<div data-role="panel" id="inside-coupon" data-position="left" data-display="overlay" data-theme="b">
+				<ul data-role="listview">
+					<li data-icon="back"><a href="#" data-rel="close">Close</a></li>
+					<li><a href="#coupon" class="ui-link ui-btn ui-icon-home ui-btn-icon-left ui-btn-active ui-state-persist">Coupons<div class="ui-li-count count-coupon"></div></a></li>
+					<li>						
+						<div class='ui-sub-panel' id='submenu1'>
+						  <div class='ui-header' data-theme='b'>
+							<h1 class='ui-title'>Dealer</h1>
+						  </div>
+						  <div class="ui-content">
+							<!-- submenu contents here -->
+							<ul data-role="listview">
+								<li><a href="#" class="ui-link ui-btn ui-icon-plus ui-btn-icon-left addDealer">Add Dealer</a></li>
+								<li><a href="#listdealer" class="ui-link ui-btn ui-icon-grid ui-btn-icon-left">List Dealer<div class="ui-li-count dealer-count"></div></a></li>
+							</ul>
+						  </div>
+						</div>
+					</li>
+					<!--<li><a href="#nearbydeals" class="ui-link ui-btn ui-icon-location ui-btn-icon-left">Nearby Deals</a></li>-->					
+					<li><a href="#feedback" class="ui-link ui-btn ui-icon-mail ui-btn-icon-left">Feedback</a></li>
+					<li><a href="#profile" class="ui-link ui-btn ui-icon-gear ui-btn-icon-left">Profile settings</a></li>					
+					<!--<li>Exit</li>-->
+					<li><a href="#contact_us" class="ui-link ui-btn ui-icon-info ui-btn-icon-left">Contact us</a></li>
+				</ul>
+			</div>
+			
+			<div role="main" class="ui-content">				
+				<form class="ui-filterable">
+				    <input id="coupon-input" data-type="search" placeholder="Dealer name,Coupon code or title...">
+				</form>
+				<h3 id="total-coupon"></h3><br>
+				<ul id="list" class="touch" data-role="listview" data-icon="false" data-split-icon="delete" data-filter="true" data-input="#coupon-input">
+				</ul>
+			</div><!-- /content -->
+						
+			<div id="confirm" class="ui-content" data-role="popup" data-theme="a">
+				<p id="question">Are you sure you want to delete:</p>
+				<div class="ui-grid-a">
+					<div class="ui-block-a">
+						<a id="yes" class="ui-btn ui-corner-all ui-mini ui-btn-a" data-rel="back">Yes</a>
+					</div>
+					<div class="ui-block-b">
+						<a id="cancel" class="ui-btn ui-corner-all ui-mini ui-btn-a" data-rel="back">Cancel</a>
+					</div>
+				</div>
+			</div><!-- /popup -->
+			<div data-role="footer" data-position="fixed">
+				<div data-role="navbar" data-iconpos="left">
+					<ul>						
+						<li><a href="#coupon" data-icon="home" class="ui-btn-b ui-btn-active ui-state-persist">Coupons</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div>			
+		</div>
+		
+		<div data-role="page" id="profile">
+			<div data-role="header">
+				<div class="ui-grid-a">
+					<div class="ui-block-a" style="width:13%;margin:1% 0% 0% 2%;">
+						<a href="#inside-profile">
+							<img src="img/menu32.png">
+						</a>
+					</div>
+					<div class="ui-block-b" style="width:85%;padding:2% 0%;">
+						<h3 style="margin: 0% 0% 0% 10%;">Update profile</h3>
+					</div>
+				</div>
+			</div><!-- /header -->
+			
+			<!--Right panel-->
+			<div data-role="panel" id="inside-profile" data-position="left" data-display="overlay" data-theme="b">
+				<ul data-role="listview">
+					<li data-icon="back"><a href="#" data-rel="close">Close</a></li>
+					<li><a href="#coupon" class="ui-link ui-btn ui-icon-home ui-btn-icon-left">Coupons<div class="ui-li-count count-coupon"></div></a></li>				
+					<li>						
+						<div class='ui-sub-panel' id='submenu1'>
+						  <div class='ui-header' data-theme='b'>
+							<h1 class='ui-title'>Dealer</h1>
+						  </div>
+						  <div class="ui-content">
+							<!-- submenu contents here -->
+							<ul data-role="listview">
+								<li><a href="#" class="ui-link ui-btn ui-icon-plus ui-btn-icon-left addDealer">Add Dealer</a></li>
+								<li><a href="#listdealer" class="ui-link ui-btn ui-icon-grid ui-btn-icon-left">List Dealer<div class="ui-li-count dealer-count"></div></a></li>
+							</ul>
+						  </div>
+						</div>
+					</li>
+					<!--<li><a href="#nearbydeals" class="ui-link ui-btn ui-icon-location ui-btn-icon-left">Nearby Deals</a></li>-->					
+					<li><a href="#feedback" class="ui-link ui-btn ui-icon-mail ui-btn-icon-left">Feedback</a></li>
+					<li><a href="#profile" class="ui-link ui-btn ui-icon-gear ui-btn-icon-left ui-btn-active ui-state-persist">Profile settings</a></li>					
+					<!--<li>Exit</li>-->
+					<li><a href="#contact_us" class="ui-link ui-btn ui-icon-info ui-btn-icon-left">Contact us</a></li>
+				</ul>
+			</div>
+			
+			<div data-role="main" class="ui-content">
+				<form id="form2">
+					<hr>
+					<span style="color:red">*</span> denotes required fileds
+					<hr>
+					<label for="text-1">Full name:<span style="color:red">*</span></label>
+					<input data-clear-btn="true" name="f_name_update" id="f_name_update" value="" type="text">
+					
+					<label for="text-3">Mobile No.:<span style="color:red">*</span></label>
+					<input data-clear-btn="true" name="mob_no_update" id="mob_no_update" value="" type="text">
+					
+					<label for="text-3">Email Addr.:<span style="color:red">*</span></label>
+					<input data-clear-btn="true" name="email_update" id="email_update" value="" type="text">
+					
+				<!--	<fieldset data-role="controlgroup" id="category_choosen">
+						<legend>Categories:
+						<h5 style="color:green;">Notes : Select interested categories you want to get deals notification for</h5>
+						</legend>
+						<input name="categories[]" id="checkbox-v-2a" type="checkbox" value="1">
+						<label for="checkbox-v-2a">Restaurent</label>
+						<input name="categories[]" id="checkbox-v-2b" type="checkbox" value="2">
+						<label for="checkbox-v-2b">Apparel</label>
+						<input name="categories[]" id="checkbox-v-2c" type="checkbox" value="3">
+						<label for="checkbox-v-2c">Shoes</label>
+					</fieldset>
+										
+					<div class="ui-field-contain">
+						<label for="select-native-2">Deals Within(Distance in miles):</label>
+						<h5 style="color:green;">Note : You will get deals notifications of gear dealers, within your selected range below (miles) and on your choosen category(above).</h5>
+						<select name="distance" id="distance">
+							<option value="0.5">Half mile</option>
+							<option value="1">1 Mile</option>
+							<option value="2">2 Miles</option>
+							<option value="3">3 Miles</option>
+							<option value="5">5 Miles</option>
+							<option value="10">10 Miles</option>
+							<option value="15">15 Miles</option>
+							<option value="25">25 Miles</option>
+						</select>
+					</div>
+					-->
+					<input value="Update" type="submit" data-inline="true" id="register">
+					<input value="Reset" type="reset" data-inline="true">
+					
+				</form>
+				<!--<div class="app">
+					<h1>Apache Cordova</h1>
+					<div id="deviceready" class="blink">
+						<p class="event listening">Connecting to Device</p>
+						<p class="event received">Device is Ready</p>
+						<button id="clearwatch">Clear poiton watch</button>
+						<button id="startwatch">start watch</button>
+						<button id="getcurrent">get current positon</button>
+						<button id="getimei">get imei no.</button>
+						<a href="store_list.html">Store List within 1 miles</a>
+					</div>
+				
+					<ul id="app-status-ul">
+						<li>Cordova PushCoupons Plugin Demo</li>
+					</ul>
+					<div id="geolocation">
+					</div>
+				</div>-->
+			</div>
+			
+			<div data-role="footer" data-position="fixed">
+				<div data-role="navbar" data-iconpos="left">
+					<ul>												
+						<li><a href="#coupon" data-icon="home">Coupons</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div>            
+        </div>
+               
+		<div data-role="page" id="listdealer" data-title="Inbox">
+			<div data-role="header">
+				<div class="ui-grid-a">
+					<div class="ui-block-a" style="width:13%;margin:1% 0% 0% 2%;">
+						<a href="#inside-listdealer">
+							<img src="img/menu32.png">
+						</a>
+					</div>
+					<div class="ui-block-b" style="width:85%;padding:2% 0%;">
+						<h3 style="margin: 0% 0% 0% 10%;">List Dealer</h3>
+					</div>
+				</div>
+			</div><!-- /header -->
+			
+			<!--Right panel-->
+			<div data-role="panel" id="inside-listdealer" data-position="left" data-display="overlay" data-theme="b">
+				<ul data-role="listview">
+					<li data-icon="back"><a href="#" data-rel="close">Close</a></li>
+					<li><a href="#coupon" class="ui-link ui-btn ui-icon-home ui-btn-icon-left">Coupons<div class="ui-li-count count-coupon"></div></a></li>
+					<li>						
+						<div class='ui-sub-panel' id='submenu1'>
+						  <div class='ui-header' data-theme='b'>
+							<h1 class='ui-title'>Dealer</h1>
+						  </div>
+						  <div class="ui-content">
+							<!-- submenu contents here -->
+							<ul data-role="listview">
+								<li><a href="#" class="ui-link ui-btn ui-icon-plus ui-btn-icon-left addCurrnetDealer">Add Dealer</a></li>
+								<li><a href="#listdealer" class="ui-link ui-btn ui-icon-grid ui-btn-icon-left ui-btn-active ui-state-persist">List Dealer<div class="ui-li-count dealer-count"></div></a></li>
+							</ul>
+						  </div>
+						</div>
+					</li>
+					<!--<li><a href="#nearbydeals" class="ui-link ui-btn ui-icon-location ui-btn-icon-left">Nearby Deals</a></li>-->					
+					<li><a href="#feedback" class="ui-link ui-btn ui-icon-mail ui-btn-icon-left">Feedback</a></li>
+					<li><a href="#profile" class="ui-link ui-btn ui-icon-gear ui-btn-icon-left">Profile settings</a></li>					
+					<!--<li>Exit</li>-->
+					<li><a href="#contact_us" class="ui-link ui-btn ui-icon-info ui-btn-icon-left">Contact us</a></li>
+				</ul>
+			</div>
+			
+			<div role="main" class="ui-content">
+				<a href="#popupAddDealer" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-icon-plus ui-btn-icon-left ui-btn-a" data-transition="pop" id="openAddDealer">Add Dealer</a>
+				<div data-role="popup" id="popupAddDealer" data-overlay-theme="a" class="ui-corner-all">
+					 <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+				     <form>
+				        <div style="padding:0px 20px;">
+				            <h3>Add Dealer</h3>
+				            <label for="un" class="ui-hidden-accessible">Enter dealer id:</label>
+				            <input data-clear-btn="true" name="merchant_name2" id="merchant_name2" value="" type="text" data-rel="popup" placeholder="254">
+							<button type="submit" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-btn-inline ui-icon-plus" id="add_close">Add & close</button>
+							<a class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-btn-inline ui-icon-plus" id="add_continue">Add</a>
+				        </div>
+		         	</form>					
+				</div>
+				
+				<ul style="color:green;">
+					<li>You will get coupon notification from following dealers.</li>					
+				</ul>
+				<form class="ui-filterable">
+				    <input id="merchant-input" data-type="search" placeholder="Dealer name or Description keyword...">
+				</form>
+				<h3 id="total-dealer"></h3><br>
+				<ul id="list2" class="touch" data-role="listview" data-icon="false" data-split-icon="delete" data-filter="true" data-input="#merchant-input">
+				</ul>
+			</div><!-- /content -->
+			<div id="confirm2" class="ui-content" data-role="popup" data-theme="a">
+				<p id="question2">Are you sure you want to delete:</p>
+				<div class="ui-grid-a">
+					<div class="ui-block-a">
+						<a id="yes2" class="ui-btn ui-corner-all ui-mini ui-btn-a" data-rel="back">Yes</a>
+					</div>
+					<div class="ui-block-b">
+						<a id="cancel2" class="ui-btn ui-corner-all ui-mini ui-btn-a" data-rel="back">Cancel</a>
+					</div>
+				</div>
+			</div><!-- /popup -->
+			<div data-role="footer" data-position="fixed">
+				<div data-role="navbar" data-iconpos="left">
+					<ul>												
+						<li><a href="#coupon" data-icon="home">Coupons</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div>
+		</div>
+				
+		<div data-role="page" id="notification">
+			<div data-role="header">
+				<div class="ui-grid-a">
+					<div class="ui-block-a" style="width:13%;margin:1% 0% 0% 2%;">
+						<a href="#inside-notification">
+							<img src="img/menu32.png">
+						</a>
+					</div>
+					<div class="ui-block-b" style="width:85%;padding:2% 0%;">
+						<h3 style="margin: 0% 0% 0% 10%;" id="notification_coupon_merchant"></h3>
+					</div>
+				</div>
+			</div>
+			
+			<!--Right panel-->
+			<div data-role="panel" id="inside-notification" data-position="left" data-display="overlay" data-theme="b">
+				<ul data-role="listview">
+					<li data-icon="back"><a href="#" data-rel="close">Close</a></li>
+					<li><a href="#coupon" class="ui-link ui-btn ui-icon-home ui-btn-icon-left ui-btn-active ui-state-persist">Coupons<div class="ui-li-count count-coupon"></div></a></li>
+					<li>						
+						<div class='ui-sub-panel' id='submenu1'>
+						  <div class='ui-header' data-theme='b'>
+							<h1 class='ui-title'>Dealer</h1>
+						  </div>
+						  <div class="ui-content">
+							<!-- submenu contents here -->
+							<ul data-role="listview">
+								<li><a href="#" class="ui-link ui-btn ui-icon-plus ui-btn-icon-left addDealer">Add Dealer</a></li>
+								<li><a href="#listdealer" class="ui-link ui-btn ui-icon-grid ui-btn-icon-left">List Dealer<div class="ui-li-count dealer-count"></div></a></li>
+							</ul>
+						  </div>
+						</div>
+					</li>
+					<!--<li><a href="#nearbydeals" class="ui-link ui-btn ui-icon-location ui-btn-icon-left">Nearby Deals</a></li>-->
+					<li><a href="#feedback" class="ui-link ui-btn ui-icon-mail ui-btn-icon-left">Feedback</a></li>
+					<li><a href="#profile" class="ui-link ui-btn ui-icon-gear ui-btn-icon-left">Profile settings</a></li>					
+					<!--<li>Exit</li>-->
+					<li><a href="#contact_us" class="ui-link ui-btn ui-icon-info ui-btn-icon-left">Contact us</a></li>
+				</ul>
+			</div>
+			
+			<div role="main" class="ui-content">
+				<h2>New coupon just  arrived</h2>
+				<ul id="app-status-ul-notification" data-role="listview" data-inset="true">
+					<li class="ui-li-has-alt ui-first-child">						
+						<div class="ui-grid-a ui-responsive">							
+							<div class="ui-block-a">
+								<a href="#" class="ui-link ui-btn ui-icon-location ui-btn-icon-left ui-btn-active ui-state-persist" id="notification_coupon_distance">Locate Dealer</a>
+								<a href="#" class="ui-link ui-btn ui-icon-info ui-btn-icon-left ui-btn-active ui-state-persist merchant_info" id="notification_coupon_merchantid">Merchant info</a>
+							</div>
+							<div class="ui-block-b" id="notification_sharable">								
+								<h3 style="text-align:center;">Share coupon : </h3>
+								<a href="#" class="notification-facebook-share" style="padding:3%"><img src="img/facebook.jpg" height="32" width="32"/></a>
+								<a href="#" class="notification-twitter-share" style="padding:3%"><img src="img/twitter.jpg" height="32" width="32"/></a>
+								<a href="#" class="notification-whatsapp-share" style="padding:3%"><img src="img/whatsapp.jpg" height="32" width="32"/></a>
+								<!--<a href="#" class="mail-share"><img src="img/mail.png" height="32" width="32"/></a>-->
+								<a href="#" class="notification-sms-share" style="padding:3%"><img src="img/sms.jpg" height="32" width="32"/></a>
+							</div>
+						</div>
+						
+						<div class="ui-grid-a ui-responsive">
+							<div class="ui-block-a">
+								<a href="#" class="ui-link ui-btn ui-icon-clock ui-btn-icon-left" id="notification_coupon_exipry"></a>
+							</div>
+							<div class="ui-block-b">
+								<a href="#" class="ui-link ui-btn ui-icon-shop ui-btn-icon-left" id="notification_coupon_code"></a>
+							</div>
+						</div><!-- /grid-a -->
+						
+						<hr>
+						<div class="ui-grid-a">
+							<div class="ui-block-a" style="padding-top: 2%;width: 5%;">
+								<img style="padding:1%;" src="img/deals.png" align="middle" alt="USA">
+							</div>
+							<div class="ui-block-b" style="width:95%;">
+								<div class="ui-bar" style="height:30px;text-align:center;">
+									<b id="notification_coupon_title"></b>
+								</div>
+							</div>
+						</div>
+						<hr>
+					</li>
+				</ul>
+				<p>
+					<div id="notification_coupon_desc">
+					</div>	
+				</p>
+			</div>
+			
+			<div data-role="footer" data-position="fixed">
+				<div data-role="navbar" data-iconpos="left">
+					<ul>
+						<li><a href="#coupon" data-icon="home">Coupons</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div>
+		</div>
+		
+		<div data-role="page" id="contact_us">
+			<div data-role="header">
+				<div class="ui-grid-a">
+					<div class="ui-block-a" style="width:13%;margin:1% 0% 0% 2%;">
+						<a href="#inside-contact">
+							<img src="img/menu32.png">
+						</a>
+					</div>
+					<div class="ui-block-b" style="width:85%;padding:2% 0%;">
+						<h3 style="margin: 0% 0% 0% 10%;" id="notification_coupon_merchant">Contact Us</h3>
+					</div>
+				</div>				
+			</div>
+			
+			<!--Right panel-->
+			<div data-role="panel" id="inside-contact" data-position="left" data-display="overlay" data-theme="b">
+				<ul data-role="listview">
+					<li data-icon="back"><a href="#" data-rel="close">Close</a></li>
+					<li><a href="#coupon" class="ui-link ui-btn ui-icon-home ui-btn-icon-left">Coupons<div class="ui-li-count count-coupon"></div></a></li>
+					<li>						
+						<div class='ui-sub-panel' id='submenu1'>
+						  <div class='ui-header' data-theme='b'>
+							<h1 class='ui-title'>Dealer</h1>
+						  </div>
+						  <div class="ui-content">
+							<!-- submenu contents here -->
+							<ul data-role="listview">
+								<li><a href="#" class="ui-link ui-btn ui-icon-plus ui-btn-icon-left addDealer">Add Dealer</a></li>
+								<li><a href="#listdealer" class="ui-link ui-btn ui-icon-grid ui-btn-icon-left">List Dealer<div class="ui-li-count dealer-count"></div></a></li>
+							</ul>
+						  </div>
+						</div>
+					</li>
+					<!--<li><a href="#nearbydeals" class="ui-link ui-btn ui-icon-location ui-btn-icon-left">Nearby Deals</a></li>-->
+					<li><a href="#feedback" class="ui-link ui-btn ui-icon-mail ui-btn-icon-left">Feedback</a></li>
+					<li><a href="#profile" class="ui-link ui-btn ui-icon-gear ui-btn-icon-left">Profile settings</a></li>					
+					<!--<li>Exit</li>-->
+					<li><a href="#contact_us" class="ui-link ui-btn ui-icon-info ui-btn-icon-left ui-btn-active ui-state-persist">Contact us</a></li>
+				</ul>
+			</div>
+			
+			<div role="main" class="ui-content">
+				<h2>Near by best deals</h2>
+				<p><a onclick="event.preventDefault();window.open('http://www.nearbybestdeals.com', '_system');" class="ui-btn ui-icon-arrow-r ui-btn-icon-left ui-btn-active ui-state-persist">Website : www.nearbybestdeals.com</a></p>
+				<p><a href="tel:+919662547757" class="ui-btn ui-icon-phone ui-btn-icon-left ui-btn-active ui-state-persist">Mobile No. : +91 9662547757</a></p>
+				<p><a href="mailto:info@nearbybestdeals.com" class="ui-btn ui-icon-mail ui-btn-icon-left ui-btn-active ui-state-persist">Email : info@nearbybestdeals.com</a></p>
+				<p>Contact us if you want to be our member and send coupon like you currently get from dealer you added.Register your dealer id with us.</p>
+			</div><!-- /content -->
+			
+			
+			<div data-role="footer" data-position="fixed">
+				<div data-role="navbar" data-iconpos="left">
+					<ul>						
+						<li><a href="#coupon" data-icon="home">Coupons</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div>
+		</div>
+	</body>
+</html>

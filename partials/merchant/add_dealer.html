@@ -1,0 +1,101 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+       <!-- <link rel="stylesheet" type="text/css" href="css/index.css" />-->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.mobile-1.4.5.css" />
+        <style>
+			.ui-icon-nearby:after {
+				background-image: url("../../css/images/icons-svg/nearby.svg");
+				/* Make your icon fit */
+				background-size: 32px 32px;
+				width: 32px;
+				height: 32px;
+				top: 35%;
+			}
+			
+			.error {
+				color:red;
+			}
+			
+        </style>      
+        <script type="text/javascript" src="../../js/jquery.js"></script>        
+        <!--<script type="text/javascript" src="../../js/jquery-ui.js"></script>-->
+        <script charset="utf-8" src="js/index.js"></script>
+        <script type="text/javascript" src="../../js/config.js"></script>
+        <script>
+			jQuery(document).bind("mobileinit", function () {
+				console.log("configuring jqm...");
+		 
+				// required for "phoning home" (load external assets, etc.)
+				jQuery.support.cors = true;
+				jQuery.mobile.allowCrossDomainPages = true;
+				 
+				jQuery.mobile.phonegapNavigationEnabled = true;
+				jQuery.mobile.defaultDialogTransition = "pop";
+				jQuery.mobile.defaultPageTransition = "none";
+				 
+				jQuery.mobile.loader.prototype.options.text = "loading";
+				jQuery.mobile.loader.prototype.options.textVisible = true;
+				jQuery.mobile.loader.prototype.options.theme = "a";
+								
+			});
+			app.initAddDealer();
+			
+		</script>
+		<script type="text/javascript" src="../../js/JQM.js"></script>
+        <title>Hello World</title>
+    </head>
+    <body>
+		<div data-role="page" id="update">
+			<div data-role="header">
+				<h3 style="margin: 0 0 0.3%;">Adding Dealer</h3>
+				<div data-role="navbar">
+					<ul>
+						<li><a href="../merchant/add_dealer.html" data-icon="plus" data-ajax="false">Add Dealer</a></li>
+						<li><a href="../merchant/list_dealer.html" data-icon="grid" data-ajax="false">List Dealer</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div>
+			<div role="main" class="ui-content">
+				<!--<a href="#page1" data-rel="back" data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline">Go Back To Page 1</a>-->
+				<form id="deals">					
+					<div class="ui-grid-a" id="add_block">
+						  <div class="ui-block-a">
+							  	<label for="text-4"><b>Enter dealer id:</b></label>
+								<input data-clear-btn="true" name="merchant_name" id="merchant_name" value="" type="text" data-rel="popup">
+						  </div>
+						  <div class="ui-block-b">
+								<a href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-btn-inline ui-icon-plus" data-inline="true" id="varify_merchant" style="margin-top: 21px;">Add</a>
+						  </div>
+					</div>
+					
+				</form>
+			</div>
+			
+			<div data-role="footer">
+				<div data-role="navbar" data-iconpos="left">
+					<ul>						
+						<li><a href="../profile/profile.html" data-icon="gear" data-ajax="false">Settings</a></li>			
+						<li><a href="../notifications/notify.html" data-icon="nearby" data-ajax="false">Notification</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div>			
+		</div>
+		
+        <script type="text/javascript">
+		
+		/*$( document ).on( "pageload", function( event ) {
+		 // alert( "This page was just enhanced by jQuery Mobile!" );
+			$( "#add_block" ).show();
+			$( "#merchant_detail" ).empty();
+			$( "#merchant_name" ).val("");
+		});*/
+
+        </script>    
+    </body>
+</html>
+

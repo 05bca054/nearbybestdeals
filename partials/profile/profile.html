@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <!--<meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />-->
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+       <!-- <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />-->
+       <!-- <link rel="stylesheet" type="text/css" href="css/index.css" />-->
+       
+        <style>
+			.ui-icon-nearby:after {
+				background-image: url("../../css/images/icons-svg/nearby.svg");
+				/* Make your icon fit */
+				background-size: 32px 32px;
+				width: 32px;
+				height: 32px;
+				top: 35%;
+			}
+			
+			.error {
+				color:red;
+			}
+			
+        </style>
+        <script type="text/javascript" src="../../cordova.js"></script>        
+        <script type="text/javascript" src="../../js/jquery.js"></script>        
+        <!--<script type="text/javascript" src="../../js/jquery-ui.js"></script>-->
+        <script charset="utf-8" src="js/index.js"></script>
+        <script type="text/javascript" src="../../js/config.js"></script>
+        <script charset="utf-8" type="text/javascript" src="../../js/jq_validate.js"></script>
+        <script>
+			jQuery(document).bind("mobileinit", function () {
+				console.log("configuring jqm...");
+		 
+				// required for "phoning home" (load external assets, etc.)
+				jQuery.support.cors = true;
+				jQuery.mobile.allowCrossDomainPages = true;
+				 
+				jQuery.mobile.phonegapNavigationEnabled = true;
+				jQuery.mobile.defaultDialogTransition = "pop";
+				jQuery.mobile.defaultPageTransition = "none";
+				 
+				jQuery.mobile.loader.prototype.options.text = "loading";
+				jQuery.mobile.loader.prototype.options.textVisible = true;
+				jQuery.mobile.loader.prototype.options.theme = "a";
+								
+			});
+			app.initProfile();
+			
+		</script>
+		<script type="text/javascript" src="../../js/JQM.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../css/jquery.mobile-1.4.5.css" />
+        <link rel="stylesheet" href="../../css/font-awesome.css" />
+		<link rel="stylesheet" href="../../css/index.css" />
+        <title>Hello World</title>
+    </head>
+    <body>
+        <div data-role="page" id="profile">
+			<div data-role="header">
+				<h3 style="margin: 0 0 0.3%;">List Dealer</h3>
+				<div data-role="navbar">
+					<ul>
+		                
+						<!-- <li><a href="deals/deals.html" data-icon="location">Nearby Deals</a></li>-->
+						<!--<li><a href="#" data-icon="star" class="ui-btn-active">add</a></li>-->
+						<li><a href="../merchant/add_dealer.html" data-icon="plus" data-ajax="false">Add Dealer</a></li>
+						<li><a href="../merchant/list_dealer.html" data-icon="grid" data-ajax="false">List Dealer</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!-- /header -->
+			<div data-role="main" class="ui-content">
+				<form id="form1">
+					<hr>
+					<span style="color:red">*</span> denotes required fileds
+					<hr>
+					<label for="text-1">Full name:<span style="color:red">*</span></label>
+					<input data-clear-btn="true" name="f_name" id="f_name" value="" type="text">
+					
+					<label for="text-3">Mobile No.:<span style="color:red">*</span></label>
+					<input data-clear-btn="true" name="mob_no" id="mob_no" value="" type="text">
+					
+					<label for="text-3">Email Addr.:<span style="color:red">*</span></label>
+					<input data-clear-btn="true" name="email" id="email" value="" type="text">
+					
+				<!--	<fieldset data-role="controlgroup" id="category_choosen">
+						<legend>Categories:
+						<h5 style="color:green;">Notes : Select interested categories you want to get deals notification for</h5>
+						</legend>
+						<input name="categories[]" id="checkbox-v-2a" type="checkbox" value="1">
+						<label for="checkbox-v-2a">Restaurent</label>
+						<input name="categories[]" id="checkbox-v-2b" type="checkbox" value="2">
+						<label for="checkbox-v-2b">Apparel</label>
+						<input name="categories[]" id="checkbox-v-2c" type="checkbox" value="3">
+						<label for="checkbox-v-2c">Shoes</label>
+					</fieldset>
+										
+					<div class="ui-field-contain">
+						<label for="select-native-2">Deals Within(Distance in miles):</label>
+						<h5 style="color:green;">Note : You will get deals notifications of nearby dealers, within your selected range below (miles) and on your choosen category(above).</h5>
+						<select name="distance" id="distance">
+							<option value="0.5">Half mile</option>
+							<option value="1">1 Mile</option>
+							<option value="2">2 Miles</option>
+							<option value="3">3 Miles</option>
+							<option value="5">5 Miles</option>
+							<option value="10">10 Miles</option>
+							<option value="15">15 Miles</option>
+							<option value="25">25 Miles</option>
+						</select>
+					</div>
+					-->
+					<input value="Register" type="submit" data-inline="true" id="register">
+					<input value="Reset" type="reset" data-inline="true">
+					
+				</form>
+				<!--<div class="app">
+					<h1>Apache Cordova</h1>
+					<div id="deviceready" class="blink">
+						<p class="event listening">Connecting to Device</p>
+						<p class="event received">Device is Ready</p>
+						<button id="clearwatch">Clear poiton watch</button>
+						<button id="startwatch">start watch</button>
+						<button id="getcurrent">get current positon</button>
+						<button id="getimei">get imei no.</button>
+						<a href="store_list.html">Store List within 1 miles</a>
+					</div>
+				
+					<ul id="app-status-ul">
+						<li>Cordova PushNotification Plugin Demo</li>
+					</ul>
+					<div id="geolocation">
+					</div>
+				</div>-->
+			</div>
+			
+			<div data-role="footer">
+				<div data-role="navbar" data-iconpos="left">
+					<ul>						
+						<li><a href="../profile/profile.html" data-icon="gear">Settings</a></li>
+						<!--<li><a href="#" data-icon="star" class="ui-btn-active">add</a></li>-->						
+						<li><a href="../notifications/notify.html" data-icon="nearby">Notification</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div>            
+        </div>
+        
+        <!--success page-->
+        <div data-role="page" id="success">
+			<div data-role="header">
+				<h3 style="margin: 0 0 0.3%;">Profile created successfully</h3>
+				<div data-role="navbar">
+					<ul>
+						<li><a href="../merchant/add_dealer.html" data-icon="plus" data-ajax="false">Add Dealer</a></li>
+						<li><a href="../merchant/list_dealer.html" data-icon="grid" data-ajax="false">List Dealer</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div>
+			<div role="main" class="ui-content">
+					<!--<a href="#page1" data-rel="back" data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline">Go Back To Page 1</a>-->
+				To Search deals nearby please click here
+				<br>
+				Or 
+				<br>
+				Wait for notification you will get deals notification from your choosen dealers
+				<br>
+				To view or edit subsribed dealers click here
+				
+			</div>
+			
+			<div data-role="footer">				
+				<div data-role="navbar" data-iconpos="left">
+					<ul>						
+						<li><a href="../profile/profile.html" data-icon="gear" data-ajax="false">Settings</a></li>
+						<!--<li><a href="#" data-icon="star" class="ui-btn-active">add</a></li>-->						
+						<li><a href="../notifications/notify.html" data-icon="nearby" data-ajax="false">Notification</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div>
+		</div>
+        
+        <!--success page-->
+        <div data-role="page" id="update">
+			<div data-role="header">
+				<h3 style="margin: 0 0 0.3%;">Update profile successfully</h3>
+				<div data-role="navbar">
+					<ul>
+		                
+		               <!-- <li><a href="deals/deals.html" data-icon="location">Nearby Deals</a></li>-->
+						<!--<li><a href="#" data-icon="star" class="ui-btn-active">add</a></li>-->
+						<li><a href="../merchant/add_dealer.html" data-icon="plus" data-ajax="false">Add Dealer</a></li>
+						<li><a href="../merchant/list_dealer.html" data-icon="grid" data-ajax="false">List Dealer</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div>
+			<div role="main" class="ui-content">
+				<!--<a href="#page1" data-rel="back" data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline">Go Back To Page 1</a>-->
+				To Search deals nearby please click here
+				<br>
+				Or 
+				<br>
+				Wait for notification you will get deals notification from your choosen dealers
+				<br>
+				To view or edit subsribed dealers click here				
+			</div>
+						
+			<div data-role="footer">				
+				<div data-role="navbar" data-iconpos="left">
+					<ul>						
+						<li><a href="../profile/profile.html" data-icon="gear" data-ajax="false">Settings</a></li>
+						<!--<li><a href="#" data-icon="star" class="ui-btn-active">add</a></li>-->						
+						<li><a href="../notifications/notify.html" data-icon="nearby" data-ajax="false">Notification</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div>
+		</div>
+    </body>
+</html>

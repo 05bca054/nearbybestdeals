@@ -1,0 +1,195 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+       <!-- <link rel="stylesheet" type="text/css" href="css/index.css" />-->
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.mobile-1.4.5.css" />
+        <style>
+			.ui-icon-nearby:after {
+				background-image: url("../css/images/icons-svg/nearby.svg");
+				/* Make your icon fit */
+				background-size: 32px 32px;
+				width: 32px;
+				height: 32px;
+				top: 35%;
+			}
+			
+			.error {
+				color:red;
+			}
+			
+        </style>        
+      
+        <script type="text/javascript" src="../../js/jquery.js"></script>        
+        <script type="text/javascript" src="../../js/jquery-ui.js"></script>
+        <script charset="utf-8" type='application/javascript' type="text/javascript" src="../../js/jquery.countdown.min.js"></script>
+      <!--  <script charset="utf-8" src="js/coupon.js"></script>-->
+		<script charset="utf-8" src="js/index.js"></script>
+		
+	
+				
+		<!--<script charset="utf-8" type="text/javascript" src="js/IOS_notification.js"></script>-->		
+		<script>
+			jQuery(document).bind("mobileinit", function () {
+				console.log("configuring jqm...");
+		 
+				// required for "phoning home" (load external assets, etc.)
+				jQuery.support.cors = true;
+				jQuery.mobile.allowCrossDomainPages = true;
+				 
+				jQuery.mobile.phonegapNavigationEnabled = true;
+				jQuery.mobile.defaultDialogTransition = "pop";
+				jQuery.mobile.defaultPageTransition = "none";
+				 
+				jQuery.mobile.loader.prototype.options.text = "loading";
+				jQuery.mobile.loader.prototype.options.textVisible = true;
+				jQuery.mobile.loader.prototype.options.theme = "a";
+								
+			});
+        
+			app.init();
+			
+        </script>
+        <script charset="utf-8" src="../../js/JQM.js"></script>
+		<!-- critical -->
+		<!-- plugins -->
+		<!-- plugins-->
+		<!-- themes -->
+		<!-- jQuery Mobile, FontAwesome & App -->
+		<link rel="stylesheet" href="../../css/jquery.mobile-1.4.5.css" />
+		<link rel="stylesheet" href="../../css/font-awesome.css" />	
+		<link rel="stylesheet" href="../../css/custom-icon.css" />
+        <title>Hello World</title>
+    </head>
+    <body>
+		
+		
+		<div data-role="page" id="nearby_single_coupon">
+			<div data-role="header">
+				<div class="ui-grid-a">
+					<div class="ui-block-a" style="width:13%;margin:2% 0% 0% 2%;">
+						<a href="#inside-single-merchant">
+							<img src="../../img/menu24.png" align="middle" alt="USA" class="ui-li-icon">
+						</a>
+					</div>
+					<div class="ui-block-b" style="width:85%;padding:2% 0%;">
+						<h3 style="margin: 0% 0% 0% 10%;" id="notification_coupon_merchant">Contact Us</h3>
+					</div>
+				</div>
+			</div>
+			
+			<!--Right panel-->
+			<div data-role="panel" id="inside-single-merchant" data-position="left" data-display="overlay" data-theme="b">
+				<ul data-role="listview">
+					<li data-icon="back"><a href="#" data-rel="close">Close</a></li>
+					<li><a href="#coupon" class="ui-link ui-btn ui-icon-home ui-btn-icon-left ui-btn-active ui-state-persist">Coupons<div class="ui-li-count count-coupon"></div></a></li>
+					<li>						
+						<div class='ui-sub-panel' id='submenu1'>
+						  <div class='ui-header' data-theme='b'>
+							<h1 class='ui-title'>Dealer</h1>
+						  </div>
+						  <div class="ui-content">
+							<!-- submenu contents here -->
+							<ul data-role="listview">
+								<li><a href="#" class="ui-link ui-btn ui-icon-plus ui-btn-icon-left addDealer">Add Dealer</a></li>
+								<li><a href="#listdealer" class="ui-link ui-btn ui-icon-grid ui-btn-icon-left">List Dealer</a></li>
+							</ul>
+						  </div>
+						</div>
+					</li>
+					<li><a href="#nearbydeals" class="ui-link ui-btn ui-icon-location ui-btn-icon-left">Nearby Deals</a></li>					
+					<li><a href="#feedback" class="ui-link ui-btn ui-icon-mail ui-btn-icon-left">Feedback</a></li>
+					<li><a href="#profile" class="ui-link ui-btn ui-icon-gear ui-btn-icon-left">Profile settings</a></li>					
+					<!--<li>Exit</li>-->
+					<li><a href="#contact_us" class="ui-link ui-btn ui-icon-info ui-btn-icon-left">Contact us</a></li>
+				</ul>
+			</div>
+			
+			<div role="main" class="ui-content">
+				<ul id="couponSingle" class="touch" data-role="listview" data-icon="false" data-split-icon="delete" data-inset="true">
+					<li class="ui-li-has-alt ui-first-child">
+						<div class="ui-grid-a ui-responsive">							
+							<div class="ui-block-a">
+								<a href="#" class="ui-link ui-btn ui-icon-location ui-btn-icon-left ui-btn-active ui-state-persist" id="single_coupon_distance">Locate Dealer</a>
+							</div>
+							<div class="ui-block-b">
+								<a href="#" class="ui-link ui-btn ui-icon-info ui-btn-icon-left ui-btn-active ui-state-persist merchant_info" id="single_coupon_merchantid">Merchant info</a>
+								<!--<a href="#" onclick="window.plugins.socialsharing.share('Message and subject', 'The subject','http://freelanceventure.in/wp-content/uploads/2014/08/logo.png','https://www.google.com/maps/?saddr=22,73&daddr=23,73')" class="ui-link ui-btn ui-icon-info ui-btn-icon-left ui-btn-active ui-state-persist">Share</a>-->
+								Share coupon
+								<a href="#" class="facebook-share"><img src="../../img/fb_share_s.png"/></a>
+								<!--<a href="#" onclick="window.plugins.socialsharing.share('Message, subject, image and link', 'The subject', 'https://www.google.nl/images/srpr/logo4w.png', 'https://www.google.com/maps/?saddr=22,73&daddr=23,73')" class="ui-link ui-btn ui-icon-info ui-btn-icon-left ui-btn-active ui-state-persist">Share on FB</a>-->
+								<!--<a onClick="fb_share();">FB SHARE </a>-->
+							</div>
+						</div>
+						
+						<div class="ui-grid-a ui-responsive">							
+							<div class="ui-block-a">
+								<a href="#" class="ui-link ui-btn ui-icon-clock ui-btn-icon-left" id="single_coupon_exipry">1 day 20:15:30</a>
+							</div>
+							<div class="ui-block-b">
+								<a href="#" class="ui-link ui-btn ui-icon-shop ui-btn-icon-left" id="single_coupon_code">Code : rasasi15</a>
+							</div>
+						</div><!-- /grid-a -->
+						
+						<hr>
+						<div class="ui-grid-a">
+							<div class="ui-block-a" style="padding-top: 2%;width: 5%;">
+								<img style="padding:1%;" src="img/deals.png" align="middle" alt="USA">
+							</div>
+							<div class="ui-block-b" style="width:95%;">
+								<div class="ui-bar" style="height:30px;text-align:center;">
+									<b id="single_coupon_title">Perfume sale</b>
+								</div>
+							</div>
+						</div>
+						<hr>
+									
+						<div id="single_coupon_desc">
+							15% discount on rasasi products
+						</div>
+					</li>
+				</ul>
+				<!--<div class="ui-grid-a ui-responsive">
+					<div class="ui-block-a">
+						<div id="coupon_title" class="ui-bar ui-bar-a" style="height:60px"></div>
+					</div>
+					<div class="ui-block-b">
+						<div class="ui-bar ui-bar-a" style="height:60px">
+							<div id="coupon_code"></div>
+							<div id="coupon_expiry"></div>
+						</div>
+					</div>
+				</div><!-- /grid-a -->
+				
+				<div class="ui-grid-solo">
+				    <div class="ui-block-a" id="coupon_desc"></div>
+				</div>
+			</div>
+		</div>
+		<!--mandatory libraries-->	    
+		<div data-role="page" id="update">
+			<div data-role="header">
+				<h3 class="ui-btn-active ui-state-persist">Registering device</h3>
+			</div>
+			<div data-role="main" class="ui-content">
+				<img src="../../img/1.png" height="30%" width="30%" align="middle" alt="USA" class="ui-li-icon" style="margin-left: 35%;">
+				<ul id="app-status-ul" data-role="listview" data-inset="true">					
+					<li class="ui-btn ui-icon-clock ui-btn-icon-left" style=" text-align: center;">Please wait...</li>
+					<li class="ui-icon-action ui-btn-icon-right">Registering mobile..</li>
+					<li class="ui-icon-search ui-btn-icon-right">Detecting Enviroment</li>
+					<li class="ui-icon-android ui-btn-icon-right">Registering Android</li>
+					<li class="ui-icon-carat-r ui-btn-icon-right">Register Device Successfully</li>
+					<li class="ui-icon-location ui-btn-icon-right">Updating location information</li>
+					<li class="ui-icon-arrow-r ui-btn-icon-right">Update location info successfully</li>
+				</ul>
+			</div>
+			
+			<div data-role="footer">				
+			</div>
+		</div>
+    </body>
+</html>
+
