@@ -7,8 +7,7 @@
     <author email="naitik@freelanceventure.in" href="http://nearbybestdeals.com">
         Nearby Best Deals team
 	</author>
-	
-	
+		
 	<preference name="SplashScreen" value="screen" />
 	<preference name="AutoHideSplashScreen" value="false" />
 	
@@ -16,10 +15,6 @@
 	<preference name="Orientation" value="portrait" />
 	<preference name="DisallowOverscroll" value="true"/>
 		
-    
-    <gap:plugin name="com.phonegap.plugins.PushPlugin" />
-    <gap:plugin name="de.appplant.cordova.plugin.background-mode" />
-    <gap:plugin name="nl.x-services.plugins.socialsharing" />
     <gap:plugin name="org.apache.cordova.device" />    
     <gap:plugin name="org.apache.cordova.dialogs" />
     <gap:plugin name="org.apache.cordova.file" />    
