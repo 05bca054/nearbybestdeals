@@ -8,6 +8,7 @@
         Nearby Best Deals team
 	</author>
 	
+	
 	<preference name="SplashScreen" value="screen" />
 	<preference name="AutoHideSplashScreen" value="false" />
 	
@@ -15,7 +16,7 @@
 	<preference name="Orientation" value="portrait" />
 	<preference name="DisallowOverscroll" value="true"/>
 		
-    <!--<gap:plugin name="com.msopentech.websql" />-->
+    
     <gap:plugin name="com.phonegap.plugins.PushPlugin" />
     <gap:plugin name="de.appplant.cordova.plugin.background-mode" />
     <gap:plugin name="nl.x-services.plugins.socialsharing" />
@@ -26,7 +27,7 @@
     <gap:plugin name="org.apache.cordova.inappbrowser" />
     <gap:plugin name="org.apache.cordova.media" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
-    <!--<gap:plugin name="uk.co.workingedge.phonegap.plugin.LaunchNavigator" />-->
+    
 	
 	
 	
@@ -59,6 +60,10 @@
 	<preference name="SplashScreenDelay" value="10000" />
 	<preference name="KeepRunning" value="true"/>-->
 	
+	<gap:config-file platform="ios" parent="CFBundleShortVersionString">
+    <string>100</string>
+    </gap:config-file>
+    
     <content src="index.html" />
     <access origin="*" />
     <access origin="tel:*" launch-external="yes" />
