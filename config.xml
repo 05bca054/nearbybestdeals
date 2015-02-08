@@ -15,7 +15,7 @@
 	<preference name="Orientation" value="portrait" />
 	<preference name="DisallowOverscroll" value="true"/>
 		
-    <gap:plugin name="com.msopentech.websql" />
+    <!--<gap:plugin name="com.msopentech.websql" />-->
     <gap:plugin name="com.phonegap.plugins.PushPlugin" />
     <gap:plugin name="de.appplant.cordova.plugin.background-mode" />
     <gap:plugin name="nl.x-services.plugins.socialsharing" />
@@ -26,7 +26,7 @@
     <gap:plugin name="org.apache.cordova.inappbrowser" />
     <gap:plugin name="org.apache.cordova.media" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
-    <gap:plugin name="uk.co.workingedge.phonegap.plugin.LaunchNavigator" />
+    <!--<gap:plugin name="uk.co.workingedge.phonegap.plugin.LaunchNavigator" />-->
 	
 	
 	
