@@ -1,4 +1,4 @@
-var web_url = "http://nearbybestdeals.com/misc/web_service_new/web_services/";
+var web_url = "https://nearbybestdeals.com/misc/web_service_new/web_services/";
 
 /*for device testing testing
 var imei_no = "355004054535961"; 

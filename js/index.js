@@ -61,11 +61,7 @@ var app = {
 				function backKeyDown() {
 					//navigator.app.exitApp(); // To exit the app!
 					if($.mobile.activePage.is('#coupon')){
-						alert("back on coupon page");
-						e.preventDefault();
-					}
-					else {
-						alert("back other page");
+						
 						navigator.notification.confirm(
 							"Do you want to exit the app?",
 							function (button) {
@@ -77,6 +73,12 @@ var app = {
 							"EXIT",
 							["Cancel","OK"]
 						);
+						e.preventDefault();
+					}
+					else {
+						//alert("back on coupon page");
+						e.preventDefault();
+						//alert("back other page");						
 					}					
 				}
 				
@@ -162,6 +164,7 @@ var app = {
 						launchApplicationOnPush: true
 					});
 				} else {
+					alert("IOS testing :"+device.platform);
 					pushNotification.register(
 					tokenHandler,
 					errorHandler,
