@@ -123,6 +123,7 @@ function onNotification(e) {
 		coupon.createTable();
 		coupon.addCoupon(e.payload.merchant_name, e.payload.coupon_title, e.payload.coupon_desc, e.payload.coupon_code, e.payload.expire_time, e.payload.merchant_id, e.payload.lat, e.payload.lon, e.payload.sharable);
 		coupon.countCoupon();
+		coupon.getCoupons();
 		//alert("coupon added successfully");
 		//coupon.deleteAllExpires();
 		
@@ -170,6 +171,10 @@ function onNotification(e) {
 		$("#notification_coupon_merchantid").attr("merchant-id",e.payload.merchant_id);
 		$("#notification_coupon_exipry").attr("data-countdown",e.payload.expire_time);
 		
+		$('#notification_coupon_exipry').countdown(e.payload.expire_time, function(event) {
+			$(this).html(event.strftime('%D days %H:%M:%S'));
+		});
+		
 		$("#notification_coupon_code").text(e.payload.coupon_code);
 		$("#notification_coupon_title").text(e.payload.coupon_title);
 		$("#notification_coupon_desc").text(e.payload.coupon_desc);
@@ -198,19 +203,22 @@ function onNotification(e) {
 		//$(".notification-twitter-share").attr("onclick","event.preventDefault();$.mobile.loading('show');window.plugins.socialsharing.shareViaTwitter('Use Coupon code :"+e.payload.coupon_code+" And get "+e.payload.coupon_desc+" at "+e.payload.merchant_name+"', 'http://nearbybestdeals.com/wp-content/themes/enfold/images/layout/logo.jpg', 'https://www.google.com/maps/@"+e.payload.lat+","+e.payload.lon+",18z');$.mobile.loading('hide');");
 		$(".notification-twitter-share").attr("onclick","event.preventDefault();$.mobile.loading('show'); setTimeout(function(){		window.plugins.socialsharing.shareViaTwitter('Use Coupon code :"+e.payload.coupon_code+" And get "+e.payload.coupon_desc+" at "+e.payload.merchant_name+"', 'http://nearbybestdeals.com/wp-content/themes/enfold/images/layout/logo.jpg', 'http://maps.google.com/maps?q=loc:"+e.payload.lat+","+e.payload.lon+"'); $.mobile.loading('hide'); }, 5000);");
 		
-		//$(".notification-whatsapp-share").attr("onclick","event.preventDefault();$.mobile.loading('show');window.plugins.socialsharing.shareViaWhatsApp('Use Coupon code :"+e.payload.coupon_code+" And get "+e.payload.coupon_desc+" at "+e.payload.merchant_name+"', 'http://nearbybestdeals.com/wp-content/themes/enfold/images/layout/logo.jpg', 'http://maps.google.com/maps?q=loc:"+e.payload.lat+","+e.payload.lon+"',function() {$.mobile.loading('hide');}, function(errormsg){alert(errormsg);$.mobile.loading('hide');})");
-		$(".whatsapp-share").attr("onclick","$.mobile.loading('show');window.plugins.socialsharing.canShareVia('whatsapp','Use Coupon code :"+testJSON.nearby_single_coupon_code+" And get "+testJSON.nearby_single_coupon_desc+" at "+testJSON.nearby_single_coupon_merchant+"', 'http://nearbybestdeals.com/wp-content/themes/enfold/images/layout/logo.jpg', 'http://maps.google.com/maps?q=loc:"+testJSON.nearby_single_coupon_lat+","+testJSON.nearby_single_coupon_lon+"',function(e) {$.mobile.loading('hide');alert(e);}, function(errormsg){alert(errormsg);$.mobile.loading('hide');})");
+		$(".notification-whatsapp-share").attr("onclick","event.preventDefault();$.mobile.loading('show');window.plugins.socialsharing.shareViaWhatsApp('Use Coupon code :"+e.payload.coupon_code+" And get "+e.payload.coupon_desc+" at "+e.payload.merchant_name+"', 'http://nearbybestdeals.com/wp-content/themes/enfold/images/layout/logo.jpg', 'http://maps.google.com/maps?q=loc:"+e.payload.lat+","+e.payload.lon+"',function() {$.mobile.loading('hide');}, function(errormsg){alert(errormsg);$.mobile.loading('hide');})");
+		//$(".whatsapp-share").attr("onclick","$.mobile.loading('show');window.plugins.socialsharing.canShareVia('whatsapp','Use Coupon code :"+testJSON.nearby_single_coupon_code+" And get "+testJSON.nearby_single_coupon_desc+" at "+testJSON.nearby_single_coupon_merchant+"', 'http://nearbybestdeals.com/wp-content/themes/enfold/images/layout/logo.jpg', 'http://maps.google.com/maps?q=loc:"+testJSON.nearby_single_coupon_lat+","+testJSON.nearby_single_coupon_lon+"',function(e) {$.mobile.loading('hide');alert(e);}, function(errormsg){alert(errormsg);$.mobile.loading('hide');})");
 		
 		//$(".mail-share").attr("onclick","window.plugins.socialsharing.shareViaEmail('"+e.payload.coupon_desc+" Locate dealer : https://www.google.com/maps/@"+e.payload.lat+","+e.payload.lon+"','"+e.payload.merchant_name+" : "+e.payload.coupon_code"', 'http://nearbybestdeals.com/wp-content/themes/enfold/images/layout/logo.jpg', null, function(msg) {alert('ok: ' + msg)}, function(msg) {alert('error: ' + msg)})");
 		
 		$(".notification-sms-share").attr("onclick","event.preventDefault();$.mobile.loading('show'); window.plugins.socialsharing.shareViaSMS('Use Coupon code :"+e.payload.coupon_code+" And get "+e.payload.coupon_desc+" at "+e.payload.merchant_name+" : Location : http://maps.google.com/maps?q=loc:"+e.payload.lat+","+e.payload.lon+"', null, function(msg) {$.mobile.loading('hide');  }, function(msg) {$.mobile.loading('hide');alert('error: ' + msg)})");
 		
+		//alert(e.payload.expire_time);
+		
+		/*
 		var $this = $("#notification_coupon_exipry"), finalDate = e.payload.expire_time;
 		$this.countdown(finalDate, function(event) {
 			//alert(finalDate);
 			$this.html(event.strftime('%D days %H:%M:%S'));
 		});
-				
+			*/	
 		//Only works for GCM
 		//$("#app-status-ul-notification").append('<li>MESSAGE -> MSGCNT: ' + e.payload.msgcnt + '</li>');
 		$("#app-status-ul-notification").listview("refresh");
