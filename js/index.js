@@ -96,11 +96,11 @@ var app = {
 				});*/
 				//cordova.plugins.backgroundMode.setDefaults({ text:'Doing heavy tasks.'});
 				
-				cordova.plugins.backgroundMode.enable();
+				//cordova.plugins.backgroundMode.enable();
 				alert("after loading and background mode enable");
 
 				// Called when background mode has been activated
-				cordova.plugins.backgroundMode.onactivate = function () {
+				/*cordova.plugins.backgroundMode.onactivate = function () {
 					// Modify the currently displayed notification
 										
 					//setTimeout(function () {
@@ -109,7 +109,7 @@ var app = {
 					});
 						//cordova.plugins.backgroundMode.disable();
 					 //}, 5000);
-				}
+				}*/
 				
 				//cordova.plugins.backgroundMode.ondeactivate = function() {
 					
@@ -124,19 +124,19 @@ var app = {
 				else
 				{
 					alert("Background mode is enable");
-				}*/
-				//else
+				}
+			
 				cordova.plugins.backgroundMode.onfailure = function(errorCode) {
 					alert(errorCode);
 				};
-				
+				*/
 				FastClick.attach(document.body);
 				//enable when next vertion realease
 				//navigator.geolocation.getCurrentPosition(onSuccess1, onError1);
 				
 				pushNotification = window.plugins.pushNotification;
 				window.localStorage.setItem("notification", "no");
-				alert("set local variable push notification to on");
+				alert("set local variable push notification to on and remove background mode plugin code");
 				$("#app-status-ul").append('<li class="ui-icon-search ui-btn-icon-right">Detecting Enviroment</li>');
 
 				//alert(device.platform);
