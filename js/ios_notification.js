@@ -1,5 +1,5 @@
 function onNotificationAPN (event) {
-	alert(event);
+	//alert(event);
     if ( event.alert )
     {
 		alert(event.alert+"in alert");
@@ -15,7 +15,7 @@ function onNotificationAPN (event) {
 
     if ( event.badge )
     {
-        alert(event.badge+"in badge");
+        alert(event.badge+"in badge"+event.toSource());
         pushNotification.setApplicationIconBadgeNumber(successHandler, errorHandler, event.badge);
     }
 }
@@ -23,7 +23,7 @@ function onNotificationAPN (event) {
 function tokenHandler (result) {
     // Your iOS push server needs to know the token before it can push to this device
     // here is where you might want to send it the token for later use.
-    alert('device token = ' + result);
+    //alert('device token = ' + result);
     $("#app-status-ul").append('<li class="ui-icon-carat-r ui-btn-icon-right">Register Device Successfully</li>');
 	$("#app-status-ul").listview("refresh");
 	window.localStorage.setItem("gcm_id", result);

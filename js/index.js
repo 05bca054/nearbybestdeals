@@ -56,7 +56,7 @@ var app = {
 	 
 			jQuery.when(deviceReadyDeferred, jqmReadyDeferred).then(function () {
 				console.log("PhoneGap & jQuery.Mobile finished loading");
-				alert("loading on phone test");
+				//alert("loading on phone test");
 				//window.localStorage.setItem("registration", "no");
 				document.addEventListener("backbutton", backKeyDown, true);
 				function backKeyDown() {
@@ -96,8 +96,7 @@ var app = {
 				});*/
 				//cordova.plugins.backgroundMode.setDefaults({ text:'Doing heavy tasks.'});
 				
-				//cordova.plugins.backgroundMode.enable();
-				alert("after loading and background mode enable");
+				//cordova.plugins.backgroundMode.enable();				
 
 				// Called when background mode has been activated
 				/*cordova.plugins.backgroundMode.onactivate = function () {
@@ -136,7 +135,7 @@ var app = {
 				
 				pushNotification = window.plugins.pushNotification;
 				window.localStorage.setItem("notification", "no");
-				alert("set local variable push notification to on and remove background mode plugin code");
+				//alert("set local variable push notification to on and remove background mode plugin code");
 				$("#app-status-ul").append('<li class="ui-icon-search ui-btn-icon-right">Detecting Enviroment</li>');
 
 				//alert(device.platform);
@@ -167,7 +166,7 @@ var app = {
 						launchApplicationOnPush: true
 					});
 				} else {
-					alert("IOS testing :"+device.platform);
+					//alert("IOS testing :"+device.platform);
 					pushNotification.register(
 					tokenHandler,
 					errorHandler,
