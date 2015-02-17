@@ -2,7 +2,7 @@ function onNotificationAPN (event) {
 	//alert(event);
     if ( event.alert )
     {
-		//alert(event.alert+"in alert");
+		alert(event.coupon_id+"in alert");
        // navigator.notification.alert(event.alert);
         $(':mobile-pagecontainer').pagecontainer('change', '#notification', {
 			reload: false
@@ -12,7 +12,7 @@ function onNotificationAPN (event) {
 			beforeSend: function() { $.mobile.loading("show"); }, //Show spinner
 			complete: function() { $.mobile.loading("hide"); }, //Hide spinner
 			url: web_url+"deals/add_coupon_ios.php",					
-			data: { coupon_id: event.alert},
+			data: { coupon_id: event.coupon_id},
 			type: "POST",
 			success: function(data) {
 				
