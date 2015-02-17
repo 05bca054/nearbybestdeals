@@ -20,7 +20,7 @@ function onNotificationAPN (event) {
 				var notificationCoupon = $.parseJSON(data);
 				
 				//alert(notificationCoupon.ios_single_coupon_merchant+" : "+ notificationCoupon.ios_single_coupon_title+" : "+ notificationCoupon.ios_single_coupon_desc+" : "+ notificationCoupon.ios_single_coupon_code+" : "+notificationCoupon.ios_single_coupon_exipry+" : "+notificationCoupon.ios_single_coupon_merchantid+" : "+notificationCoupon.ios_single_coupon_lat+" : "+notificationCoupon.ios_single_coupon_lon+" : "+notificationCoupon.ios_single_coupon_shareable);
-				
+				//coupon.db=window.sqlitePlugin.openDatabase({name: "coupon_mgr"});
 				coupon.openDatabase();
 				coupon.createTable();
 				coupon.addCoupon(notificationCoupon.ios_single_coupon_merchant, notificationCoupon.ios_single_coupon_title, notificationCoupon.ios_single_coupon_desc, notificationCoupon.ios_single_coupon_code, notificationCoupon.ios_single_coupon_exipry, notificationCoupon.ios_single_coupon_merchantid, notificationCoupon.ios_single_coupon_lat, notificationCoupon.ios_single_coupon_lon, notificationCoupon.ios_single_coupon_shareable);

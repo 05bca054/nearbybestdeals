@@ -70,6 +70,8 @@
   
     <gap:plugin name="com.phonegap.plugins.PushPlugin" />
     
+    <gap:plugin name="com.brodysoft.sqliteplugin" version="1.0.0" />
+    
     <gap:plugin name="org.apache.cordova.statusbar" version="0.1.4" />
    <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" />
     <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.6.3" />-->

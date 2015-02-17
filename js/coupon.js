@@ -25,9 +25,14 @@ var coupon = {
     openDatabase: function () {
         var dbSize = 5 * 1024 * 1024; // 5MB
         // open database
-        coupon.db = openDatabase("coupon_mgr", "", "coupon manager", dbSize, function() {
+        //IOS only
+        coupon.db = window.sqlitePlugin.openDatabase({name: "coupon_mgr"});
+        alert('db successfully opened or created');
+        //Android only
+        
+		/* coupon.db = openDatabase("coupon_mgr", "", "coupon manager", dbSize, function() {
             alert('db successfully opened or created');
-        });
+        });*/
     },
 
     createTable: function () {
