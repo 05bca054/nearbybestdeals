@@ -3,7 +3,7 @@ function onNotificationAPN (event) {
     if ( event.alert )
     {
 		//alert(event.alert+"in alert");
-        navigator.notification.alert(event.alert);
+       // navigator.notification.alert(event.alert);
         $(':mobile-pagecontainer').pagecontainer('change', '#notification', {
 			reload: false
 		});
@@ -16,9 +16,10 @@ function onNotificationAPN (event) {
 			type: "POST",
 			success: function(data) {
 				
-				alert(data);
+				//alert(data);
 				var notificationCoupon = $.parseJSON(data);
 				
+				alert(notificationCoupon.ios_single_coupon_merchant+" : "+ notificationCoupon.ios_single_coupon_title+" : "+ notificationCoupon.ios_single_coupon_desc+" : "+ notificationCoupon.ios_single_coupon_code+" : "+notificationCoupon.ios_single_coupon_exipry+" : "+notificationCoupon.ios_single_coupon_merchantid+" : "+notificationCoupon.ios_single_coupon_lat+" : "+notificationCoupon.ios_single_coupon_lon+" : "+notificationCoupon.ios_single_coupon_shareable);
 				
 				coupon.openDatabase();
 				coupon.createTable();
@@ -73,14 +74,14 @@ function onNotificationAPN (event) {
 
     if ( event.sound )
     {
-		alert(event.sound+"in sound");
+		//alert(event.sound+"in sound");
         var snd = new Media(event.sound);
         snd.play();
     }
 
     if ( event.badge )
     {
-        alert(event.badge+"in badge"+event.toSource());
+        //alert(event.badge+"in badge"+event.toSource());
         pushNotification.setApplicationIconBadgeNumber(successHandler, errorHandler, event.badge);
     }
 }
