@@ -420,8 +420,8 @@ var app = {
 						}
 						$( "#popupNearbyDeals" ).popup( "close" );
 					}
-				});	
-				return false;				
+				});
+				return false;
 			});
 			
 			$("#varify_merchant").click(function(e) {
