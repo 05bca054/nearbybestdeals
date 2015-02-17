@@ -26,7 +26,7 @@ var coupon = {
         var dbSize = 5 * 1024 * 1024; // 5MB
         // open database
         coupon.db = openDatabase("coupon_mgr", "", "coupon manager", dbSize, function() {
-            console.log('db successfully opened or created');
+            alert('db successfully opened or created');
         });
     },
 
