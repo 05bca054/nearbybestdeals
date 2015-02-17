@@ -17,7 +17,7 @@ var coupon = {
     },
 
     onSuccess: function (transaction, resultSet) {
-        console.log('Operation completed successfully');
+		alert('Operation completed successfully');
 		//alert('RowsAffected: ' + resultSet.rowsAffected + '; InsertId: ' + resultSet.insertId);
         //coupon.getAllTodoItems(transaction);
     },
@@ -37,8 +37,10 @@ var coupon = {
 
     createTable: function () {
         coupon.db.transaction(function (tx) {
+			alert("in create table");
             tx.executeSql("CREATE TABLE IF NOT EXISTS coupon(ID INTEGER PRIMARY KEY ASC, merchant_name TEXT, coupon_title TEXT, coupon_desc TEXT, coupon_code TEXT, expire_time TEXT,merchant_id INTEGER,lat TEXT,lon TEXT,sharable TEXT)", [],
                 coupon.onSuccess, coupon.onError);
+			alert("create table complete");
         });
     },
     
@@ -162,7 +164,7 @@ var coupon = {
     addCoupon: function (merchant_name, coupon_title, coupon_desc, coupon_code, expire_time, merchant_id, lat, lon, sharable) {
         coupon.db.transaction(function (tx) {
             var ts = new Date().toUTCString();
-           // alert(merchant_name+coupon_title+coupon_desc+coupon_code+expire_time+merchant_id+lat+lon);
+            alert(merchant_name+coupon_title+coupon_desc+coupon_code+expire_time+merchant_id+lat+lon);
             tx.executeSql("INSERT INTO coupon(merchant_name, coupon_title, coupon_desc, coupon_code, expire_time, merchant_id, lat, lon, sharable) VALUES (?,?,?,?,?,?,?,?,?)", [merchant_name, coupon_title, coupon_desc, coupon_code, expire_time, merchant_id, lat, lon, sharable], coupon.onSuccess, coupon.onError);
         });
     },
