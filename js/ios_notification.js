@@ -2,7 +2,7 @@ function onNotificationAPN (event) {
 	//alert(event);
     if ( event.alert )
     {
-		alert(event.coupon_id+"in alert");
+		//alert(event.coupon_id+"in alert");
        // navigator.notification.alert(event.alert);
         $(':mobile-pagecontainer').pagecontainer('change', '#notification', {
 			reload: false
@@ -19,7 +19,7 @@ function onNotificationAPN (event) {
 				//alert(data);
 				var notificationCoupon = $.parseJSON(data);
 				
-				alert(notificationCoupon.ios_single_coupon_merchant+" : "+ notificationCoupon.ios_single_coupon_title+" : "+ notificationCoupon.ios_single_coupon_desc+" : "+ notificationCoupon.ios_single_coupon_code+" : "+notificationCoupon.ios_single_coupon_exipry+" : "+notificationCoupon.ios_single_coupon_merchantid+" : "+notificationCoupon.ios_single_coupon_lat+" : "+notificationCoupon.ios_single_coupon_lon+" : "+notificationCoupon.ios_single_coupon_shareable);
+				//alert(notificationCoupon.ios_single_coupon_merchant+" : "+ notificationCoupon.ios_single_coupon_title+" : "+ notificationCoupon.ios_single_coupon_desc+" : "+ notificationCoupon.ios_single_coupon_code+" : "+notificationCoupon.ios_single_coupon_exipry+" : "+notificationCoupon.ios_single_coupon_merchantid+" : "+notificationCoupon.ios_single_coupon_lat+" : "+notificationCoupon.ios_single_coupon_lon+" : "+notificationCoupon.ios_single_coupon_shareable);
 				
 				coupon.openDatabase();
 				coupon.createTable();
@@ -27,7 +27,7 @@ function onNotificationAPN (event) {
 				coupon.countCoupon();
 				coupon.getCoupons();
 				
-				alert("after get coupon");
+				//alert("after get coupon");
 				
 				$("#notification_coupon_distance").attr('onclick',"event.preventDefault();launchnavigator.navigateByLatLon("+notificationCoupon.ios_single_coupon_lat+", "+notificationCoupon.ios_single_coupon_lon+")");
 				
