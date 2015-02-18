@@ -204,7 +204,7 @@ var coupon = {
 					}
 					else
 					{
-						//alert(d1+" : "+d2);
+						alert(d1+" : "+d2+" : "+row.ID);
 						//alert('delete older'+row.ID+"Expire time "+row.expire_time);
 						coupon.deleteExpires(row.ID);
 					}
