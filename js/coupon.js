@@ -49,7 +49,7 @@ var coupon = {
 		coupon.deleteAllExpires();
 		alert("into getCoupons");
 		coupon.db.transaction(function (tx) {
-            /*tx.executeSql("SELECT * FROM coupon", [], function (tx, resultSet) {
+            tx.executeSql("SELECT * FROM coupon", [], function (tx, resultSet) {
 				//alert("calling loadCoupons internal callback"+resultSet.rows.length+" : "+resultSet);
 				$("#list").empty();
 				for (var i = 0; i < resultSet.rows.length; i++) {
@@ -75,7 +75,7 @@ var coupon = {
 				var count = $('#list li').size();
 				alert(count);
 				$('#total-coupon').text("Total Coupons: "+count);
-			 }, coupon.onCouponLoadError);*/
+			 }, coupon.onCouponLoadError);
         });
     },
 
