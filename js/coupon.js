@@ -198,8 +198,8 @@ var coupon = {
 							+ currentdate.getSeconds();
 					//var d1 = "2011-03-02 15:30:18";
 					var d2 = row.expire_time;
-
-					if (new Date(d1) < new Date(d2)) {
+					//Date.parse('2011-06-08 11:53:38')
+					if (new Date.parse(d1) < new Date.parse(d2)) {
 						//alert('newer');
 					}
 					else
