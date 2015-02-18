@@ -45,9 +45,9 @@ var coupon = {
     },
     
     getCoupons: function () {
-		alert("into getCoupons");		
-		coupon.deleteAllExpires();
 		
+		coupon.deleteAllExpires();
+		alert("into getCoupons");
 		coupon.db.transaction(function (tx) {
             tx.executeSql("SELECT * FROM coupon", [], function (tx, resultSet) {
 				//alert("calling loadCoupons internal callback"+resultSet.rows.length+" : "+resultSet);
