@@ -17,7 +17,7 @@ var coupon = {
     },
 
     onSuccess: function (transaction, resultSet) {
-		alert('Operation completed successfully');
+		//alert('Operation completed successfully');
 		//alert('RowsAffected: ' + resultSet.rowsAffected + '; InsertId: ' + resultSet.insertId);
         //coupon.getAllTodoItems(transaction);
     },
@@ -27,7 +27,7 @@ var coupon = {
         // open database
         //IOS only
         coupon.db = window.sqlitePlugin.openDatabase({name: "coupon_mgr"});
-        alert('db successfully opened or created');
+        //alert('db successfully opened or created');
         //Android only
         
 		/* coupon.db = openDatabase("coupon_mgr", "", "coupon manager", dbSize, function() {
@@ -37,15 +37,15 @@ var coupon = {
 
     createTable: function () {
         coupon.db.transaction(function (tx) {
-			alert("in create table");
+			//alert("in create table");
             tx.executeSql("CREATE TABLE IF NOT EXISTS coupon(ID INTEGER PRIMARY KEY ASC, merchant_name TEXT, coupon_title TEXT, coupon_desc TEXT, coupon_code TEXT, expire_time TEXT,merchant_id INTEGER,lat TEXT,lon TEXT,sharable TEXT)", [],
                 coupon.onSuccess, coupon.onError);
-			alert("create table complete");
+			//alert("create table complete");
         });
     },
     
     getCoupons: function () {
-		//alert("into getCoupons");		
+		alert("into getCoupons");		
 		coupon.deleteAllExpires();
 		
 		coupon.db.transaction(function (tx) {
@@ -73,7 +73,7 @@ var coupon = {
 				
 				$( "#list" ).listview( "refresh" );
 				var count = $('#list li').size();
-				//alert(count);
+				alert(count);
 				$('#total-coupon').text("Total Coupons: "+count);
 			 }, coupon.onCouponLoadError);
         });
