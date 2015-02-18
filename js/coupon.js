@@ -51,9 +51,9 @@ var coupon = {
 		coupon.db.transaction(function (tx) {
             tx.executeSql("SELECT * FROM coupon", [], function (tx, resultSet) {
 				alert("calling loadCoupons internal callback "+resultSet.rows.length);
-				/*$("#list").empty();
+				$("#list").empty();
 				for (var i = 0; i < resultSet.rows.length; i++) {
-					row = resultSet.rows.item(i);					
+					row = resultSet.rows.item(i);
 					//alert(resultSet.rows.length);
 					//$("#list").append('<li class="ui-li-has-alt" id="coupon_'+row.ID+'"><a show-id="'+row.ID+'" id="coupon_link_'+row.ID+'" href="#" class="coupon_desc"><h3>'+row.merchant_name+'</h3><p class="topic"><strong>'+row.coupon_code+'</strong></p><p>'+row.coupon_title+'</p><p class="ui-li-aside"><strong data-countdown="'+row.expire_time+'"></strong></p></a><a href="#" class="delete ui-btn ui-btn-icon-notext ui-icon-delete" title="Delete" delete-id="'+row.ID+'"></a></li>');
 					$("#list").append('<li class="ui-li-has-alt" id="coupon_'+row.ID+'"><a id="coupon_link_'+row.ID+'" href="#"><h3>'+row.merchant_name+'</h3><div class="ui-grid-a"><div class="ui-block-a" style="width:15%;"><img src="img/coupon_tag-r.png" width="100%" align="middle" alt="USA" class="ui-li-icon"/></div><div class="ui-block-b" style="width:85%;padding:3%;"><strong>'+row.coupon_code+'</strong></div></div><hr><p style="text-align:center;font-weight:bold;">'+row.coupon_title+'</p><hr><button class="ui-btn ui-icon-info ui-btn-icon-left ui-btn-active ui-state-persist coupon_desc" show-id="'+row.ID+'">Coupon Detail</button><p class="ui-li-aside" style="right: 1.333em;"><strong style="color:#3388cc;" data-countdown="'+row.expire_time+'"></strong></p></a><a href="#" class="delete ui-btn ui-btn-icon-notext ui-icon-delete" title="Delete" delete-id="'+row.ID+'"></a></li>');
@@ -73,8 +73,8 @@ var coupon = {
 				
 				$( "#list" ).listview( "refresh" );
 				var count = $('#list li').size();
-				alert(count);
-				$('#total-coupon').text("Total Coupons: "+count);*/
+				//alert(count);
+				$('#total-coupon').text("Total Coupons: "+count);
 			 }, coupon.onCouponLoadError);
         });
     },
