@@ -30,10 +30,10 @@
 	<preference name="DisallowOverscroll" value="true"/>
 	<preference name="phonegap-version" value="3.7.0" />
 		
-	<preference name="StatusBarOverlaysWebView" value="true" /> 
+	<!--<preference name="StatusBarOverlaysWebView" value="true" /> 
 	<preference name="StatusBarBackgroundColor" value="#000000" />
 
-	<!--<preference name="StatusBarBackgroundColor" value="#000000" />
+	<preference name="StatusBarBackgroundColor" value="#000000" />
 	<preference name="StatusBarStyle" value="lightcontent" />-->
     
 	<gap:config-file platform="ios" parent="UISupportedInterfaceOrientations" overwrite="true">
