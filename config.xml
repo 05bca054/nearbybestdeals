@@ -29,8 +29,11 @@
 	<preference name="Orientation" value="portrait" />
 	<preference name="DisallowOverscroll" value="true"/>
 	<preference name="phonegap-version" value="3.7.0" />
-	
-	<preference name="StatusBarOverlaysWebView" value="false" /> 
+		
+	<preference name="StatusBarOverlaysWebView" value="true" /> 
+	<preference name="StatusBarBackgroundColor" value="#000000" />
+	<preference name="StatusBarStyle" value="lightcontent" />
+
 	<!--<preference name="StatusBarBackgroundColor" value="#000000" />
 	<preference name="StatusBarStyle" value="lightcontent" />-->
     
