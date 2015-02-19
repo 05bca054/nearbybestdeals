@@ -58,6 +58,7 @@ var app = {
 				console.log("PhoneGap & jQuery.Mobile finished loading");
 				//alert("loading on phone test");
 				//window.localStorage.setItem("registration", "no");
+				
 				document.addEventListener("backbutton", backKeyDown, true);
 				function backKeyDown() {
 					//navigator.app.exitApp(); // To exit the app!

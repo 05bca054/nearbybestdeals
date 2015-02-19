@@ -50,7 +50,7 @@ var coupon = {
 		//alert("into getCoupons");
 		coupon.db.transaction(function (tx) {
             tx.executeSql("SELECT * FROM coupon", [], function (tx, resultSet) {
-				alert("calling loadCoupons internal callback "+resultSet.rows.length);
+				//alert("calling loadCoupons internal callback "+resultSet.rows.length);
 				$("#list").empty();
 				for (var i = 0; i < resultSet.rows.length; i++) {
 					row = resultSet.rows.item(i);
