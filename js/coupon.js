@@ -202,12 +202,12 @@ var coupon = {
 					//alert("calling loadCoupons internal callback"+resultSet.rows.length+Date.parse(d2));
 					//Date.parse('2011-06-08 11:53:38')
 					alert(Date.parse(d1)+ " : " +Date.parse(d2));
-					if (new Date.parse(d1) < new Date.parse(d2)) {
+					if (Date.parse(d1) < Date.parse(d2)) {
 						alert('newer');
 					}
 					else
 					{
-						alert(d1+" : "+d2+" : "+row.ID);
+						//alert(d1+" : "+d2+" : "+row.ID);
 						//alert('delete older'+row.ID+"Expire time "+row.expire_time);
 						coupon.deleteExpires(row.ID);
 					}
@@ -218,7 +218,7 @@ var coupon = {
     },
     
     deleteExpires: function (id) {
-        alert('Delete item: ' + id);
+        //alert('Delete item: ' + id);
         coupon.db.transaction(function (tx) {
             tx.executeSql("DELETE FROM coupon WHERE ID=?", [id], function (tx, resultSet) {coupon.countCoupon();}, coupon.onError);
         });
