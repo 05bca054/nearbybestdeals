@@ -4,73 +4,7 @@ function onNotificationAPN (event) {
     {
 		//alert(event.coupon_id+"in alert");
        // navigator.notification.alert(event.alert);
-        $(':mobile-pagecontainer').pagecontainer('change', '#notification', {
-			reload: false
-		});
-		
-        $.ajax({
-			beforeSend: function() { $.mobile.loading("show"); }, //Show spinner
-			complete: function() { $.mobile.loading("hide"); }, //Hide spinner
-			url: web_url+"deals/add_coupon_ios.php",					
-			data: { coupon_id: event.coupon_id},
-			type: "POST",
-			success: function(data) {
-				
-				//alert(data);
-				var notificationCoupon = $.parseJSON(data);
-				
-				//alert(notificationCoupon.ios_single_coupon_merchant+" : "+ notificationCoupon.ios_single_coupon_title+" : "+ notificationCoupon.ios_single_coupon_desc+" : "+ notificationCoupon.ios_single_coupon_code+" : "+notificationCoupon.ios_single_coupon_exipry+" : "+notificationCoupon.ios_single_coupon_merchantid+" : "+notificationCoupon.ios_single_coupon_lat+" : "+notificationCoupon.ios_single_coupon_lon+" : "+notificationCoupon.ios_single_coupon_shareable);
-				//coupon.db=window.sqlitePlugin.openDatabase({name: "coupon_mgr"});
-				coupon.openDatabase();
-				coupon.createTable();
-				coupon.addCoupon(notificationCoupon.ios_single_coupon_merchant, notificationCoupon.ios_single_coupon_title, notificationCoupon.ios_single_coupon_desc, notificationCoupon.ios_single_coupon_code, notificationCoupon.ios_single_coupon_exipry, notificationCoupon.ios_single_coupon_merchantid, notificationCoupon.ios_single_coupon_lat, notificationCoupon.ios_single_coupon_lon, notificationCoupon.ios_single_coupon_shareable);
-				coupon.countCoupon();
-				coupon.getCoupons();
-				
-				//alert("after get coupon");
-				
-				$("#notification_coupon_distance").attr('onclick',"event.preventDefault();launchnavigator.navigateByLatLon("+notificationCoupon.ios_single_coupon_lat+", "+notificationCoupon.ios_single_coupon_lon+")");
-				
-				$("#notification_coupon_merchantid").attr("merchant-id",notificationCoupon.ios_single_coupon_merchant);
-				$("#notification_coupon_exipry").attr("data-countdown",notificationCoupon.ios_single_coupon_exipry);
-				
-				$('#notification_coupon_exipry').countdown(notificationCoupon.ios_single_coupon_exipry, function(event23) {
-					$(this).html(event23.strftime('%D days %H:%M:%S'));
-				});
-				
-				$("#notification_coupon_code").text(notificationCoupon.ios_single_coupon_code);
-				$("#notification_coupon_title").text(notificationCoupon.ios_single_coupon_title);
-				$("#notification_coupon_desc").text(notificationCoupon.ios_single_coupon_desc);
-				$("#notification_coupon_merchant").text(notificationCoupon.ios_single_coupon_merchant);
-				$("#app-status-ul-notification").listview("refresh");
-
-				if(notificationCoupon.ios_single_coupon_shareable!="on")
-				{
-					//alert(notificationCoupon.sharable+"not Sharable");
-					$("#notification_sharable").hide("fast");
-				}
-				else
-				{
-					//alert(notificationCoupon.sharable+"Sharable");
-					$("#notification_sharable").show("fast");
-				}
-								
-				$(".notification-facebook-share").attr("onclick","$.mobile.loading('show');window.plugins.socialsharing.shareViaFacebook('Use Coupon code :"+notificationCoupon.ios_single_coupon_code+" And get "+notificationCoupon.ios_single_coupon_desc+" at "+notificationCoupon.ios_single_coupon_merchant+"', 'http://nearbybestdeals.com/wp-content/themes/enfold/images/layout/logo.jpg', 'http://maps.google.com/maps?q=loc:"+notificationCoupon.ios_single_coupon_lat+","+notificationCoupon.ios_single_coupon_lon+"', function() {$.mobile.loading('hide');}, function(errormsg){alert(errormsg);$.mobile.loading('hide');})");
-								
-				$(".notification-twitter-share").attr("onclick","$.mobile.loading('show'); setTimeout(function(){		window.plugins.socialsharing.shareViaTwitter('Use Coupon code :"+notificationCoupon.ios_single_coupon_code+" And get "+notificationCoupon.ios_single_coupon_desc+" at "+notificationCoupon.ios_single_coupon_merchant+"', 'http://nearbybestdeals.com/wp-content/themes/enfold/images/layout/logo.jpg', 'http://maps.google.com/maps?q=loc:"+notificationCoupon.ios_single_coupon_lat+","+notificationCoupon.ios_single_coupon_lon+"'); $.mobile.loading('hide'); }, 5000);");
-				
-				$(".notification-whatsapp-share").attr("onclick","$.mobile.loading('show');window.plugins.socialsharing.shareViaWhatsApp('Use Coupon code :"+notificationCoupon.ios_single_coupon_code+" And get "+notificationCoupon.ios_single_coupon_desc+" at "+notificationCoupon.ios_single_coupon_merchant+"', 'http://nearbybestdeals.com/wp-content/themes/enfold/images/layout/logo.jpg', 'http://maps.google.com/maps?q=loc:"+notificationCoupon.ios_single_coupon_lat+","+notificationCoupon.ios_single_coupon_lon+"',function() {$.mobile.loading('hide');}, function(errormsg){alert(errormsg);$.mobile.loading('hide');})");				
-				
-				$(".notification-sms-share").attr("onclick","$.mobile.loading('show'); window.plugins.socialsharing.shareViaSMS('Use Coupon code :"+notificationCoupon.ios_single_coupon_code+" And get "+notificationCoupon.ios_single_coupon_desc+" at "+notificationCoupon.ios_single_coupon_merchant+" : Location : http://maps.google.com/maps?q=loc:"+notificationCoupon.ios_single_coupon_lat+","+notificationCoupon.ios_single_coupon_lon+"', null, function(msg) {$.mobile.loading('hide');  }, function(msg) {$.mobile.loading('hide');alert('error: ' + msg)})");
-								
-				$("#app-status-ul-notification").listview("refresh");
-
-				alert("at last");
-				//e.preventDefault();
-				//e.stopPropagation();
-				
-			}
-		});	
+        
     }
 
     if ( event.sound )
@@ -85,6 +19,74 @@ function onNotificationAPN (event) {
         //alert(event.badge+"in badge"+event.toSource());
         pushNotification.setApplicationIconBadgeNumber(successHandler, errorHandler, event.badge);
     }
+    
+    $(':mobile-pagecontainer').pagecontainer('change', '#notification', {
+		reload: false
+	});
+	
+	$.ajax({
+		beforeSend: function() { $.mobile.loading("show"); }, //Show spinner
+		complete: function() { $.mobile.loading("hide"); }, //Hide spinner
+		url: web_url+"deals/add_coupon_ios.php",					
+		data: { coupon_id: event.coupon_id},
+		type: "POST",
+		success: function(data) {
+			
+			//alert(data);
+			var notificationCoupon = $.parseJSON(data);
+			
+			//alert(notificationCoupon.ios_single_coupon_merchant+" : "+ notificationCoupon.ios_single_coupon_title+" : "+ notificationCoupon.ios_single_coupon_desc+" : "+ notificationCoupon.ios_single_coupon_code+" : "+notificationCoupon.ios_single_coupon_exipry+" : "+notificationCoupon.ios_single_coupon_merchantid+" : "+notificationCoupon.ios_single_coupon_lat+" : "+notificationCoupon.ios_single_coupon_lon+" : "+notificationCoupon.ios_single_coupon_shareable);
+			//coupon.db=window.sqlitePlugin.openDatabase({name: "coupon_mgr"});
+			coupon.openDatabase();
+			coupon.createTable();
+			coupon.addCoupon(notificationCoupon.ios_single_coupon_merchant, notificationCoupon.ios_single_coupon_title, notificationCoupon.ios_single_coupon_desc, notificationCoupon.ios_single_coupon_code, notificationCoupon.ios_single_coupon_exipry, notificationCoupon.ios_single_coupon_merchantid, notificationCoupon.ios_single_coupon_lat, notificationCoupon.ios_single_coupon_lon, notificationCoupon.ios_single_coupon_shareable);
+			coupon.countCoupon();
+			coupon.getCoupons();
+			
+			//alert("after get coupon");
+			
+			$("#notification_coupon_distance").attr('onclick',"event.preventDefault();launchnavigator.navigateByLatLon("+notificationCoupon.ios_single_coupon_lat+", "+notificationCoupon.ios_single_coupon_lon+")");
+			
+			$("#notification_coupon_merchantid").attr("merchant-id",notificationCoupon.ios_single_coupon_merchant);
+			$("#notification_coupon_exipry").attr("data-countdown",notificationCoupon.ios_single_coupon_exipry);
+			
+			$('#notification_coupon_exipry').countdown(notificationCoupon.ios_single_coupon_exipry, function(event23) {
+				$(this).html(event23.strftime('%D days %H:%M:%S'));
+			});
+			
+			$("#notification_coupon_code").text(notificationCoupon.ios_single_coupon_code);
+			$("#notification_coupon_title").text(notificationCoupon.ios_single_coupon_title);
+			$("#notification_coupon_desc").text(notificationCoupon.ios_single_coupon_desc);
+			$("#notification_coupon_merchant").text(notificationCoupon.ios_single_coupon_merchant);
+			$("#app-status-ul-notification").listview("refresh");
+
+			if(notificationCoupon.ios_single_coupon_shareable!="on")
+			{
+				//alert(notificationCoupon.sharable+"not Sharable");
+				$("#notification_sharable").hide("fast");
+			}
+			else
+			{
+				//alert(notificationCoupon.sharable+"Sharable");
+				$("#notification_sharable").show("fast");
+			}
+							
+			$(".notification-facebook-share").attr("onclick","$.mobile.loading('show');window.plugins.socialsharing.shareViaFacebook('Use Coupon code :"+notificationCoupon.ios_single_coupon_code+" And get "+notificationCoupon.ios_single_coupon_desc+" at "+notificationCoupon.ios_single_coupon_merchant+"', 'http://nearbybestdeals.com/wp-content/themes/enfold/images/layout/logo.jpg', 'http://maps.google.com/maps?q=loc:"+notificationCoupon.ios_single_coupon_lat+","+notificationCoupon.ios_single_coupon_lon+"', function() {$.mobile.loading('hide');}, function(errormsg){alert(errormsg);$.mobile.loading('hide');})");
+							
+			$(".notification-twitter-share").attr("onclick","$.mobile.loading('show'); setTimeout(function(){		window.plugins.socialsharing.shareViaTwitter('Use Coupon code :"+notificationCoupon.ios_single_coupon_code+" And get "+notificationCoupon.ios_single_coupon_desc+" at "+notificationCoupon.ios_single_coupon_merchant+"', 'http://nearbybestdeals.com/wp-content/themes/enfold/images/layout/logo.jpg', 'http://maps.google.com/maps?q=loc:"+notificationCoupon.ios_single_coupon_lat+","+notificationCoupon.ios_single_coupon_lon+"'); $.mobile.loading('hide'); }, 5000);");
+			
+			$(".notification-whatsapp-share").attr("onclick","$.mobile.loading('show');window.plugins.socialsharing.shareViaWhatsApp('Use Coupon code :"+notificationCoupon.ios_single_coupon_code+" And get "+notificationCoupon.ios_single_coupon_desc+" at "+notificationCoupon.ios_single_coupon_merchant+"', 'http://nearbybestdeals.com/wp-content/themes/enfold/images/layout/logo.jpg', 'http://maps.google.com/maps?q=loc:"+notificationCoupon.ios_single_coupon_lat+","+notificationCoupon.ios_single_coupon_lon+"',function() {$.mobile.loading('hide');}, function(errormsg){alert(errormsg);$.mobile.loading('hide');})");				
+			
+			$(".notification-sms-share").attr("onclick","$.mobile.loading('show'); window.plugins.socialsharing.shareViaSMS('Use Coupon code :"+notificationCoupon.ios_single_coupon_code+" And get "+notificationCoupon.ios_single_coupon_desc+" at "+notificationCoupon.ios_single_coupon_merchant+" : Location : http://maps.google.com/maps?q=loc:"+notificationCoupon.ios_single_coupon_lat+","+notificationCoupon.ios_single_coupon_lon+"', null, function(msg) {$.mobile.loading('hide');  }, function(msg) {$.mobile.loading('hide');alert('error: ' + msg)})");
+							
+			$("#app-status-ul-notification").listview("refresh");
+
+			//alert("at last");
+			//e.preventDefault();
+			//e.stopPropagation();
+			
+		}
+	});	
 }
 
 function tokenHandler (result) {

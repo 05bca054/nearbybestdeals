@@ -164,7 +164,7 @@ var coupon = {
     addCoupon: function (merchant_name, coupon_title, coupon_desc, coupon_code, expire_time, merchant_id, lat, lon, sharable) {
         coupon.db.transaction(function (tx) {
             var ts = new Date().toUTCString();
-            alert(merchant_name+coupon_title+coupon_desc+coupon_code+expire_time+merchant_id+lat+lon);
+            //alert(merchant_name+coupon_title+coupon_desc+coupon_code+expire_time+merchant_id+lat+lon);
             tx.executeSql("INSERT INTO coupon(merchant_name, coupon_title, coupon_desc, coupon_code, expire_time, merchant_id, lat, lon, sharable) VALUES (?,?,?,?,?,?,?,?,?)", [merchant_name, coupon_title, coupon_desc, coupon_code, expire_time, merchant_id, lat, lon, sharable], coupon.onSuccess, coupon.onError);
         });
     },
@@ -204,7 +204,7 @@ var coupon = {
 					}
 					else
 					{
-						alert(d1+" : "+d2+" : "+row.ID);
+						//alert(d1+" : "+d2+" : "+row.ID);
 						//alert('delete older'+row.ID+"Expire time "+row.expire_time);
 						coupon.deleteExpires(row.ID);
 					}
