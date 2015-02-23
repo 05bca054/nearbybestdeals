@@ -233,7 +233,7 @@ var app = {
 				coupon.openDatabase();
 				//coupon.openDatabase();
 				coupon.createTable();
-				coupon.deleteAllExpires();
+				//coupon.deleteAllExpires();
 				coupon.countCoupon();
 				coupon.getCoupons();
 				

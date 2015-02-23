@@ -185,7 +185,7 @@ var coupon = {
 		//alert("calling delete expires");
         coupon.db.transaction(function (tx) {
             tx.executeSql("SELECT * FROM coupon", [], function (tx, resultSet) {
-				alert("calling loadCoupons internal callback"+resultSet.rows.length+" : "+resultSet);
+				
 				for (var i = 0; i < resultSet.rows.length; i++) {
 					
 					row = resultSet.rows.item(i);
@@ -199,6 +199,7 @@ var coupon = {
 							+ currentdate.getSeconds();
 					//var d1 = "2011-03-02 15:30:18";
 					var d2 = row.expire_time;
+					alert("calling loadCoupons internal callback"+resultSet.rows.length+ " : " +new Date.parse(d1));
 					//Date.parse('2011-06-08 11:53:38')
 					if (new Date.parse(d1) < new Date.parse(d2)) {
 						alert('newer');
