@@ -182,10 +182,10 @@ var coupon = {
     },
 
     deleteAllExpires: function () {
-		alert("calling delete expires");
+		//alert("calling delete expires");
         coupon.db.transaction(function (tx) {
             tx.executeSql("SELECT * FROM coupon", [], function (tx, resultSet) {
-			  //alert("calling loadCoupons internal callback"+resultSet.rows.length+" : "+resultSet);
+				alert("calling loadCoupons internal callback"+resultSet.rows.length+" : "+resultSet);
 				for (var i = 0; i < resultSet.rows.length; i++) {
 					
 					row = resultSet.rows.item(i);
@@ -215,7 +215,7 @@ var coupon = {
     },
     
     deleteExpires: function (id) {
-        //alert('Delete item: ' + id);
+        alert('Delete item: ' + id);
         coupon.db.transaction(function (tx) {
             tx.executeSql("DELETE FROM coupon WHERE ID=?", [id], function (tx, resultSet) {coupon.countCoupon();}, coupon.onError);
         });
