@@ -199,8 +199,9 @@ var coupon = {
 							+ currentdate.getSeconds();
 					//var d1 = "2011-03-02 15:30:18";
 					var d2 = row.expire_time;
-					alert("calling loadCoupons internal callback"+resultSet.rows.length+Date.parse(d2));
+					//alert("calling loadCoupons internal callback"+resultSet.rows.length+Date.parse(d2));
 					//Date.parse('2011-06-08 11:53:38')
+					alert(Date.parse(d1)+ " : " +Date.parse(d2));
 					if (new Date.parse(d1) < new Date.parse(d2)) {
 						alert('newer');
 					}
@@ -210,7 +211,7 @@ var coupon = {
 						//alert('delete older'+row.ID+"Expire time "+row.expire_time);
 						coupon.deleteExpires(row.ID);
 					}
-					alert(Date.parse(d1)+ " : " +Date.parse(d2));
+					
 				}
 			 }, coupon.onCouponLoadError);
         });	
