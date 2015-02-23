@@ -476,10 +476,10 @@ var app = {
 						required: true,
 						email: true
 					},
-					feedback_contact: {
+					/*feedback_contact: {
 						required: true,
 						number: true
-					},					
+					},*/
 					feedback_message: {
 						required: true,						
 					}        
