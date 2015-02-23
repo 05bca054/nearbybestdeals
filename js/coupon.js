@@ -50,7 +50,7 @@ var coupon = {
 		//alert("into getCoupons");
 		coupon.db.transaction(function (tx) {
             tx.executeSql("SELECT * FROM coupon", [], function (tx, resultSet) {
-				alert("calling loadCoupons internal callback "+resultSet.rows.length);
+				//alert("calling loadCoupons internal callback "+resultSet.rows.length);
 				$("#list").empty();
 				for (var i = 0; i < resultSet.rows.length; i++) {
 					row = resultSet.rows.item(i);
@@ -201,7 +201,7 @@ var coupon = {
 					var d2 = row.expire_time;
 					//alert("calling loadCoupons internal callback"+resultSet.rows.length+Date.parse(d2));
 					//Date.parse('2011-06-08 11:53:38')
-					//alert(Date.parse(d1)+ " : " +Date.parse(d2));
+					alert(Date.parse(d1)+ " : " +Date.parse(d2));
 					if (Date.parse(d1) < Date.parse(d2)) {
 						//alert('newer');
 					}
