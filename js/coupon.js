@@ -182,6 +182,7 @@ var coupon = {
     },
 
     deleteAllExpires: function () {
+		alert("calling delete expires");
         coupon.db.transaction(function (tx) {
             tx.executeSql("SELECT * FROM coupon", [], function (tx, resultSet) {
 			  //alert("calling loadCoupons internal callback"+resultSet.rows.length+" : "+resultSet);
