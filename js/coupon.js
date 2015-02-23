@@ -200,11 +200,11 @@ var coupon = {
 					var d2 = row.expire_time;
 					//Date.parse('2011-06-08 11:53:38')
 					if (new Date.parse(d1) < new Date.parse(d2)) {
-						//alert('newer');
+						alert('newer');
 					}
 					else
 					{
-						//alert(d1+" : "+d2+" : "+row.ID);
+						alert(d1+" : "+d2+" : "+row.ID);
 						//alert('delete older'+row.ID+"Expire time "+row.expire_time);
 						coupon.deleteExpires(row.ID);
 					}
