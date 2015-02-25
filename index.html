@@ -49,6 +49,10 @@
 				ajaxStop: function () { $.mobile.loading('show'); },
 				ajaxError: function () { $.mobile.loading('hide'); }
 			});*/
+			* {
+				-webkit-touch-callout: none;
+				-webkit-user-select: none; /* Disable selection/copy in UIWebView */
+			}
 			app.init();
 			
 		</script>
@@ -272,12 +276,12 @@
 				<div class="ui-grid-a ui-responsive">
 					<div class="ui-block-a">
 						<div class="ui-bar ui-bar-a" style="height:60px">							
-							<a href="tel:+91 9662 547 757" class="ui-btn ui-icon-phone ui-btn-icon-left ui-btn-active ui-state-persist" id="merchant_phone"></a>
+							<a href="tel:+91 9662 547 757" target="_system" class="ui-btn ui-icon-phone ui-btn-icon-left ui-btn-active ui-state-persist" id="merchant_phone"></a>
 						</div>
 					</div>
 					<div class="ui-block-b">
 						<div class="ui-bar ui-bar-a" style="height:60px">
-							<a href="mailto:info@rajwadi.com" class="ui-btn ui-icon-mail ui-btn-icon-left ui-btn-active ui-state-persist" id="merchant_email"></a>
+							<a href="mailto:info@nearbybestdeals.com" target="_system" class="ui-btn ui-icon-mail ui-btn-icon-left ui-btn-active ui-state-persist" id="merchant_email"></a>
 						</div>
 					</div><!-- /grid-a -->
 					<div class="ui-block-c">
@@ -1057,8 +1061,8 @@
 			<div role="main" class="ui-content">
 				<h2>Near by best deals</h2>
 				<p><a onclick="event.preventDefault();window.open('http://www.nearbybestdeals.com', '_system');" class="ui-btn ui-icon-arrow-r ui-btn-icon-left ui-btn-active ui-state-persist">Website : www.nearbybestdeals.com</a></p>
-				<p><a onclick="event.preventDefault();" href="tel:+919662547757" class="ui-btn ui-icon-phone ui-btn-icon-left ui-btn-active ui-state-persist">Mobile No. : +91 9662547757</a></p>
-				<p><a onclick="event.preventDefault();" href="mailto:info@nearbybestdeals.com" class="ui-btn ui-icon-mail ui-btn-icon-left ui-btn-active ui-state-persist">Email : info@nearbybestdeals.com</a></p>
+				<p><a onclick="event.preventDefault();window.open('tel:+919662547757', '_system')" class="ui-btn ui-icon-phone ui-btn-icon-left ui-btn-active ui-state-persist">Mobile No. : +91 9662547757</a></p>
+				<p><a onclick="event.preventDefault();window.open('mailto:info@nearbybestdeals.com', '_system')" class="ui-btn ui-icon-mail ui-btn-icon-left ui-btn-active ui-state-persist">Email : info@nearbybestdeals.com</a></p>
 				<p>Contact us if you want to be our member and send coupon like you currently get from dealer you added.Register your dealer id with us.</p>
 			</div><!-- /content -->
 			

@@ -56,6 +56,7 @@ var app = {
 	 
 			jQuery.when(deviceReadyDeferred, jqmReadyDeferred).then(function () {
 				console.log("PhoneGap & jQuery.Mobile finished loading");
+				
 				//alert("loading on phone test");
 				//window.localStorage.setItem("registration", "no");
 				
