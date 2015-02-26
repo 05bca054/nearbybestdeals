@@ -225,7 +225,8 @@ var app = {
 				}
 				app.countMerchants();
 				//initListDealer in background
-				$.ajax({
+				app.initListDealer();
+				/*$.ajax({
 					beforeSend: function() { }, //Show spinner
 					complete: function() { }, //Hide spinner
 					url: web_url+"merchant/list_merchant.php",
@@ -250,12 +251,12 @@ var app = {
 										user_id=ndes;
 									//alert("Key : -- "+k+" Value : -- "+ndes);
 								});
-								$("#dealer_li"+i).append('<a href="#" class="delete" delete-id="'+user_id+'">Delete</a>');
+								//$("#dealer_li"+i).append('<a href="#" class="delete" delete-id="'+user_id+'">Delete</a>');
 							});
 							$( "#list2" ).listview( "refresh" );
 						}
 					}
-				});	
+				});	*/
 				//app.initListDealer();
 			});
 			
