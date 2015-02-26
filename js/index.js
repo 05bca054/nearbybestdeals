@@ -918,7 +918,7 @@ var app = {
 					$.each(testJSON, function(i, clstr) {
 						var user_id="";
 						
-						$("#list2").append('<li id="dealer_li'+i+'"><a  id="merchant'+i+'" href="#" class="merchant_desc"></a></li>');
+						$("#list2").append('<li id="dealer_li'+i+'"><a  id="merchant'+i+'" href="#" class="merchant_desc" style="margin-right: 0px;"></a></li>');
 						//alert("Key : -- "+i+" Value : -- "+clstr);
 						$.each(clstr, function(k, ndes) {
 							if(k=="merchant")
