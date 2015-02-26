@@ -89,8 +89,9 @@
     
     <gap:plugin name="org.apache.cordova.statusbar" version="0.1.4" />
     
+    <gap:plugin name="com.ohh2ahh.plugins.appavailability" version="0.3.1" />    
     
-   <!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" />
+	<!-- <gap:plugin name="de.appplant.cordova.plugin.background-mode" />
     <gap:plugin name="de.appplant.cordova.plugin.background-mode" version="0.6.3" />-->
     <gap:plugin name="nl.x-services.plugins.socialsharing" />
 
@@ -146,9 +147,8 @@
     <access origin="http://*" launch-external="yes" />
 	<access origin="https://*" launch-external="yes" />
     <!--
-        <access origin="http://phonegap.com" />                    - allow any secure requests to http://phonegap.com/
-        <access origin="http://phonegap.com" subdomains="true" />  - same as above, but including subdomains, such as http://build.phonegap.com/
-        <access origin="http://phonegap.com" browserOnly="true" /> - only allows http://phonegap.com to be opened by the child browser.
+		<access origin="http://phonegap.com" />                    - allow any secure requests to http://phonegap.com/
+		<access origin="http://phonegap.com" subdomains="true" />  - same as above, but including subdomains, such as http://build.phonegap.com/
+		<access origin="http://phonegap.com" browserOnly="true" /> - only allows http://phonegap.com to be opened by the child browser.
     -->
-
 </widget>

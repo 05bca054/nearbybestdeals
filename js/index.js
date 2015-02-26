@@ -87,58 +87,16 @@ var app = {
 						e.preventDefault();
 					}
 					else {
+						navigator.app.backHistory();
 						//alert("back on coupon page");
-						e.preventDefault();
+						//e.preventDefault();
 						//alert("back other page");						
 					}					
 				}
 				
 				$.mobile.loading("show");  
 				
-				//cordova.plugins.backgroundMode.setDefaults({ text:'Doing heavy tasks.'});
 				
-				// Enable background mode
-				
-				//testing this mode anytime you needed
-				
-				/*cordova.plugins.backgroundMode.configure({
-					silent: true
-				});*/
-				//cordova.plugins.backgroundMode.setDefaults({ text:'Doing heavy tasks.'});
-				
-				//cordova.plugins.backgroundMode.enable();				
-
-				// Called when background mode has been activated
-				/*cordova.plugins.backgroundMode.onactivate = function () {
-					// Modify the currently displayed notification
-										
-					//setTimeout(function () {
-					cordova.plugins.backgroundMode.configure({
-						text:'Near by Deals Running in background now.'
-					});
-						//cordova.plugins.backgroundMode.disable();
-					 //}, 5000);
-				}*/
-				
-				//cordova.plugins.backgroundMode.ondeactivate = function() {
-					
-					//alert("test on deactivate");
-				//}
-				
-				/*if(!cordova.plugins.backgroundMode.isEnabled())
-				{
-					//cordova.plugins.backgroundMode.enable();
-					//alert("Not enable");
-				}
-				else
-				{
-					alert("Background mode is enable");
-				}
-			
-				cordova.plugins.backgroundMode.onfailure = function(errorCode) {
-					alert(errorCode);
-				};
-				*/
 				FastClick.attach(document.body);
 				//enable when next vertion realease
 				//navigator.geolocation.getCurrentPosition(onSuccess1, onError1);
@@ -256,7 +214,8 @@ var app = {
 			$(document).on("pageshow","#coupon",function(e){ // When entering pagetwo				
 				if(localStorage.openSuccessPopup==1)
 				{
-					alert("Profile has benn created");
+					//alert("Profile has been created");
+					$( "#help-coupon" ).popup( "open" );
 					localStorage.openSuccessPopup=0;
 				}
 				else if(localStorage.openUpdatePopup==1)
@@ -970,7 +929,7 @@ var app = {
 								user_id=ndes;
 							//alert("Key : -- "+k+" Value : -- "+ndes);
 						});
-						$("#dealer_li"+i).append('<a href="#" class="delete" delete-id="'+user_id+'">Delete</a>');
+						//$("#dealer_li"+i).append('<a href="#" class="delete" delete-id="'+user_id+'">Delete</a>');
 					});
 					$( "#list2" ).listview( "refresh" );
 					var count = $('#list2 li').size();
