@@ -226,6 +226,21 @@ var app = {
 				app.countMerchants();
 				//initListDealer in background
 				//app.initListDealer();
+				
+				$(".notif_status").on('change', function (event) {
+					alert($(this).attr("dealer-no")+" : "+$(this).val());
+					$.ajax({
+						beforeSend: function() { }, //Show spinner
+						complete: function() { }, //Hide spinner
+						url: web_url+"merchant/upadate_merchant.php",
+						data: { imei: window.localStorage.getItem("mob_user_id"),dealer_no:$(this).attr("dealer-no"),switch_val:$(this).val() },
+						type: "POST",
+						success: function(data) {
+							alert(data);
+						}
+					});	
+				});
+				
 				$.ajax({
 					beforeSend: function() { }, //Show spinner
 					complete: function() { }, //Hide spinner
@@ -246,12 +261,13 @@ var app = {
 									if(k=="merchant")
 										$("#merchant"+i).append('<h3>'+ndes+'</h3>');
 									if(k=="desc")
-										$("#merchant"+i).append('<p class="desc">'+ndes+'</p>');
+										$("#merchant"+i).append('<p class="desc">'+ndes+'</p><p class="ui-li-aside" style="right: 1.333em;"><select id="select-based-flipswitch'+clstr.id+'" data-role="flipswitch" data-corners="false" class="notif_status" dealer-no="'+clstr.id+'"><option value="1">On</option><option value="0">Off</option></select></p>');
 									if(k=="id")
 										user_id=ndes;
 									//alert("Key : -- "+k+" Value : -- "+ndes);
-								});
+								});								
 								$("#dealer_li"+i).append('<a href="#" class="delete" delete-id="'+user_id+'">Delete</a>');
+								$("#select-based-flipswitch"+clstr.id).val(clstr.notif).flipswitch("refresh");
 							});
 							$( "#list2" ).listview( "refresh" );
 						}
