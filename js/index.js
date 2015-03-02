@@ -227,20 +227,6 @@ var app = {
 				//initListDealer in background
 				//app.initListDealer();
 				
-				$(".notif_status").on('change', function (event) {
-					alert($(this).attr("dealer-no")+" : "+$(this).val());
-					$.ajax({
-						beforeSend: function() { }, //Show spinner
-						complete: function() { }, //Hide spinner
-						url: web_url+"merchant/upadate_merchant.php",
-						data: { imei: window.localStorage.getItem("mob_user_id"),dealer_no:$(this).attr("dealer-no"),switch_val:$(this).val() },
-						type: "POST",
-						success: function(data) {
-							alert(data);
-						}
-					});	
-				});
-				
 				$.ajax({
 					beforeSend: function() { }, //Show spinner
 					complete: function() { }, //Hide spinner
@@ -270,6 +256,20 @@ var app = {
 								$("#dealer_li"+i).append('<p class="ui-li-aside" style="right: 1.333em;"><select id="select-based-flipswitch'+clstr.id+'" data-role="flipswitch" data-corners="false" class="notif_status" dealer-no="'+clstr.id+'"><option value="1">On</option><option value="0">Off</option></select></p>');
 								//$("#select-based-flipswitch"+clstr.id).val(clstr.notif).flipswitch("refresh");
 								$("#select-based-flipswitch"+clstr.id).val(clstr.notif);
+							});
+							$(".notif_status").on('change', function (event) {
+							//$(".notif_status").flipswitch().flipswitch("refresh");
+								alert($(this).attr("dealer-no")+" : "+$(this).val());
+								$.ajax({
+									beforeSend: function() { $.mobile.loading("show");}, //Show spinner
+									complete: function() { $.mobile.loading("hide");}, //Hide spinner
+									url: "https://nearbybestdeals.com/misc/web_service_new/web_services/merchant/upadate_merchant.php",
+									data: { imei:window.localStorage.getItem("mob_user_id"),dealer_no:$(this).attr("dealer-no"),switch_val:$(this).val() },
+									type: "POST",
+									success: function(data) {
+										//alert(data);
+									}
+								});
 							});
 							$(".notif_status").flipswitch().flipswitch("refresh");
 							$( "#list2" ).listview( "refresh" );
@@ -950,6 +950,7 @@ var app = {
 							//alert("Key : -- "+k+" Value : -- "+ndes);
 						});
 						$("#dealer_li"+i).append('<p class="ui-li-aside" style="right: 1.333em;"><select id="select-based-flipswitch'+clstr.id+'" data-role="flipswitch" data-corners="false" class="notif_status" dealer-no="'+clstr.id+'"><option value="1">On</option><option value="0">Off</option></select></p>');
+						$("#select-based-flipswitch"+clstr.id).val(clstr.notif);
 					});
 					$(".notif_status").flipswitch().flipswitch("refresh");
 					$( "#list2" ).listview( "refresh" );
