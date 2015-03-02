@@ -269,6 +269,7 @@ var app = {
 								});								
 								$("#dealer_li"+i).append('<p class="ui-li-aside" style="right: 1.333em;"><select id="select-based-flipswitch'+clstr.id+'" data-role="flipswitch" data-corners="false" class="notif_status" dealer-no="'+clstr.id+'"><option value="1">On</option><option value="0">Off</option></select></p>');
 								//$("#select-based-flipswitch"+clstr.id).val(clstr.notif).flipswitch("refresh");
+								$("#select-based-flipswitch"+clstr.id).val(clstr.notif);
 							});
 							$(".notif_status").on('change', function (event) {
 							//$(".notif_status").flipswitch().flipswitch("refresh");
@@ -948,22 +949,34 @@ var app = {
 				$("#list2").empty();
 				var testJSON = $.parseJSON(data);
 				if (testJSON.length != 0) {
-					$.each(testJSON, function(i, clstr) {
-						var user_id="";
-						
+					$.each(testJSON, function(i, clstr) {						
 						$("#list2").append('<li id="dealer_li'+i+'"><a id="merchant'+i+'" href="#" class="delete merchant_desc" style="margin-right: 0px;" delete-id='+clstr.id+'></a></li>');
 						//alert("Key : -- "+i+" Value : -- "+clstr);
 						$.each(clstr, function(k, ndes) {
 							if(k=="merchant")
 								$("#merchant"+i).append('<h3>'+ndes+'</h3>');
 							if(k=="desc")
-								$("#merchant"+i).append('<p class="desc">'+ndes+'</p>');
-							if(k=="id")
-								user_id=ndes;
+								$("#merchant"+i).append('<p class="desc">'+ndes+'</p>');							
 							//alert("Key : -- "+k+" Value : -- "+ndes);
 						});
 						$("#dealer_li"+i).append('<p class="ui-li-aside" style="right: 1.333em;"><select id="select-based-flipswitch'+clstr.id+'" data-role="flipswitch" data-corners="false" class="notif_status" dealer-no="'+clstr.id+'"><option value="1">On</option><option value="0">Off</option></select></p>');
+						$("#select-based-flipswitch"+clstr.id).val(clstr.notif);
 					});
+					$(".notif_status").on('change', function (event) {
+						//$(".notif_status").flipswitch().flipswitch("refresh");
+						//alert($(this).attr("dealer-no")+" : "+$(this).val());
+						$.ajax({
+							beforeSend: function() { $.mobile.loading("show");}, //Show spinner
+							complete: function() { $.mobile.loading("hide");}, //Hide spinner
+							url: "https://nearbybestdeals.com/misc/web_service_new/web_services/merchant/upadate_merchant.php",
+							data: { imei:41,dealer_no:$(this).attr("dealer-no"),switch_val:$(this).val() },
+							type: "POST",
+							success: function(data) {
+								//alert(data);
+							}
+						});
+					});
+					
 					$(".notif_status").flipswitch().flipswitch("refresh");
 					$( "#list2" ).listview( "refresh" );
 					var count = $('#list2 li').size();
