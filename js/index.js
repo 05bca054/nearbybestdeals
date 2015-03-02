@@ -269,6 +269,7 @@ var app = {
 								});								
 								$("#dealer_li"+i).append('<p class="ui-li-aside" style="right: 1.333em;"><select id="select-based-flipswitch'+clstr.id+'" data-role="flipswitch" data-corners="false" class="notif_status" dealer-no="'+clstr.id+'"><option value="1">On</option><option value="0">Off</option></select></p>');
 								//$("#select-based-flipswitch"+clstr.id).val(clstr.notif).flipswitch("refresh");
+								$("#select-based-flipswitch"+clstr.id).val(clstr.notif);
 							});
 							$(".notif_status").flipswitch().flipswitch("refresh");
 							$( "#list2" ).listview( "refresh" );
