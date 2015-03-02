@@ -242,8 +242,8 @@ var app = {
 				});
 				
 				$.ajax({
-					beforeSend: function() { }, //Show spinner
-					complete: function() { }, //Hide spinner
+					beforeSend: function() { $.mobile.loading("show");}, //Show spinner
+					complete: function() { $.mobile.loading("hide");}, //Hide spinner
 					url: web_url+"merchant/list_merchant.php",
 					data: { imei: window.localStorage.getItem("mob_user_id") },
 					type: "POST",
@@ -261,20 +261,34 @@ var app = {
 									if(k=="merchant")
 										$("#merchant"+i).append('<h3>'+ndes+'</h3>');
 									if(k=="desc")
-										$("#merchant"+i).append('<p class="desc">'+ndes+'</p><p class="ui-li-aside" style="right: 1.333em;"><select id="select-based-flipswitch'+clstr.id+'" data-role="flipswitch" data-corners="false" class="notif_status" dealer-no="'+clstr.id+'"><option value="1">On</option><option value="0">Off</option></select></p>');
+										$("#merchant"+i).append('<p class="desc">'+ndes+'</p>');
 									if(k=="id")
 										user_id=ndes;
 									//alert("Key : -- "+k+" Value : -- "+ndes);
 								});								
-								$("#dealer_li"+i).append('<a href="#" class="delete" delete-id="'+user_id+'">Delete</a>');
-								$("#select-based-flipswitch"+clstr.id).val(clstr.notif).flipswitch("refresh");
+								$("#dealer_li"+i).append('<p class="ui-li-aside" style="right: 1.333em;"><select id="select-based-flipswitch'+clstr.id+'" data-role="flipswitch" data-corners="false" class="notif_status" dealer-no="'+clstr.id+'"><option value="1">On</option><option value="0">Off</option></select></p>');
+								$("#select-based-flipswitch"+clstr.id).val(clstr.notif);
 							});
+							$(".notif_status").on('change', function (event) {
+								//$(".notif_status").flipswitch().flipswitch("refresh");
+								//alert($(this).attr("dealer-no")+" : "+$(this).val());
+								$.ajax({
+									beforeSend: function() { $.mobile.loading("show");}, //Show spinner
+									complete: function() { $.mobile.loading("hide");}, //Hide spinner
+									url: web_url+"merchant/upadate_merchant.php",
+									data: { imei:window.localStorage.getItem("mob_user_id"),dealer_no:$(this).attr("dealer-no"),switch_val:$(this).val() },
+									type: "POST",
+									success: function(data) {
+										//alert(data);
+									}
+								});
+							});
+							
+							$(".notif_status").flipswitch().flipswitch("refresh");
 							$( "#list2" ).listview( "refresh" );
 						}
 					}
 				});	
-				//app.initListDealer();
-			});
 			
 			$(document).on("pageshow","#single_coupon",function(e){ // When entering pagetwo				
 				coupon.getCouponsDesc(localStorage.coupon_id);
@@ -603,7 +617,7 @@ var app = {
 			
 			$(document).on('click', '.merchant_desc', function(){
 			// store some data
-				var merchant_id = $( this ).next().attr("delete-id");
+				var merchant_id = $( this ).attr("delete-id");
 				//alert(merchant_id);
 				if(typeof(Storage)!=="undefined") {
 					localStorage.merchant_id=merchant_id;
@@ -841,7 +855,7 @@ var app = {
 						}
 						$( "#confirm2" ).popup( "close" );
 					}
-				});					
+				});
 				$( "#list2" ).listview( "refresh" );
 				
 				var count = $('#list2 li').size();
@@ -921,9 +935,9 @@ var app = {
 	},
 	
 	initListDealer: function () {
-		 $.ajax({
-			beforeSend: function() { $.mobile.loading("show"); }, //Show spinner
-			complete: function() { $.mobile.loading("hide"); }, //Hide spinner
+		$.ajax({
+			beforeSend: function() { $.mobile.loading("show");}, //Show spinner
+			complete: function() { $.mobile.loading("hide");}, //Hide spinner
 			url: web_url+"merchant/list_merchant.php",
 			data: { imei: window.localStorage.getItem("mob_user_id") },
 			type: "POST",
@@ -935,7 +949,7 @@ var app = {
 					$.each(testJSON, function(i, clstr) {
 						var user_id="";
 						
-						$("#list2").append('<li id="dealer_li'+i+'"><a  id="merchant'+i+'" href="#" class="merchant_desc" style="margin-right: 0px;"></a></li>');
+						$("#list2").append('<li id="dealer_li'+i+'"><a  id="merchant'+i+'" href="#" class="merchant_desc"></a></li>');
 						//alert("Key : -- "+i+" Value : -- "+clstr);
 						$.each(clstr, function(k, ndes) {
 							if(k=="merchant")
@@ -945,15 +959,30 @@ var app = {
 							if(k=="id")
 								user_id=ndes;
 							//alert("Key : -- "+k+" Value : -- "+ndes);
-						});
-						$("#dealer_li"+i).append('<a href="#" class="delete" delete-id="'+user_id+'">Delete</a>');
+						});								
+						$("#dealer_li"+i).append('<p class="ui-li-aside" style="right: 1.333em;"><select id="select-based-flipswitch'+clstr.id+'" data-role="flipswitch" data-corners="false" class="notif_status" dealer-no="'+clstr.id+'"><option value="1">On</option><option value="0">Off</option></select></p>');
+						$("#select-based-flipswitch"+clstr.id).val(clstr.notif);
 					});
+					$(".notif_status").on('change', function (event) {
+						//$(".notif_status").flipswitch().flipswitch("refresh");
+						//alert($(this).attr("dealer-no")+" : "+$(this).val());
+						$.ajax({
+							beforeSend: function() { $.mobile.loading("show");}, //Show spinner
+							complete: function() { $.mobile.loading("hide");}, //Hide spinner
+							url: web_url+"merchant/upadate_merchant.php",
+							data: { imei:window.localStorage.getItem("mob_user_id"),dealer_no:$(this).attr("dealer-no"),switch_val:$(this).val() },
+							type: "POST",
+							success: function(data) {
+								//alert(data);
+							}
+						});
+					});
+					
+					$(".notif_status").flipswitch().flipswitch("refresh");
 					$( "#list2" ).listview( "refresh" );
-					var count = $('#list2 li').size();
-					$('#total-dealer').text("Total Dealer: "+count);
 				}
 			}
-		});		
+		});
 		// Swipe to remove list item		
 	},
 	
