@@ -769,10 +769,10 @@ var app = {
 							value = $input.val(),
 				            html = "";
 				        $ul.html( "" );
-				        if ( value && value.length > 2 ) {
-							alert(value);
+				        if ( value && value.length > 2 ) {							
 				            $ul.html( "<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>" );
 				            $ul.listview( "refresh" );
+							alert(value);
 				           	$.ajax({
 								beforeSend: function() { $.mobile.loading("show"); }, //Show spinner
 								complete: function() { $.mobile.loading("hide"); },
@@ -790,6 +790,7 @@ var app = {
 					                $ul.trigger( "updatelayout");
 								}	
 							});
+							alert("after ajax");
 				            /*.then( function ( response ) {
 								
 								var response=$.parseJSON(response);
