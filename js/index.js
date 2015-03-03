@@ -776,19 +776,20 @@ var app = {
 				           	$.ajax({
 								beforeSend: function() { $.mobile.loading("show"); }, //Show spinner
 								complete: function() { $.mobile.loading("hide"); },
-								url: weburl+"merchant/autocomplete.php",
+								url: weburl+"merchant/autocomplete.php?q="+value,
 								type: "GET",							
-								data: {	q: value },
-								success: function(data) {									
-									var response=$.parseJSON(data);
+								//data: {	q: value },
+								success: function(data) {
+									alert(data);
+									/*var response=$.parseJSON(data);
 					                $.each( response, function ( i, val ) {										
 					                    html += "<li mer-value="+val.value+">" + val.label + "</li>";
 					                });
-									alert(html);
+									
 					                $ul.html( html );
 					                $ul.listview( "refresh" );
-					                $ul.trigger( "updatelayout");
-								}	
+					                $ul.trigger( "updatelayout");*/
+								}
 							});
 							alert("after ajax");
 				            /*.then( function ( response ) {
