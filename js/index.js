@@ -770,7 +770,7 @@ var app = {
 				            html = "";
 				        $ul.html( "" );
 				        if ( value && value.length > 2 ) {
-							
+							alert(value);
 				            $ul.html( "<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>" );
 				            $ul.listview( "refresh" );
 				           	$.ajax({
@@ -789,7 +789,7 @@ var app = {
 									
 				                    html += "<li mer-value="+val.value+">" + val.label + "</li>";
 				                });
-								//alert(html);
+								alert(html);
 				                $ul.html( html );
 				                $ul.listview( "refresh" );
 				                $ul.trigger( "updatelayout");
