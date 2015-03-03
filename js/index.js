@@ -752,13 +752,14 @@ var app = {
 				$( document ).on( "pagecreate", "#listdealer", function() {
 					app.initListDealer();
 				    $( "#autocomplete" ).on( "filterablebeforefilter", function ( e, data ) {
-						alert(data.input);
+						
 				        var $ul = $( this ),
 				            $input = $( data.input ),
 				            value = $input.val(),
 				            html = "";
 				        $ul.html( "" );
 				        if ( value && value.length > 3 ) {
+							alert(value);
 				            $ul.html( "<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>" );
 				            $ul.listview( "refresh" );
 				            $.ajax({
