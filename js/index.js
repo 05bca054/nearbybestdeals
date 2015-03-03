@@ -751,36 +751,51 @@ var app = {
 				
 				$( document ).on( "pagecreate", "#listdealer", function() {
 					app.initListDealer();
+				   	$(function() {
+						$("#autocomplete").on("click", "li", function() {
+							// here I want to get the clicked id of the li (e.g. bakkerLink)
+							//var id = this.id;
+							$("#merchant_name2").val($(this).attr("mer-value"));
+							$("#autocomplete-input").val($(this).text());
+							$("#autocomplete").html( "" );
+							$("#autocomplete").listview( "refresh" );
+							//alert($(this).attr("mer-value")+$(this).text());
+						});
+					});
+					//var weburl="https://nearbybestdeals.com/misc/web_service_new/web_services/";
 				    $( "#autocomplete" ).on( "filterablebeforefilter", function ( e, data ) {
-						
 				        var $ul = $( this ),
 				            $input = $( data.input ),
 				            value = $input.val(),
 				            html = "";
 				        $ul.html( "" );
-				        if ( value && value.length > 3 ) {
-							alert(value);
+				        if ( value && value.length > 2 ) {
+							
 				            $ul.html( "<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>" );
 				            $ul.listview( "refresh" );
-				            $.ajax({
-				                url: "https://nearbybestdeals.com/misc/web_service_new/web_services/merchant/autocomplete.php",
-				                dataType: "jsonp",
-				                crossDomain: true,
-				                data: {
-				                    q: $input.val()
-				                }
-				            })
+				           	$.ajax({
+								url: weburl+"merchant/autocomplete.php",
+								type: "GET",
+								crossDomain: true,
+								data: {
+									q: $input.val()
+								},									
+							})
 				            .then( function ( response ) {
+								
+								var response=$.parseJSON(response);
+								
 				                $.each( response, function ( i, val ) {
-				                    html += "<li>" + val + "</li>";
+									
+				                    html += "<li mer-value="+val.value+">" + val.label + "</li>";
 				                });
+								//alert(html);
 				                $ul.html( html );
 				                $ul.listview( "refresh" );
 				                $ul.trigger( "updatelayout");
 				            });
 				        }
-				    });
-				
+				    });				
 				});
 				
 				$(document).on('mousedown','a', function(e) {
