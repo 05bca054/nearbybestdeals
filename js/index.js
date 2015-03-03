@@ -225,63 +225,8 @@ var app = {
 					alert("Profile Updated successfully");
 					localStorage.openUpdatePopup=0;
 				}
-				app.countMerchants();
-				//initListDealer in background
-				//app.initListDealer();
+				app.countMerchants();				
 				
-				//auto complete for regestration page
-				$( "#merchant_auto" ).autocomplete({
-					source: function( request, response ) {
-						//alert(request.toSource());
-						$.ajax({
-							url: weburl+"merchant/autocomplete.php",
-							type: "GET",
-							data: {
-								q: request.term
-							},
-							success: function( data ) {
-								//alert(data.toSource());
-								var r_data=$.parseJSON(data);
-								response( r_data );
-							},
-						});
-					},
-					minLength: 3,
-					select: function( event, ui ) {
-						event.preventDefault();
-								//this.val(ui.item.label);
-						$(this).val(ui.item.label);
-						$("#merchant_name").val(ui.item.value);	
-					},
-				});
-				
-				$( "#merchant_auto2" ).autocomplete({
-					source: function( request, response ) {
-						//alert(request.toSource());
-						$.ajax({
-							url: weburl+"merchant/autocomplete.php",
-							type: "GET",
-							data: {
-								q: request.term
-							},
-							success: function( data ) {
-								//alert(data.toSource());
-								var r_data=$.parseJSON(data);
-								response( r_data );
-							},
-						});
-					},
-					minLength: 3,
-					select: function( event, ui ) {
-						event.preventDefault();
-								//this.val(ui.item.label);
-						$(this).val(ui.item.label);
-						$("#merchant_name2").val(ui.item.value);	
-					},
-				});
-				
-				
-				//app.initListDealer();
 			});
 			
 			$(document).on("pageshow","#single_coupon",function(e){ // When entering pagetwo				
@@ -511,7 +456,7 @@ var app = {
 					beforeSend: function() { $.mobile.loading("show"); }, //Show spinner
 					complete: function() { $.mobile.loading("hide"); }, //Hide spinner
 					url: web_url+"merchant/add_merchant.php",
-					data: { merchant_id: $("#merchant_auto2").val(), imei: window.localStorage.getItem("mob_user_id")  },
+					data: { merchant_id: $("#merchant_name2").val(), imei: window.localStorage.getItem("mob_user_id")  },
 					type: "POST",
 					success: function(data) {	
 						$('#merchant_auto2').val('');
@@ -547,7 +492,7 @@ var app = {
 					beforeSend: function() { $.mobile.loading("show"); }, //Show spinner
 					complete: function() { $.mobile.loading("hide"); }, //Hide spinner
 					url: web_url+"merchant/add_merchant.php",
-					data: { merchant_id: $("#merchant_auto2").val(), imei: window.localStorage.getItem("mob_user_id")  },
+					data: { merchant_id: $("#merchant_name2").val(), imei: window.localStorage.getItem("mob_user_id")  },
 					type: "POST",
 					success: function(data) {	
 						$('#merchant_auto2').val('');
@@ -755,6 +700,7 @@ var app = {
 						$("#autocomplete").on("click", "li", function() {
 							// here I want to get the clicked id of the li (e.g. bakkerLink)
 							//var id = this.id;
+							//alert($(this).attr("mer-value"));
 							$("#merchant_name2").val($(this).attr("mer-value"));
 							$("#autocomplete-input").val($(this).text());
 							$("#autocomplete").html( "" );
