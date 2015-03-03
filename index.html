@@ -11,7 +11,7 @@
 		<!-- PhoneGap, jQuery, App, jQuery.Mobile -->
 		<script charset="utf-8" src="cordova.js"></script>
 		<script charset="utf-8" src="js/compressed/jquery.js"></script>
-		<script charset="utf-8" src="js/compressed/jquery-ui.js"></script>
+		<script charset="utf-8" src="js/jquery-ui.js"></script>
 		<script charset="utf-8" src="js/index.js"></script>
 		<script charset="utf-8" src="js/date.js"></script>
 		<script charset="utf-8" src="js/coupon.js"></script>
@@ -63,7 +63,8 @@
 		<link rel="stylesheet" href="css/jquery.mobile-1.4.5.css" />
 		<link rel="stylesheet" href="css/font-awesome.css" />
 		<link rel="stylesheet" href="css/custom-icon.css" />
-		<style>			
+		<link rel="stylesheet" href="css/jquery-ui.min.css" />
+		<style>
 			label.error {
 				color: red;
 				font-size: 16px;
@@ -466,11 +467,9 @@
 					<div class="ui-grid-a">
 						<div class="ui-block-a">
 							<label for="text-4">Dealer id :</label>
-							<input data-clear-btn="true" name="merchant_name" id="merchant_name" value="" type="text" data-rel="popup">
-						</div>
-						<div class="ui-block-b">							
-							<a href="#" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-btn-inline ui-icon-check" data-inline="true" id="varify_merchant" style="margin-top: 15%;">Verify</a>
-						</div>
+							<input data-clear-btn="true" name="merchant_auto" id="merchant_auto" value="" type="text">
+							<input name="merchant_name" id="merchant_name" value="" type="hidden">
+						</div>						
 					</div>
 					
 					<input value="Register" type="submit" data-inline="true" id="register">
@@ -901,7 +900,8 @@
 				        <div style="padding:0px 20px;">
 				            <h3>Add Dealer</h3>
 				            <label for="un" class="ui-hidden-accessible">Enter dealer id:</label>
-				            <input data-clear-btn="true" name="merchant_name2" id="merchant_name2" value="" type="text" data-rel="popup" placeholder="254">
+				            <input data-clear-btn="true" name="merchant_auto2" id="merchant_auto2" value="" type="text">
+							<input name="merchant_name2" id="merchant_name2" value="" type="hidden">
 							<button type="submit" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-btn-inline ui-icon-plus" id="add_close">Add & close</button>
 							<a class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-btn-inline ui-icon-plus" id="add_continue">Add</a>
 				        </div>
