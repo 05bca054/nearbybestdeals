@@ -277,7 +277,7 @@ var app = {
 						$("#merchant_name2").val(ui.item.value);	
 					},
 				});
-				
+				/*
 				$.ajax({
 					beforeSend: function() { }, //Show spinner
 					complete: function() { }, //Hide spinner
@@ -300,10 +300,7 @@ var app = {
 								$.each(clstr, function(k, ndes) {
 									if(k=="merchant")
 										$("#merchant"+i).append('<h3>'+ndes+'</h3>');
-									/*if(k=="desc")
-										$("#merchant"+i).append('<p class="desc">'+ndes+'</p>');
-									if(k=="id")
-										user_id=ndes;*/
+									
 									//alert("Key : -- "+k+" Value : -- "+ndes);
 								});								
 								//$("#dealer_li"+i).append('<p class="ui-li-aside" style="right: 1.333em;"><select data-mini="true" id="select-based-flipswitch'+clstr.id+'" data-role="flipswitch" data-corners="false" class="notif_status" dealer-no="'+clstr.id+'"><option value="1">On</option><option value="0">Off</option></select></p>');
@@ -328,8 +325,8 @@ var app = {
 							$( "#list2" ).listview( "refresh" );
 						}
 					}
-				});	
-				//app.initListDealer();
+				});	*/
+				app.initListDealer();
 			});
 			
 			$(document).on("pageshow","#single_coupon",function(e){ // When entering pagetwo				
