@@ -62,8 +62,7 @@
 		<!-- jQuery Mobile, FontAwesome & App -->
 		<link rel="stylesheet" href="css/jquery.mobile-1.4.5.css" />
 		<link rel="stylesheet" href="css/font-awesome.css" />
-		<link rel="stylesheet" href="css/custom-icon.css" />
-		<link rel="stylesheet" href="css/jquery-ui.min.css" />
+		<link rel="stylesheet" href="css/custom-icon.css" />	
 		<style>
 			label.error {
 				color: red;
@@ -899,7 +898,11 @@
 				        <div style="padding:0px 20px;">
 				            <h3>Add Dealer</h3>
 				            <label for="un" class="ui-hidden-accessible">Enter dealer id:</label>
-				            <input id="merchant_auto2">
+				           <!-- <input id="merchant_auto2">-->
+							<form class="ui-filterable">
+							    <input id="autocomplete-input" data-type="search" placeholder="Find a dealer...">
+							</form>
+							<ul id="autocomplete" data-role="listview" data-inset="true" data-filter="true" data-input="#autocomplete-input"></ul>
 							<input name="merchant_name2" id="merchant_name2" value="" type="hidden">
 							<button type="submit" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-btn-inline ui-icon-plus" id="add_close">Add & close</button>
 							<a class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-btn-inline ui-icon-plus" id="add_continue">Add</a>
