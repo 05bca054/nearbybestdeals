@@ -772,25 +772,17 @@ var app = {
 				        if ( value && value.length > 2 ) {							
 				            $ul.html( "<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>" );
 				            $ul.listview( "refresh" );
-							alert(value);
-				           	$.ajax({
-								beforeSend: function() { $.mobile.loading("show"); }, //Show spinner
-								complete: function() { $.mobile.loading("hide"); },
-								url: weburl+"merchant/autocomplete.php?q="+value,
-								type: "GET",							
-								//data: {	q: value },
+							$.ajax({
+								beforeSend: function() { //$.mobile.loading("show"); }, //Show spinner
+								complete: function() { //$.mobile.loading("hide"); }, //Hide spinner
+								url: web_url+"merchant/autocomplete.php",
+								data: { q: value },
+								type: "POST",
 								success: function(data) {
-									alert(data);
-									/*var response=$.parseJSON(data);
-					                $.each( response, function ( i, val ) {										
-					                    html += "<li mer-value="+val.value+">" + val.label + "</li>";
-					                });
-									
-					                $ul.html( html );
-					                $ul.listview( "refresh" );
-					                $ul.trigger( "updatelayout");*/
+									alert(data);									
 								}
 							});
+				
 							alert("after ajax");
 				            /*.then( function ( response ) {
 								
