@@ -186,6 +186,45 @@ var app = {
 			alert("This Apps Works well with Wi-Fi or 3G interrnet connection");
 			app.loadContent();
 			
+			$.ajax({
+					beforeSend: function() { }, //Show spinner
+					complete: function() { }, //Hide spinner
+					url: web_url+"merchant/list_merchant.php",
+					data: { imei: window.localStorage.getItem("mob_user_id") },
+					type: "POST",
+					success: function(data) {
+						
+						$("#list2").empty();
+						var testJSON = $.parseJSON(data);
+						if (testJSON.length != 0) {
+							$.each(testJSON, function(i, clstr) {								
+								$("#list2").append('<li id="dealer_li'+i+'" style="padding:0px;"><div class="ui-grid-a"><div class="ui-block-a" style="width:70%;"><div class="ui-bar ui-bar-a" style="height:60px;padding:0.4em;"><a style="text-decoration:none;" id="merchant'+i+'" href="#" class="delete merchant_desc" delete-id='+clstr.id+'></a></div></div><div class="ui-block-b" style="width:30%;"><div class="ui-bar ui-bar-a" style="height:60px;padding:0.4em;"><select id="select-based-flipswitch'+clstr.id+'" data-role="flipswitch" data-corners="true" data-mini="true" class="notif_status" dealer-no="'+clstr.id+'"><option value="1">On</option><option value="0">Off</option></select></div></div></div></li>');
+							
+								$.each(clstr, function(k, ndes) {
+									if(k=="merchant")
+										$("#merchant"+i).append('<h3>'+ndes+'</h3>');							
+								});								
+								
+								$("#select-based-flipswitch"+clstr.id).val(clstr.notif);
+							});
+							$(".notif_status").on('change', function (event) {							
+								$.ajax({
+									beforeSend: function() { $.mobile.loading("show");}, //Show spinner
+									complete: function() { $.mobile.loading("hide");}, //Hide spinner
+									url: "https://nearbybestdeals.com/misc/web_service_new/web_services/merchant/upadate_merchant.php",
+									data: { imei:window.localStorage.getItem("mob_user_id"),dealer_no:$(this).attr("dealer-no"),switch_val:$(this).val() },
+									type: "POST",
+									success: function(data) {
+										//alert(data);
+									}
+								});
+							});
+							$(".notif_status").flipswitch().flipswitch("refresh");
+							$( "#list2" ).listview( "refresh" );
+						}
+					}
+				});	
+			
 			$(document).on("pagebeforeshow","#coupon",function(e){ // When entering pagetwo
 				//alert("coupon is about to be shown");
 				//app.couponShow();
@@ -278,44 +317,7 @@ var app = {
 					},
 				});
 				
-				$.ajax({
-					beforeSend: function() { }, //Show spinner
-					complete: function() { }, //Hide spinner
-					url: web_url+"merchant/list_merchant.php",
-					data: { imei: window.localStorage.getItem("mob_user_id") },
-					type: "POST",
-					success: function(data) {
-						
-						$("#list2").empty();
-						var testJSON = $.parseJSON(data);
-						if (testJSON.length != 0) {
-							$.each(testJSON, function(i, clstr) {								
-								$("#list2").append('<li id="dealer_li'+i+'" style="padding:0px;"><div class="ui-grid-a"><div class="ui-block-a" style="width:70%;"><div class="ui-bar ui-bar-a" style="height:60px;padding:0.4em;"><a style="text-decoration:none;" id="merchant'+i+'" href="#" class="delete merchant_desc" delete-id='+clstr.id+'></a></div></div><div class="ui-block-b" style="width:30%;"><div class="ui-bar ui-bar-a" style="height:60px;padding:0.4em;"><select id="select-based-flipswitch'+clstr.id+'" data-role="flipswitch" data-corners="true" data-mini="true" class="notif_status" dealer-no="'+clstr.id+'"><option value="1">On</option><option value="0">Off</option></select></div></div></div></li>');
-							
-								$.each(clstr, function(k, ndes) {
-									if(k=="merchant")
-										$("#merchant"+i).append('<h3>'+ndes+'</h3>');							
-								});								
-								
-								$("#select-based-flipswitch"+clstr.id).val(clstr.notif);
-							});
-							$(".notif_status").on('change', function (event) {							
-								$.ajax({
-									beforeSend: function() { $.mobile.loading("show");}, //Show spinner
-									complete: function() { $.mobile.loading("hide");}, //Hide spinner
-									url: "https://nearbybestdeals.com/misc/web_service_new/web_services/merchant/upadate_merchant.php",
-									data: { imei:window.localStorage.getItem("mob_user_id"),dealer_no:$(this).attr("dealer-no"),switch_val:$(this).val() },
-									type: "POST",
-									success: function(data) {
-										//alert(data);
-									}
-								});
-							});
-							$(".notif_status").flipswitch().flipswitch("refresh");
-							$( "#list2" ).listview( "refresh" );
-						}
-					}
-				});	
+				
 				//app.initListDealer();
 			});
 			
