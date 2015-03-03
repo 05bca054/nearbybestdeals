@@ -779,24 +779,19 @@ var app = {
 								data: { q: value },
 								type: "POST",
 								success: function(data) {
-									alert(data);									
+									//alert(data);
+									var response=$.parseJSON(data);
+							
+					                $.each( response, function ( i, val ) {
+										
+					                    html += "<li mer-value="+val.value+">" + val.label + "</li>";
+					                });
+									//alert(html);
+					                $ul.html( html );
+					                $ul.listview( "refresh" );
+					                $ul.trigger( "updatelayout");
 								}
-							});
-				
-							alert("after ajax");
-				            /*.then( function ( response ) {
-								
-								var response=$.parseJSON(response);
-								
-				                $.each( response, function ( i, val ) {
-									
-				                    html += "<li mer-value="+val.value+">" + val.label + "</li>";
-				                });
-								alert(html);
-				                $ul.html( html );
-				                $ul.listview( "refresh" );
-				                $ul.trigger( "updatelayout");
-				            });*/
+							});							
 				        }
 				    });				
 				});
