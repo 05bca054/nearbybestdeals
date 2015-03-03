@@ -186,7 +186,7 @@ var app = {
 			alert("This Apps Works well with Wi-Fi or 3G interrnet connection");
 			app.loadContent();
 			
-			app.initListDealer();
+			
 			
 			$(document).on("pagebeforeshow","#coupon",function(e){ // When entering pagetwo
 				//alert("coupon is about to be shown");
@@ -338,7 +338,7 @@ var app = {
 			});
 			
 			$(document).on("pageshow","#listdealer",function(e){ // When entering pagetwo
-				$( "#list2" ).listview( "refresh" );
+				//$( "#list2" ).listview( "refresh" );
 				$( "#popupAddDealer" ).popup({
 					afteropen: function( event, ui ) {	
 						//alert("check multiple times");
@@ -743,41 +743,44 @@ var app = {
     },
     
     loadContent: function() {
-		//$(document).on("pagecreate",function(event){				
+		//$(document).on("pagecreate",function(event){	
+				
 				app.swipeMerchantFunc();
 							
 				app.swipeCouponFunc();
-				//
-				//$( document ).on( "pagecreate", "#myPage", function() {
-			    $( "#autocomplete" ).on( "filterablebeforefilter", function ( e, data ) {
-			        var $ul = $( this ),
-			            $input = $( data.input ),
-			            value = $input.val(),
-			            html = "";
-			        $ul.html( "" );
-			        if ( value && value.length > 3 ) {
-			            $ul.html( "<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>" );
-			            $ul.listview( "refresh" );
-			            $.ajax({
-			                url: "https://nearbybestdeals.com/misc/web_service_new/web_services/merchant/autocomplete.php",
-			                dataType: "jsonp",
-			                crossDomain: true,
-			                data: {
-			                    q: $input.val()
-			                }
-			            })
-			            .then( function ( response ) {
-			                $.each( response, function ( i, val ) {
-			                    html += "<li>" + val + "</li>";
-			                });
-			                $ul.html( html );
-			                $ul.listview( "refresh" );
-			                $ul.trigger( "updatelayout");
-			            });
-			        }
-			    });
-			
-				//});
+				
+				$( document ).on( "pagecreate", "#listdealer", function() {
+					app.initListDealer();
+				    $( "#autocomplete" ).on( "filterablebeforefilter", function ( e, data ) {
+						alert(data.input);
+				        var $ul = $( this ),
+				            $input = $( data.input ),
+				            value = $input.val(),
+				            html = "";
+				        $ul.html( "" );
+				        if ( value && value.length > 3 ) {
+				            $ul.html( "<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>" );
+				            $ul.listview( "refresh" );
+				            $.ajax({
+				                url: "https://nearbybestdeals.com/misc/web_service_new/web_services/merchant/autocomplete.php",
+				                dataType: "jsonp",
+				                crossDomain: true,
+				                data: {
+				                    q: $input.val()
+				                }
+				            })
+				            .then( function ( response ) {
+				                $.each( response, function ( i, val ) {
+				                    html += "<li>" + val + "</li>";
+				                });
+				                $ul.html( html );
+				                $ul.listview( "refresh" );
+				                $ul.trigger( "updatelayout");
+				            });
+				        }
+				    });
+				
+				});
 				
 				$(document).on('mousedown','a', function(e) {
 					e.preventDefault();
