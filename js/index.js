@@ -294,6 +294,7 @@ var app = {
 								
 								//$("#list2").append('<li id="dealer_li'+i+'"><a id="merchant'+i+'" href="#" class="merchant_desc"></a></li>');
 								//$("#list2").append('<li id="dealer_li'+i+'"><a id="merchant'+i+'" href="#" class="delete merchant_desc" style="margin-right: 0px;" delete-id='+clstr.id+'></a></li>');	
+								//$("#list2").append('<li id="dealer_li'+i+'" style="padding:0px;"><div class="ui-grid-a"><div class="ui-block-a" style="width:70%;"><div class="ui-bar ui-bar-a" style="height:60px;padding:0.4em;"><a style="text-decoration:none;" id="merchant'+i+'" href="#" class="delete merchant_desc" delete-id='+clstr.id+'></a></div></div><div class="ui-block-b" style="width:30%;"><div class="ui-bar ui-bar-a" style="height:60px;padding:0.4em;"><select id="select-based-flipswitch'+clstr.id+'" data-role="flipswitch" data-corners="true" data-mini="true" class="notif_status" dealer-no="'+clstr.id+'"><option value="1">On</option><option value="0">Off</option></select></div></div></div></li>');
 								$("#list2").append('<li id="dealer_li'+i+'" style="padding:0px;"><div class="ui-grid-a"><div class="ui-block-a" style="width:70%;"><div class="ui-bar ui-bar-a" style="height:60px;padding:0.4em;"><a style="text-decoration:none;" id="merchant'+i+'" href="#" class="delete merchant_desc" delete-id='+clstr.id+'></a></div></div><div class="ui-block-b" style="width:30%;"><div class="ui-bar ui-bar-a" style="height:60px;padding:0.4em;"><select id="select-based-flipswitch'+clstr.id+'" data-role="flipswitch" data-corners="true" data-mini="true" class="notif_status" dealer-no="'+clstr.id+'"><option value="1">On</option><option value="0">Off</option></select></div></div></div></li>');
 								//alert("Key : -- "+i+" Value : -- "+clstr);
 								$.each(clstr, function(k, ndes) {
@@ -311,7 +312,7 @@ var app = {
 							});
 							$(".notif_status").on('change', function (event) {
 							//$(".notif_status").flipswitch().flipswitch("refresh");
-								alert($(this).attr("dealer-no")+" : "+$(this).val());
+								//alert($(this).attr("dealer-no")+" : "+$(this).val());
 								$.ajax({
 									beforeSend: function() { $.mobile.loading("show");}, //Show spinner
 									complete: function() { $.mobile.loading("hide");}, //Hide spinner
@@ -385,7 +386,7 @@ var app = {
 			});
 			
 			$(document).on("pageshow","#listdealer",function(e){ // When entering pagetwo
-				
+				$( "#list2" ).listview( "refresh" );
 				$( "#popupAddDealer" ).popup({
 					afteropen: function( event, ui ) {	
 						//alert("check multiple times");
