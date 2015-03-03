@@ -773,8 +773,8 @@ var app = {
 				            $ul.html( "<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>" );
 				            $ul.listview( "refresh" );
 							$.ajax({
-								beforeSend: function() { //$.mobile.loading("show"); }, //Show spinner
-								complete: function() { //$.mobile.loading("hide"); }, //Hide spinner
+								beforeSend: function() { $.mobile.loading("show"); }, //Show spinner
+								complete: function() { $.mobile.loading("hide"); }, //Hide spinner
 								url: web_url+"merchant/autocomplete.php",
 								data: { q: value },
 								type: "POST",
