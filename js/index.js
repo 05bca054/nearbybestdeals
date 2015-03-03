@@ -766,7 +766,7 @@ var app = {
 				    $( "#autocomplete" ).on( "filterablebeforefilter", function ( e, data ) {
 				        var $ul = $( this ),
 				            $input = $( data.input ),
-				            value = $input.val(),
+							value = $input.val(),
 				            html = "";
 				        $ul.html( "" );
 				        if ( value && value.length > 2 ) {
@@ -774,14 +774,23 @@ var app = {
 				            $ul.html( "<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>" );
 				            $ul.listview( "refresh" );
 				           	$.ajax({
+								beforeSend: function() { $.mobile.loading("show"); }, //Show spinner
+								complete: function() { $.mobile.loading("hide"); },
 								url: weburl+"merchant/autocomplete.php",
-								type: "GET",
-								crossDomain: true,
-								data: {
-									q: $input.val()
-								},									
-							})
-				            .then( function ( response ) {
+								type: "GET",							
+								data: {	q: value },
+								success: function(data) {									
+									var response=$.parseJSON(data);
+					                $.each( response, function ( i, val ) {										
+					                    html += "<li mer-value="+val.value+">" + val.label + "</li>";
+					                });
+									alert(html);
+					                $ul.html( html );
+					                $ul.listview( "refresh" );
+					                $ul.trigger( "updatelayout");
+								}	
+							});
+				            /*.then( function ( response ) {
 								
 								var response=$.parseJSON(response);
 								
@@ -793,7 +802,7 @@ var app = {
 				                $ul.html( html );
 				                $ul.listview( "refresh" );
 				                $ul.trigger( "updatelayout");
-				            });
+				            });*/
 				        }
 				    });				
 				});
