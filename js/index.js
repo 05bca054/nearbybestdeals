@@ -988,16 +988,16 @@ var app = {
 						//$(".notif_status").flipswitch().flipswitch("refresh");
 						//alert($(this).attr("dealer-no")+" : "+$(this).val());						
 						$.ajax({
-							beforeSend: function() { $.mobile.loading("show");}, //Show spinner
-							complete: function() { $.mobile.loading("hide");}, //Hide spinner
+							beforeSend: function() { }, //Show spinner
+							complete: function() { }, //Hide spinner
 							url: "https://nearbybestdeals.com/misc/web_service_new/web_services/merchant/upadate_merchant.php",
 							data: { imei:window.localStorage.getItem("mob_user_id"),dealer_no:$(this).attr("dealer-no"),switch_val:$(this).val() },
 							type: "POST",
 							success: function(data) {
 								//alert(data);
-								$(this).val("0").flipswitch("refresh");
+								//$(this).val("0").flipswitch("refresh");
 							}
-						});
+						});									
 					});
 					$(".notif_status").flipswitch().flipswitch("refresh");
 					$( "#list2" ).listview( "refresh" );
