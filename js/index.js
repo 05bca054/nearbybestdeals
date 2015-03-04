@@ -659,7 +659,7 @@ var app = {
 					error.insertAfter( element.parent() );
 				},
 				submitHandler: function (form) {					
-					
+					alert("in submit");
 					$.ajax({
 						beforeSend: function() { $.mobile.loading("show"); }, //Show spinner
 						complete: function() { $.mobile.loading("hide"); }, //Hide spinner

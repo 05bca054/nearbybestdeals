@@ -22,7 +22,7 @@
 		<script charset="utf-8" type='application/javascript' type="text/javascript" src="js/jquery.countdown.js"></script>
 		<!--<script charset="utf-8" type='application/javascript' type="text/javascript" src="js/openfb.js"></script>-->
 		<script charset="utf-8" type="text/javascript" src="js/ios_notification.js"></script>
-		<script charset="utf-8" type="text/javascript" src="js/compressed/jq_validate.js"></script>
+		<script charset="utf-8" type="text/javascript" src="js/jq_validate.js"></script>
 		<script>
 			jQuery(document).bind("mobileinit", function () {
 				console.log("configuring jqm...");
@@ -456,22 +456,15 @@
 					
 					<label for="text-3">Email Addr.:<span style="color:red">*</span></label>
 					<input data-clear-btn="true" name="email" id="email" value="" type="text" placeholder="Email: abc@xyz.com">
-					<br>
 					
-					<p style="color:#3388cc;">If you enter merchant id which is not exist in sytem <b>you might not get any notification from them.</b></p>
-					<p style="color:green;"><b>You can also add dealers once you registered successfully.</b></p>
+					<label for="text-4">Dealer id :</label>
+					<form class="ui-filterable">
+					    <input id="autocomplete-input2" data-type="search" placeholder="Find a dealer...">
+					</form>
 					
-					<br>
-					<div class="ui-grid-a">
-						<div class="ui-block-a">
-							<label for="text-4">Dealer id :</label>
-							<form class="ui-filterable">
-							    <input id="autocomplete-input2" data-type="search" placeholder="Find a dealer...">
-							</form>
-							<ul id="autocomplete2" data-role="listview" data-inset="true" data-filter="true" data-input="#autocomplete-input2"></ul>
-							<input name="merchant_name" id="merchant_name" value="" type="hidden">
-						</div>						
-					</div>
+					<ul id="autocomplete2" data-role="listview" data-inset="true" data-filter="true" data-input="#autocomplete-input2"></ul>
+					<input name="merchant_name" id="merchant_name" value="" type="hidden">
+					
 					
 					<input value="Register" type="submit" data-inline="true" id="register">
 					<input value="Reset" type="reset" data-inline="true">
