@@ -465,7 +465,10 @@
 					<div class="ui-grid-a">
 						<div class="ui-block-a">
 							<label for="text-4">Dealer id :</label>
-							<input data-clear-btn="true" name="merchant_auto" id="merchant_auto" value="" type="text">
+							<form class="ui-filterable">
+							    <input id="autocomplete-input2" data-type="search" placeholder="Find a dealer...">
+							</form>
+							<ul id="autocomplete2" data-role="listview" data-inset="true" data-filter="true" data-input="#autocomplete-input2"></ul>
 							<input name="merchant_name" id="merchant_name" value="" type="hidden">
 						</div>						
 					</div>

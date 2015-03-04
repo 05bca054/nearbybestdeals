@@ -694,6 +694,53 @@ var app = {
 							
 				app.swipeCouponFunc();
 				
+				$( document ).on( "pagecreate", "#registration", function() {					
+				   	$(function() {
+						$("#autocomplete2").on("click", "li", function() {
+							// here I want to get the clicked id of the li (e.g. bakkerLink)
+							//var id = this.id;
+							//alert($(this).attr("mer-value"));
+							$("#merchant_name").val($(this).attr("mer-value"));
+							$("#autocomplete-input2").val($(this).text());
+							$("#autocomplete2").html( "" );
+							$("#autocomplete2").listview( "refresh" );
+							//alert($(this).attr("mer-value")+$(this).text());
+						});
+					});
+					//var weburl="https://nearbybestdeals.com/misc/web_service_new/web_services/";
+				    $( "#autocomplete2" ).on( "filterablebeforefilter", function ( e, data ) {
+				        var $ul = $( this ),
+				            $input = $( data.input ),
+							value = $input.val(),
+				            html = "";
+				        $ul.html( "" );
+				        if ( value && value.length > 2 ) {							
+				            $ul.html( "<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>" );
+				            $ul.listview( "refresh" );
+							$.ajax({
+								beforeSend: function() { $.mobile.loading("show"); }, //Show spinner
+								complete: function() { $.mobile.loading("hide"); }, //Hide spinner
+								url: web_url+"merchant/autocomplete.php",
+								data: { q: value },
+								type: "POST",
+								success: function(data) {
+									//alert(data);
+									var response=$.parseJSON(data);
+							
+					                $.each( response, function ( i, val ) {
+										
+					                    html += "<li mer-value="+val.value+">" + val.label + "</li>";
+					                });
+									//alert(html);
+					                $ul.html( html );
+					                $ul.listview( "refresh" );
+					                $ul.trigger( "updatelayout");
+								}
+							});				
+				        }
+				    });	
+				});
+				
 				$( document ).on( "pagecreate", "#listdealer", function() {
 					app.initListDealer();
 				   	$(function() {
@@ -936,27 +983,37 @@ var app = {
 						//$("#dealer_li"+i).append('<p class="ui-li-aside" style="right: 1.333em;"><select data-mini="true" id="select-based-flipswitch'+clstr.id+'" data-role="flipswitch" data-corners="false" class="notif_status" dealer-no="'+clstr.id+'"><option value="1">On</option><option value="0">Off</option></select></p>');
 						$("#select-based-flipswitch"+clstr.id).val(clstr.notif);
 					});
+					
 					$(".notif_status").on('change', function (event) {
 							//$(".notif_status").flipswitch().flipswitch("refresh");
 						//alert($(this).attr("dealer-no")+" : "+$(this).val());
-						$.ajax({
-							beforeSend: function() { $.mobile.loading("show");}, //Show spinner
-							complete: function() { $.mobile.loading("hide");}, //Hide spinner
-							url: "https://nearbybestdeals.com/misc/web_service_new/web_services/merchant/upadate_merchant.php",
-							data: { imei:window.localStorage.getItem("mob_user_id"),dealer_no:$(this).attr("dealer-no"),switch_val:$(this).val() },
-							type: "POST",
-							success: function(data) {
-								//alert(data);
+						navigator.notification.confirm(
+							"Are you sure you want to turn off notification for this dealer?",
+							function (button) {
+							  if (button==2) {
+								//navigator.app.exitApp();
+								$.ajax({
+									beforeSend: function() { $.mobile.loading("show");}, //Show spinner
+									complete: function() { $.mobile.loading("hide");}, //Hide spinner
+									url: "https://nearbybestdeals.com/misc/web_service_new/web_services/merchant/upadate_merchant.php",
+									data: { imei:window.localStorage.getItem("mob_user_id"),dealer_no:$(this).attr("dealer-no"),switch_val:$(this).val() },
+									type: "POST",
+									success: function(data) {
+										//alert(data);
+									}
+								});
+								$(".notif_status").flipswitch().flipswitch("refresh");
+								//$( "#list2" ).listview( "refresh" );								
+							  }
 							}
-						});
+							,
+							"EXIT",
+							["Cancel","OK"]
+						);						
 					});
-					$(".notif_status").flipswitch().flipswitch("refresh");
-					$( "#list2" ).listview( "refresh" );
-					var count = $('#list2 li').size();
-					$('#total-dealer').text("Total Dealer: "+count);
 				}
 			}
-		});		
+		});
 		// Swipe to remove list item		
 	},
 	
