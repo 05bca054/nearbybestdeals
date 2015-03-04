@@ -993,6 +993,7 @@ var app = {
 								function (button) {
 								  if (button==2) {
 									//navigator.app.exitApp();
+									alert("ok");
 									$.ajax({
 										beforeSend: function() { $.mobile.loading("show");}, //Show spinner
 										complete: function() { $.mobile.loading("hide");}, //Hide spinner
@@ -1001,9 +1002,15 @@ var app = {
 										type: "POST",
 										success: function(data) {
 											//alert(data);
+											$(this).val("0").flipswitch("refresh");
 										}
-									});
-									
+									});									
+									alert("ok finish");
+								  }
+								  else
+								  {
+									  alert("cancel");
+									  $(this).val("1").flipswitch("refresh");
 								  }
 								}
 								,
@@ -1021,6 +1028,7 @@ var app = {
 								type: "POST",
 								success: function(data) {
 									//alert(data);
+									$(this).val("1").flipswitch("refresh");
 								}
 							});
 						}
