@@ -579,19 +579,13 @@ var app = {
 				dir = event.type === "swipeleft" ? "left" : "right",
 				// Check if the browser supports the transform (3D) CSS transition
 				transition = $.support.cssTransform3d ? dir : false;						
-				
+				var listitem = $( this ).parent( "li" );
+				//var coupon_id = $( this ).attr("delete-id");
 				var coupon_id = $( this ).find(".delete").attr("delete-id");
 				
 				confirmAndDelete( coupon_id ,listitem, transition );
 			});
-			
-			$( "#list" ).on( "click", ".delete" , function() {
-				//alert("ad");
-				var listitem = $( this ).parent( "li" );
-				var coupon_id = $( this ).attr("delete-id");
-				//coupon.deleteExpires(coupon_id);			
-				confirmAndDelete( coupon_id ,listitem );
-			});
+						
 			//}
 			function confirmAndDelete( coupon_id ,listitem, transition ) {
 				//alert("confirm and delete"+ listitem + " : " + transition);
@@ -659,7 +653,7 @@ var app = {
 					error.insertAfter( element.parent() );
 				},
 				submitHandler: function (form) {					
-					alert("in submit");
+					//alert("in submit");
 					$.ajax({
 						beforeSend: function() { $.mobile.loading("show"); }, //Show spinner
 						complete: function() { $.mobile.loading("hide"); }, //Hide spinner
