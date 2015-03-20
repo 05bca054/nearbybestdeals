@@ -60,38 +60,13 @@ var app = {
 				//alert("loading on phone test");
 				//window.localStorage.setItem("registration", "no");
 				
+				//StatusBar.overlaysWebView(false);
+				//StatusBar.styleDefault();
+				
 				StatusBar.show();
 				StatusBar.overlaysWebView(false);
 				StatusBar.styleLightContent();
 				StatusBar.backgroundColorByHexString("#1f1e2e");
-				
-				window.localStorage.setItem("message","no");
-				//Android code
-				/*document.addEventListener("backbutton", backKeyDown, true);
-				function backKeyDown() {
-					//navigator.app.exitApp(); // To exit the app!
-					if($.mobile.activePage.is('#coupon')){
-						
-						navigator.notification.confirm(
-							"Do you want to exit the app?",
-							function (button) {
-							  if (button==2) {
-								navigator.app.exitApp();
-							  }
-							}
-							,
-							"EXIT",
-							["Cancel","OK"]
-						);
-						e.preventDefault();
-					}
-					else {
-						navigator.app.backHistory();
-						//alert("back on coupon page");
-						//e.preventDefault();
-						//alert("back other page");						
-					}					
-				}*/
 				
 				$.mobile.loading("show");  
 				
@@ -164,7 +139,7 @@ var app = {
 				//alert(icon);
 				window.localStorage.setItem("icon", icon);
 				initPages();
-				//console.log("App finished loading");
+				console.log("App finished loading");
 				app.app_loaded = true;
 				
 			});			
@@ -178,29 +153,14 @@ var app = {
 			//alert("[initPages]");
 			jQuery(document).bind("pageinit", _initPages);
 			
-			//Android code
-			//cordova.plugins.backgroundMode.setDefaults({ text:'Nearby best deals is running.'});
-			// Enable background mode
-			//cordova.plugins.backgroundMode.enable();
-
-			// Called when background mode has been activated
-			/*cordova.plugins.backgroundMode.onactivate = function () {
-				setTimeout(function () {
-					// Modify the currently displayed notification
-					cordova.plugins.backgroundMode.configure({
-						text:'Running in background for more than 5s now.'
-					});
-				}, 5000);
-			}
-			*/
 			//Load all pages content in back end so load is minimized
 			
 			localStorage.openSuccessPopup = 0;
 			localStorage.openUpdatePopup = 0;
-			if(localStorage.openSuccessPopup==1)
-				alert("This Apps Works well with Wi-Fi or 3G interrnet connection");
-				
+			alert("This Apps Works well with Wi-Fi or 3G interrnet connection");
 			app.loadContent();
+			
+			
 			
 			$(document).on("pagebeforeshow","#coupon",function(e){ // When entering pagetwo
 				//alert("coupon is about to be shown");
@@ -231,7 +191,6 @@ var app = {
 				if(localStorage.openSuccessPopup==1)
 				{
 					//alert("Profile has been created");
-					
 					$( "#help-coupon" ).popup( "open" );
 					localStorage.openSuccessPopup=0;
 				}
@@ -240,7 +199,6 @@ var app = {
 					alert("Profile Updated successfully");
 					localStorage.openUpdatePopup=0;
 				}
-				introJs(".introduction-coupon").start();
 				app.countMerchants();				
 				
 			});
@@ -717,13 +675,11 @@ var app = {
 			}
 		});
 	},
-	
+    
     loadContent: function() {
-		//$(document).on("pagecreate",function(event){
-				//alert(Date.today().add(1).days());
-				//coupon.addCoupon("Nearby best deals","Registration sale", "Flat 20% on membership of Nearby best deals", "NBBD20", Date.today().add(10).days(), "23", "22.283951", "70.768347", "on");
-				app.swipeMerchantFunc();
+		//$(document).on("pagecreate",function(event){	
 				app.cityFill();
+				app.swipeMerchantFunc();
 							
 				app.swipeCouponFunc();
 				
@@ -850,25 +806,26 @@ var app = {
 	},
   
 	swipeMerchantFunc: function(){
-		$( document ).on( "swipeleft swiperight", "#list2 li .list2li", function( event ) {
-			var listitem = $( this ).closest("li"),
+		$( document ).on( "swipeleft swiperight", "#list2 li", function( event ) {
+			
+			var listitem = $( this ),
 			// These are the classnames used for the CSS transition
 			dir = event.type === "swipeleft" ? "left" : "right",
 			// Check if the browser supports the transform (3D) CSS transition
-			transition = $.support.cssTransform3d ? dir : false;
-			var merchant_id = $( this ).find(".delete").attr("delete-id");
-			//var merchant_id = $( this ).attr("delete-id");
+			transition = $.support.cssTransform3d ? dir : false;		
+			var merchant_id = $( this ).find(".delete").attr("delete-id");				
 			//alert("swipeleft calling"+ dir +" : transitin :"+transition+"M id :-->"+merchant_id);
+							
 			confirmAndDelete(merchant_id, device.uuid, listitem, transition );
 		});
-		/*
+		
 		$( "#list2" ).on( "click", ".delete" , function() {
 							
 			var listitem = $( this ).parent( "li" );
 			var merchant_id = $( this ).attr("delete-id");
 						
 			confirmAndDelete(merchant_id, device.uuid, listitem );
-		});*/
+		});
 		
 		function confirmAndDelete( merchant_id, uuid, listitem, transition ) {
 			//alert("confirm and delete"+ merchant_id + " : " + uuid);
@@ -1001,7 +958,7 @@ var app = {
 						var user_id="";
 						
 						//$("#list2").append('<li id="dealer_li'+i+'"><a id="merchant'+i+'" href="#" class="delete merchant_desc" style="margin-right: 0px;" delete-id='+clstr.id+'></a></li>');
-						$("#list2").append('<li id="dealer_li'+i+'" style="padding:0px;"><div class="ui-grid-a"><div class="ui-block-a list2li" style="width:70%;"><div class="ui-bar ui-bar-a" style="height:60px;padding:0.4em;"><a style="text-decoration:none;" id="merchant'+i+'" href="#" class="delete merchant_desc" delete-id='+clstr.id+'></a></div></div><div class="ui-block-b" style="width:30%;"><div class="ui-bar ui-bar-a" style="height:60px;padding:0.4em;"><select id="select-based-flipswitch'+clstr.id+'" data-role="flipswitch" data-corners="true" data-mini="true" class="notif_status" dealer-no="'+clstr.id+'"><option value="1">On</option><option value="0">Off</option></select></div></div></div></li>');
+						$("#list2").append('<li id="dealer_li'+i+'" style="padding:0px;"><div class="ui-grid-a"><div class="ui-block-a" style="width:70%;"><div class="ui-bar ui-bar-a" style="height:60px;padding:0.4em;"><a style="text-decoration:none;" id="merchant'+i+'" href="#" class="delete merchant_desc" delete-id='+clstr.id+'></a></div></div><div class="ui-block-b" style="width:30%;"><div class="ui-bar ui-bar-a" style="height:60px;padding:0.4em;"><select id="select-based-flipswitch'+clstr.id+'" data-role="flipswitch" data-corners="true" data-mini="true" class="notif_status" dealer-no="'+clstr.id+'"><option value="1">On</option><option value="0">Off</option></select></div></div></div></li>');
 						//alert("Key : -- "+i+" Value : -- "+clstr);
 						$.each(clstr, function(k, ndes) {
 							if(k=="merchant")
@@ -1112,7 +1069,7 @@ var app = {
 			}
 		});
 	},
-			
+	
 	initNearbySingleCoupon: function(coupon_id) {	
 		 $.ajax({
 			beforeSend: function() { $.mobile.loading("show"); }, //Show spinner
@@ -1125,10 +1082,14 @@ var app = {
 				
 				var testJSON = $.parseJSON(data);												
 				
-				
+				if ( device.platform == 'android' || device.platform == 'Android' || device.platform == 'ANDROID'){						
 					//$(".nearby-facebook-share").attr("onclick","$.mobile.loading('show');window.plugins.socialsharing.shareViaFacebookWithPasteMessageHint('Use Coupon code :"+testJSON.nearby_single_coupon_code+" And get "+testJSON.nearby_single_coupon_desc+" at "+testJSON.nearby_single_coupon_merchant+" Locate merchant using this link: https://www.google.com/maps/@"+testJSON.nearby_single_coupon_lat+","+testJSON.nearby_single_coupon_lon+",18z', 'http://nearbybestdeals.com/wp-content/themes/enfold/images/layout/logo.jpg', null, 'Please paste message from clipboard!', function() {$.mobile.loading('hide');}, function(errormsg){alert(errormsg);$.mobile.loading('hide');})");
-				$(".nearby-facebook-share").attr("onclick",app.singleCouponFBshare);
-				
+					$(".nearby-facebook-share").attr("onclick","$.mobile.loading('show');window.plugins.socialsharing.shareViaFacebookWithPasteMessageHint('Use Coupon code :"+testJSON.nearby_single_coupon_code+" And get "+testJSON.nearby_single_coupon_desc+" at "+testJSON.nearby_single_coupon_merchant+" Locate merchant using this link: http://maps.google.com/maps?q=loc:"+testJSON.nearby_single_coupon_lat+","+testJSON.nearby_single_coupon_lon+"', 'http://nearbybestdeals.com/wp-content/themes/enfold/images/layout/logo.jpg', null, 'Please paste message from clipboard!', function() {$.mobile.loading('hide');}, function(errormsg){alert(errormsg);$.mobile.loading('hide');})");
+				}
+				else
+				{
+					$(".nearby-facebook-share").attr("onclick","$.mobile.loading('show');window.plugins.socialsharing.shareViaFacebook('Use Coupon code :"+testJSON.nearby_single_coupon_code+" And get "+testJSON.nearby_single_coupon_desc+" at "+testJSON.nearby_single_coupon_merchant+"', 'http://nearbybestdeals.com/wp-content/themes/enfold/images/layout/logo.jpg', 'http://maps.google.com/maps?q=loc:"+testJSON.nearby_single_coupon_lat+","+testJSON.nearby_single_coupon_lon+"', function() {$.mobile.loading('hide');}, function(errormsg){alert(errormsg);$.mobile.loading('hide');})");
+				}
 				
 				//$(".nearby-twitter-share").attr("onclick","$.mobile.loading('show');window.plugins.socialsharing.shareViaTwitter('Use Coupon code :"+testJSON.nearby_single_coupon_code+" And get "+testJSON.nearby_single_coupon_desc+" at "+testJSON.nearby_single_coupon_merchant+"', null, 'https://www.google.com/maps/@"+testJSON.nearby_single_coupon_lat+","+testJSON.nearby_single_coupon_lon+",18z');$.mobile.loading('hide');");
 				$(".nearby-twitter-share").attr("onclick","event.preventDefault();$.mobile.loading('show'); setTimeout(function(){		window.plugins.socialsharing.shareViaTwitter('Use Coupon code :"+testJSON.nearby_single_coupon_code+" And get "+testJSON.nearby_single_coupon_desc+" at "+testJSON.nearby_single_coupon_merchant+"', 'http://nearbybestdeals.com/wp-content/themes/enfold/images/layout/logo.jpg', 'http://maps.google.com/maps?q=loc:"+testJSON.nearby_single_coupon_lat+","+testJSON.nearby_single_coupon_lon+"'); $.mobile.loading('hide'); }, 5000);");
