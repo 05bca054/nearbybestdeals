@@ -57,7 +57,7 @@ var coupon = {
 					//alert(resultSet.rows.length);
 					//$("#list").append('<li class="ui-li-has-alt" id="coupon_'+row.ID+'"><a show-id="'+row.ID+'" id="coupon_link_'+row.ID+'" href="#" class="coupon_desc"><h3>'+row.merchant_name+'</h3><p class="topic"><strong>'+row.coupon_code+'</strong></p><p>'+row.coupon_title+'</p><p class="ui-li-aside"><strong data-countdown="'+row.expire_time+'"></strong></p></a><a href="#" class="delete ui-btn ui-btn-icon-notext ui-icon-delete" title="Delete" delete-id="'+row.ID+'"></a></li>');
 					//$("#list").append('<li class="ui-li-has-alt" id="coupon_'+row.ID+'"><a id="coupon_link_'+row.ID+'" href="#"><h3>'+row.merchant_name+'</h3><div class="ui-grid-a"><div class="ui-block-a" style="width:15%;"><img src="img/coupon_tag-r.png" width="100%" align="middle" alt="USA" class="ui-li-icon"/></div><div class="ui-block-b" style="width:85%;padding:3%;"><strong>'+row.coupon_code+'</strong></div></div><hr><p style="text-align:center;font-weight:bold;">'+row.coupon_title+'</p><hr><button class="ui-btn ui-icon-info ui-btn-icon-left ui-btn-active ui-state-persist coupon_desc" show-id="'+row.ID+'">Coupon Detail</button><p class="ui-li-aside" style="right: 1.333em;"><strong style="color:#3388cc;" data-countdown="'+row.expire_time+'"></strong></p></a><a href="#" class="delete ui-btn ui-btn-icon-notext ui-icon-delete" title="Delete" delete-id="'+row.ID+'"></a></li>');
-					$("#list").append('<li class="ui-li-has-alt" id="coupon_'+row.ID+'"><a id="coupon_link_'+row.ID+'" href="#" delete-id="'+row.ID+'" class="delete coupon_desc" style="margin-right: 0px;" show-id="'+row.ID+'"><h3>'+row.merchant_name+'</h3><div class="ui-grid-a"><div class="ui-block-a" style="width:15%;"><img src="img/coupon_tag-r.png" width="100%" align="middle" alt="USA" class="ui-li-icon"/></div><div class="ui-block-b" style="width:85%;padding:3%;"><strong>'+row.coupon_code+'</strong></div></div><hr><p style="text-align:center;font-weight:bold;">'+row.coupon_title+'</p><hr><p class="ui-li-aside" style="right: 1.333em;"><strong style="color:#3388cc;" data-countdown="'+row.expire_time+'"></strong></p></a></li>');
+					$("#list").append('<li class="ui-li-has-alt" delete-id="'+row.ID+'" id="coupon_'+row.ID+'"><a id="coupon_link_'+row.ID+'" href="#" delete-id="'+row.ID+'" class="delete coupon_desc" style="margin-right: 0px;" show-id="'+row.ID+'"><h3>'+row.merchant_name+'</h3><div class="ui-grid-a"><div class="ui-block-a" style="width:15%;"><img src="img/coupon_tag-r.png" width="100%" align="middle" alt="USA" class="ui-li-icon"/></div><div class="ui-block-b" style="width:85%;padding:3%;"><strong>'+row.coupon_code+'</strong></div></div><hr><p style="text-align:center;font-weight:bold;">'+row.coupon_title+'</p><hr><p class="ui-li-aside" style="right: 1.333em;"><strong style="color:#3388cc;" data-countdown="'+row.expire_time+'"></strong></p></a></li>');
 				}
 				
 				if(resultSet.rows.length!=0)
@@ -117,13 +117,9 @@ var coupon = {
 						//alert(row.sharable+"sharable");
 						$("#single_sharable").show("fast");
 					}
-					if ( device.platform == 'android' || device.platform == 'Android' || device.platform == 'ANDROID'){
-						$(".facebook-share").attr("onclick","event.preventDefault();$.mobile.loading('show');window.plugins.socialsharing.shareViaFacebookWithPasteMessageHint('Use Coupon code :"+row.coupon_code+" And get "+row.coupon_desc+" at "+row.merchant_name+" Locate merchant : http://maps.google.com/maps?q=loc:"+row.lat+","+row.lon+"', null, null, 'Please paste message from clipboard!', function() {$.mobile.loading('hide');}, function(errormsg){alert(errormsg);$.mobile.loading('hide');})");
-					}
-					else
-					{
-						$(".facebook-share").attr("onclick","event.preventDefault();$.mobile.loading('show');window.plugins.socialsharing.shareViaFacebook('Use Coupon code :"+row.coupon_code+" And get "+row.coupon_desc+" at "+row.merchant_name+" Locate merchant : http://maps.google.com/maps?q=loc:"+row.lat+","+row.lon+"', null, 'https://www.google.com/maps/@"+row.lat+","+row.lon+",18z', function() {$.mobile.loading('hide');}, function(errormsg){alert(errormsg);$.mobile.loading('hide');})");
-					}
+					
+					$(".facebook-share").attr("onclick","event.preventDefault();$.mobile.loading('show');window.plugins.socialsharing.shareViaFacebook('Use Coupon code :"+row.coupon_code+" And get "+row.coupon_desc+" at "+row.merchant_name+" Locate merchant : http://maps.google.com/maps?q=loc:"+row.lat+","+row.lon+"', null, 'https://www.google.com/maps/@"+row.lat+","+row.lon+",18z', function() {$.mobile.loading('hide');}, function(errormsg){alert(errormsg);$.mobile.loading('hide');})");
+					
 					//alert(row.expire_time+"after alert");
 					//$(".twitter-share").attr("onclick","event.preventDefault();$.mobile.loading('show');window.plugins.socialsharing.shareViaTwitter('Use Coupon code :"+row.coupon_code+" And get "+row.coupon_desc+" at "+row.merchant_name+"', 'http://nearbybestdeals.com/wp-content/themes/enfold/images/layout/logo.jpg', 'https://www.google.com/maps/@"+row.lat+","+row.lon+",18z');$.mobile.loading('hide');");
 					$(".twitter-share").attr("onclick","event.preventDefault();$.mobile.loading('show'); setTimeout(function(){		window.plugins.socialsharing.shareViaTwitter('Use Coupon code :"+row.coupon_code+" And get "+row.coupon_desc+" at "+row.merchant_name+"', 'http://nearbybestdeals.com/wp-content/themes/enfold/images/layout/logo.jpg', 'http://maps.google.com/maps?q=loc:"+row.lat+","+row.lon+"'); $.mobile.loading('hide'); }, 5000);");
@@ -223,6 +219,7 @@ var coupon = {
         coupon.db.transaction(function (tx) {
             tx.executeSql("DELETE FROM coupon WHERE ID=?", [id], function (tx, resultSet) {coupon.countCoupon();}, coupon.onError);
         });
+        coupon.countCoupon();
     },
 
     loadTodoItems: function (tx, rs) {
