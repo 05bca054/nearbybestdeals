@@ -806,7 +806,7 @@ var app = {
 	},
   
 	swipeMerchantFunc: function(){
-		$( document ).on( "swipeleft swiperight", "#list2 li", function( event ) {
+		/*$( document ).on( "swipeleft swiperight", "#list2 li", function( event ) {
 			
 			var listitem = $( this ),
 			// These are the classnames used for the CSS transition
@@ -816,6 +816,18 @@ var app = {
 			var merchant_id = $( this ).find(".delete").attr("delete-id");				
 			//alert("swipeleft calling"+ dir +" : transitin :"+transition+"M id :-->"+merchant_id);
 							
+			confirmAndDelete(merchant_id, device.uuid, listitem, transition );
+		});*/
+		
+		$( document ).on( "swipeleft swiperight", "#list2 li .list2li", function( event ) {
+			var listitem = $( this ).closest("li"),
+			// These are the classnames used for the CSS transition
+			dir = event.type === "swipeleft" ? "left" : "right",
+			// Check if the browser supports the transform (3D) CSS transition
+			transition = $.support.cssTransform3d ? dir : false;
+			var merchant_id = $( this ).find(".delete").attr("delete-id");
+			//var merchant_id = $( this ).attr("delete-id");
+			//alert("swipeleft calling"+ dir +" : transitin :"+transition+"M id :-->"+merchant_id);
 			confirmAndDelete(merchant_id, device.uuid, listitem, transition );
 		});
 		
@@ -958,7 +970,8 @@ var app = {
 						var user_id="";
 						
 						//$("#list2").append('<li id="dealer_li'+i+'"><a id="merchant'+i+'" href="#" class="delete merchant_desc" style="margin-right: 0px;" delete-id='+clstr.id+'></a></li>');
-						$("#list2").append('<li id="dealer_li'+i+'" style="padding:0px;"><div class="ui-grid-a"><div class="ui-block-a" style="width:70%;"><div class="ui-bar ui-bar-a" style="height:60px;padding:0.4em;"><a style="text-decoration:none;" id="merchant'+i+'" href="#" class="delete merchant_desc" delete-id='+clstr.id+'></a></div></div><div class="ui-block-b" style="width:30%;"><div class="ui-bar ui-bar-a" style="height:60px;padding:0.4em;"><select id="select-based-flipswitch'+clstr.id+'" data-role="flipswitch" data-corners="true" data-mini="true" class="notif_status" dealer-no="'+clstr.id+'"><option value="1">On</option><option value="0">Off</option></select></div></div></div></li>');
+						//$("#list2").append('<li id="dealer_li'+i+'" style="padding:0px;"><div class="ui-grid-a"><div class="ui-block-a" style="width:70%;"><div class="ui-bar ui-bar-a" style="height:60px;padding:0.4em;"><a style="text-decoration:none;" id="merchant'+i+'" href="#" class="delete merchant_desc" delete-id='+clstr.id+'></a></div></div><div class="ui-block-b" style="width:30%;"><div class="ui-bar ui-bar-a" style="height:60px;padding:0.4em;"><select id="select-based-flipswitch'+clstr.id+'" data-role="flipswitch" data-corners="true" data-mini="true" class="notif_status" dealer-no="'+clstr.id+'"><option value="1">On</option><option value="0">Off</option></select></div></div></div></li>');
+						$("#list2").append('<li id="dealer_li'+i+'" style="padding:0px;"><div class="ui-grid-a"><div class="ui-block-a list2li" style="width:70%;"><div class="ui-bar ui-bar-a" style="height:60px;padding:0.4em;"><a style="text-decoration:none;" id="merchant'+i+'" href="#" class="delete merchant_desc" delete-id='+clstr.id+'></a></div></div><div class="ui-block-b" style="width:30%;"><div class="ui-bar ui-bar-a" style="height:60px;padding:0.4em;"><select id="select-based-flipswitch'+clstr.id+'" data-role="flipswitch" data-corners="true" data-mini="true" class="notif_status" dealer-no="'+clstr.id+'"><option value="1">On</option><option value="0">Off</option></select></div></div></div></li>');
 						//alert("Key : -- "+i+" Value : -- "+clstr);
 						$.each(clstr, function(k, ndes) {
 							if(k=="merchant")
