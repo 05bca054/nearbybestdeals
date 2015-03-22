@@ -94,7 +94,20 @@ var coupon = {
 					$("#single_coupon_merchant").text(row.merchant_name);
 					//$("#single_coupon_distance").text(row.distance);
 					//$("#single_coupon_distance").attr('onclick',"window.open('https://www.google.com/maps/?saddr="+window.localStorage.getItem("langtitude")+","+window.localStorage.getItem("longtitude")+"&daddr="+row.lat+","+row.lon+"', '_system')");
-					$("#single_coupon_distance").attr('onclick',"event.preventDefault();launchnavigator.navigateByLatLon("+row.lat+","+row.lon+");");
+					//$("#single_coupon_distance").attr('onclick',"event.preventDefault();launchnavigator.navigateByLatLon("+row.lat+","+row.lon+");");
+					$("#single_coupon_distance").click(function() {
+					//launchnavigator.navigate([$("#dlat1").val(),$("#dlon1").val()], null, onSuccess, onError);	
+						launchnavigator.navigate(
+							[row.lat,row.lon],
+							null,
+							function(){
+								//alert("Plugin success"):
+							},
+							function(error){
+								alert("Plugin error: "+ error);
+							}
+						);
+					});
 					$("#single_coupon_title").text(row.coupon_title);
 					$("#single_coupon_code").text(row.coupon_code);					
 					$("#single_coupon_merchantid").attr("merchant-id",row.merchant_id);

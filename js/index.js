@@ -1065,7 +1065,20 @@ var app = {
 						else if(i=="locate_merchant"){
 							//$("#merchant_email").attr("href","mailto:"+clstr);
 							//$("#locate_merchant").attr('onclick',"window.open('https://www.google.com/maps/?saddr="+window.localStorage.getItem("langtitude")+","+window.localStorage.getItem("longtitude")+"&daddr="+clstr+"', '_system')");
-							$("#locate_merchant").attr('onclick',"event.preventDefault();launchnavigator.navigateByLatLon("+testJSON.lat+","+ testJSON.lon+")");
+							//$("#locate_merchant").attr('onclick',"event.preventDefault();launchnavigator.navigateByLatLon("+testJSON.lat+","+ testJSON.lon+")");
+							$("#locate_merchant").click(function() {
+							//launchnavigator.navigate([$("#dlat1").val(),$("#dlon1").val()], null, onSuccess, onError);	
+								launchnavigator.navigate(
+									[testJSON.lat, testJSON.lon],
+									null,
+									function(){
+										//alert("Plugin success"):
+									},
+									function(error){
+										alert("Plugin error: "+ error);
+									}
+								);
+							});
 						}
 						else
 						{
@@ -1129,7 +1142,22 @@ var app = {
 							$("#"+i).attr("merchant-id",clstr);
 						else if(i=="nearby_single_coupon_distance")
 						{
-							$("#nearby_single_coupon_distance").attr('onclick',"event.preventDefault();launchnavigator.navigateByLatLon("+testJSON.nearby_single_coupon_lat+", "+testJSON.nearby_single_coupon_lon+");");
+							//$("#nearby_single_coupon_distance").attr('onclick',"event.preventDefault();launchnavigator.navigateByLatLon("+testJSON.nearby_single_coupon_lat+", "+testJSON.nearby_single_coupon_lon+");");
+							//Navigate from current location:
+							
+							$("#nearby_single_coupon_distance").click(function() {
+							//launchnavigator.navigate([$("#dlat1").val(),$("#dlon1").val()], null, onSuccess, onError);	
+								launchnavigator.navigate(
+									[testJSON.nearby_single_coupon_lat, testJSON.nearby_single_coupon_lon],
+									null,
+									function(){
+										//alert("Plugin success");
+									},
+									function(error){
+										alert("Plugin error: "+ error);
+									}
+								);
+							});
 							$("#"+i).text(clstr);
 						}
 						else if(i=="nearby_single_coupon_desc")
