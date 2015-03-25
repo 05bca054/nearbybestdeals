@@ -851,9 +851,13 @@ var app = {
 			// Proceed when the user confirms
 			$( "#confirm2 #yes2" ).on( "click", function() {
 				// Remove with a transition							
+				listitem.slideUp('slow', function(){
+			    	listitem.remove();
+				});
 				$.ajax({
-					beforeSend: function() { $.mobile.loading("show"); }, //Show spinner
-					complete: function() { $.mobile.loading("hide");  }, //Hide spinner
+					
+					beforeSend: function() {  }, //Show spinner
+					complete: function() {   }, //Hide spinner
 					url: web_url+"merchant/remove_merchant.php",
 					data: { imei: window.localStorage.getItem("mob_user_id"), merchant_id : merchant_id  },
 					type: "POST",
@@ -861,21 +865,15 @@ var app = {
 					success: function(data) {
 						//...
 						//alert(data);
-						if(data==0)
-						{
-							listitem.slideUp('slow', function(){
-			                	listitem.remove();
-							});
+						
+							
 							app.countMerchants();
-							$.mobile.loading("hide"); 
-						}
-						else
-						{
-							alert("Problem in deleting dealer");
-						}
-						$( "#confirm2" ).popup( "close" );
+							//$.mobile.loading("hide"); 
+						
+						
 					}
-				});					
+				});		
+				$( "#confirm2" ).popup( "close" );			
 				$( "#list2" ).listview( "refresh" );
 				
 				var count = $('#list2 li').size();
@@ -1145,7 +1143,8 @@ var app = {
 							//$("#nearby_single_coupon_distance").attr('onclick',"event.preventDefault();launchnavigator.navigateByLatLon("+testJSON.nearby_single_coupon_lat+", "+testJSON.nearby_single_coupon_lon+");");
 							//Navigate from current location:
 							
-							$("#nearby_single_coupon_distance").click(function() {
+							$("#nearby_single_coupon_distance").click(function(e) {
+								
 							//launchnavigator.navigate([$("#dlat1").val(),$("#dlon1").val()], null, onSuccess, onError);	
 								launchnavigator.navigate(
 									[testJSON.nearby_single_coupon_lat, testJSON.nearby_single_coupon_lon],
@@ -1157,6 +1156,7 @@ var app = {
 										alert("Plugin error: "+ error);
 									}
 								);
+								e.preventDefault();
 							});
 							$("#"+i).text(clstr);
 						}
