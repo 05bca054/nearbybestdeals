@@ -972,8 +972,8 @@ var app = {
 			data: { imei: window.localStorage.getItem("mob_user_id") },
 			type: "POST",
 			success: function(data) {
-				alert(data);
-				//$("#list2").empty();
+				//alert(data);
+				$("#list2").empty();
 				var testJSON = $.parseJSON(data);
 				if (testJSON.length != 0) {
 					$.each(testJSON, function(i, clstr) {
@@ -986,14 +986,10 @@ var app = {
 						$.each(clstr, function(k, ndes) {
 							if(k=="merchant")
 								$("#merchant"+i).append('<h3>'+ndes+'</h3>');
-							/*if(k=="desc")
-								$("#merchant"+i).append('<p class="desc">'+ndes+'</p>');
-							if(k=="id")
-								user_id=ndes;*/
-							//alert("Key : -- "+k+" Value : -- "+ndes);
-							alert("in firsst");
-						});
-						alert("Key : -- "+i+" Value : -- "+clstr.merchant);
+					
+						
+							
+						});						
 						//$("#dealer_li"+i).append('<p class="ui-li-aside" style="right: 1.333em;"><select data-mini="true" id="select-based-flipswitch'+clstr.id+'" data-role="flipswitch" data-corners="false" class="notif_status" dealer-no="'+clstr.id+'"><option value="1">On</option><option value="0">Off</option></select></p>');
 						$("#select-based-flipswitch"+clstr.id).val(clstr.notif);
 						
