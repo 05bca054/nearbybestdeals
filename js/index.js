@@ -871,9 +871,10 @@ var app = {
 				listitem.slideUp('slow', function(){
 			    	listitem.remove();
 				});
+				
 				app.staticRemoveMerchantCount();
+				
 				$.ajax({
-					
 					beforeSend: function() {  }, //Show spinner
 					complete: function() {   }, //Hide spinner
 					url: web_url+"merchant/remove_merchant.php",
@@ -881,13 +882,6 @@ var app = {
 					type: "POST",
 					//headers: //headers
 					success: function(data) {
-						//...
-						//alert(data);
-						
-							
-							//app.countMerchants();
-							//$.mobile.loading("hide"); 
-						
 						
 					}
 				});		
@@ -978,7 +972,7 @@ var app = {
 			data: { imei: window.localStorage.getItem("mob_user_id") },
 			type: "POST",
 			success: function(data) {
-				//alert("count");
+				alert("data");
 				$("#list2").empty();
 				var testJSON = $.parseJSON(data);
 				if (testJSON.length != 0) {
@@ -1275,16 +1269,17 @@ var app = {
     },
     
     staticRemoveMerchantCount: function() {
-		//alert($("#total-dealer").text()-1);
+		alert($("#total-dealer").text()-1);
 		$("#total-dealer").text($("#total-dealer").text()-1);
 		$(".dealer-count").text(parseInt($(".dealer-count").eq(1).text())-1);
-		//alert($("#total-dealer").text()+"after delete");
+		alert($("#total-dealer").text()+"after delete");
 	},
 	
 	staticAddMerchantCount: function() {
-		//alert($("#total-dealer").text()+1);
+		alert($("#total-dealer").text()+1);
 		$("#total-dealer").text($("#total-dealer").text()+1);
 		$(".dealer-count").text(parseInt($(".dealer-count").eq(1).text())+1);
+		alert(parseInt($(".dealer-count").eq(1).text())+1);
 	},
     
     initialize: function() {
