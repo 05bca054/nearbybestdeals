@@ -888,8 +888,8 @@ var app = {
 				$( "#confirm2" ).popup( "close" );			
 				$( "#list2" ).listview( "refresh" );
 				
-				var count = $('#list2 li').size();
-				$('#total-dealer').text(count);
+				//var count = $('#list2 li').size();
+				//$('#total-dealer').text(count);
 			});
 			
 			// Remove active state and unbind when the cancel button is clicked
