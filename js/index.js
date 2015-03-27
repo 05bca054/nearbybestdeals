@@ -972,7 +972,7 @@ var app = {
 			data: { imei: window.localStorage.getItem("mob_user_id") },
 			type: "POST",
 			success: function(data) {
-				alert("data");
+				alert(data);
 				$("#list2").empty();
 				var testJSON = $.parseJSON(data);
 				if (testJSON.length != 0) {
