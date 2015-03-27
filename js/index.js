@@ -972,7 +972,7 @@ var app = {
 			data: { imei: window.localStorage.getItem("mob_user_id") },
 			type: "POST",
 			success: function(data) {
-				//alert(data);
+				alert(data);
 				$("#list2").empty();
 				var testJSON = $.parseJSON(data);
 				if (testJSON.length != 0) {
@@ -982,7 +982,7 @@ var app = {
 						//$("#list2").append('<li id="dealer_li'+i+'"><a id="merchant'+i+'" href="#" class="delete merchant_desc" style="margin-right: 0px;" delete-id='+clstr.id+'></a></li>');
 						//$("#list2").append('<li id="dealer_li'+i+'" style="padding:0px;"><div class="ui-grid-a"><div class="ui-block-a" style="width:70%;"><div class="ui-bar ui-bar-a" style="height:60px;padding:0.4em;"><a style="text-decoration:none;" id="merchant'+i+'" href="#" class="delete merchant_desc" delete-id='+clstr.id+'></a></div></div><div class="ui-block-b" style="width:30%;"><div class="ui-bar ui-bar-a" style="height:60px;padding:0.4em;"><select id="select-based-flipswitch'+clstr.id+'" data-role="flipswitch" data-corners="true" data-mini="true" class="notif_status" dealer-no="'+clstr.id+'"><option value="1">On</option><option value="0">Off</option></select></div></div></div></li>');
 						$("#list2").append('<li id="dealer_li'+i+'" style="padding:0px;"><div class="ui-grid-a"><div class="ui-block-a list2li" style="width:70%;"><div class="ui-bar ui-bar-a" style="height:60px;padding:0.4em;"><a style="text-decoration:none;" id="merchant'+i+'" href="#" class="delete merchant_desc" delete-id='+clstr.id+'></a></div></div><div class="ui-block-b" style="width:30%;"><div class="ui-bar ui-bar-a" style="height:60px;padding:0.4em;"><select id="select-based-flipswitch'+clstr.id+'" data-role="flipswitch" data-corners="true" data-mini="true" class="notif_status" dealer-no="'+clstr.id+'"><option value="1">On</option><option value="0">Off</option></select></div></div></div></li>');
-						alert("Key : -- "+i+" Value : -- "+clstr.merchant);
+						//alert("Key : -- "+i+" Value : -- "+clstr.merchant);
 						$.each(clstr, function(k, ndes) {
 							if(k=="merchant")
 								$("#merchant"+i).append('<h3>'+ndes+'</h3>');
@@ -1269,17 +1269,17 @@ var app = {
     },
     
     staticRemoveMerchantCount: function() {
-		alert($("#total-dealer").text()-1);
+		//alert($("#total-dealer").text()-1);
 		$("#total-dealer").text($("#total-dealer").text()-1);
 		$(".dealer-count").text(parseInt($(".dealer-count").eq(1).text())-1);
-		alert($("#total-dealer").text()+"after delete");
+		//alert($("#total-dealer").text()+"after delete");
 	},
 	
 	staticAddMerchantCount: function() {
-		alert($("#total-dealer").text()+1);
+		//alert($("#total-dealer").text()+1);
 		$("#total-dealer").text($("#total-dealer").text()+1);
 		$(".dealer-count").text(parseInt($(".dealer-count").eq(1).text())+1);
-		alert(parseInt($(".dealer-count").eq(1).text())+1);
+		//alert(parseInt($(".dealer-count").eq(1).text())+1);
 	},
     
     initialize: function() {
