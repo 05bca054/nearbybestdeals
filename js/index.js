@@ -198,9 +198,7 @@ var app = {
 				{
 					alert("Profile Updated successfully");
 					localStorage.openUpdatePopup=0;
-				}
-				app.countMerchants();				
-				
+				}				
 			});
 			
 			$(document).on("pageshow","#single_coupon",function(e){ // When entering pagetwo				
@@ -400,9 +398,9 @@ var app = {
 						data: { feedback_name: $("#feedback_name").val(), feedback_email: $("#feedback_email").val(), feedback_contact: $("#feedback_contact").val(), feedback_massage: $("#feedback_message").val() },
 						type: "POST",
 						success: function(data) {	
-							alert(data);
+							//alert(data);
 							//$("#form1")[0].reset();
-							$("#feedback_form")[0].reset();
+							$("#feedback_form")[0].reset();							
 						}
 					});
 					//e.preventDefault();
@@ -439,7 +437,7 @@ var app = {
 							alert(data+" has been added successfully.");
 							$("#merchant_auto2").val('');
 							$("#merchant_auto2").focus();
-							app.countMerchants();
+							app.staticAddMerchantCount();
 							//$( "#popupAddDealer" ).popup( "close" );
 							app.initListDealer();
 						}
@@ -473,7 +471,7 @@ var app = {
 						if(data!="0" && data!="2" && data!="3")
 						{
 							alert(data+" has been added successfully.");
-							app.countMerchants();
+							app.staticAddMerchantCount();
 							app.initListDealer();
 						}
 						else if(data=="0")
@@ -640,6 +638,7 @@ var app = {
 							//alert(window.localStorage.getItem("registration"));
 							$.mobile.loading("hide");
 							localStorage.openSuccessPopup = 1;
+							app.countMerchants();
 							$(':mobile-pagecontainer').pagecontainer('change', '#coupon', {
 								reload: false
 							});
@@ -677,7 +676,11 @@ var app = {
 	},
     
     loadContent: function() {
-		//$(document).on("pagecreate",function(event){	
+		//$(document).on("pagecreate",function(event){		
+				if(window.localStorage.getItem("registration")=="yes")
+				{
+					app.countMerchants();
+				}				
 				app.cityFill();
 				app.swipeMerchantFunc();
 							
@@ -714,16 +717,23 @@ var app = {
 								type: "POST",
 								success: function(data) {
 									//alert(data);
-									var response=$.parseJSON(data);
-							
-					                $.each( response, function ( i, val ) {
-										
-					                    html += "<li mer-value="+val.value+">" + val.label + "</li>";
-					                });
-									//alert(html);
-					                $ul.html( html );
-					                $ul.listview( "refresh" );
-					                $ul.trigger( "updatelayout");
+									if(data !="0")
+									{
+										var response=$.parseJSON(data);
+								
+						                $.each( response, function ( i, val ) {
+											
+						                    html += "<li mer-value="+val.value+">" + val.label + "</li>";
+						                });
+										//alert(html);
+						                $ul.html( html );
+						                $ul.listview( "refresh" );
+						                $ul.trigger( "updatelayout");
+									}
+									else
+									{
+										alert("No Dealer Found with given name");
+									}
 								}
 							});				
 				        }
@@ -762,16 +772,23 @@ var app = {
 								type: "POST",
 								success: function(data) {
 									//alert(data);
-									var response=$.parseJSON(data);
-							
-					                $.each( response, function ( i, val ) {
-										
-					                    html += "<li mer-value="+val.value+">" + val.label + "</li>";
-					                });
-									//alert(html);
-					                $ul.html( html );
-					                $ul.listview( "refresh" );
-					                $ul.trigger( "updatelayout");
+									if(data !="0")
+									{
+										var response=$.parseJSON(data);
+								
+						                $.each( response, function ( i, val ) {
+											
+						                    html += "<li mer-value="+val.value+">" + val.label + "</li>";
+						                });
+										//alert(html);
+						                $ul.html( html );
+						                $ul.listview( "refresh" );
+						                $ul.trigger( "updatelayout");
+									}
+									else
+									{
+										alert("No Dealer Found with given name");
+									}
 								}
 							});							
 				        }
@@ -854,6 +871,7 @@ var app = {
 				listitem.slideUp('slow', function(){
 			    	listitem.remove();
 				});
+				app.staticRemoveMerchantCount();
 				$.ajax({
 					
 					beforeSend: function() {  }, //Show spinner
@@ -867,7 +885,7 @@ var app = {
 						//alert(data);
 						
 							
-							app.countMerchants();
+							//app.countMerchants();
 							//$.mobile.loading("hide"); 
 						
 						
@@ -877,7 +895,7 @@ var app = {
 				$( "#list2" ).listview( "refresh" );
 				
 				var count = $('#list2 li').size();
-				$('#total-dealer').text("Total Dealer: "+count);
+				$('#total-dealer').text(count);
 			});
 			
 			// Remove active state and unbind when the cancel button is clicked
@@ -1002,7 +1020,7 @@ var app = {
 					$(".notif_status").flipswitch().flipswitch("refresh");
 					$( "#list2" ).listview( "refresh" );
 					var count = $('#list2 li').size();
-					$('#total-dealer').text("Total Dealer: "+count);
+					$('#total-dealer').text(count);
 				}
 			}
 		});
@@ -1249,12 +1267,25 @@ var app = {
 				$(".dealer-count").text(data);
 				//var count = $('#list2 li').size();
 				//alert(count)
-				$('#total-dealer').text("Total Dealer: "+data);
+				$('#total-dealer').text(data);
 				//jQuery('#merchant_call').button('refresh');
 				//$( "#nearbydealsSingle" ).listview( "refresh" );
 			}
 		});
     },
+    
+    staticRemoveMerchantCount: function() {
+		//alert($("#total-dealer").text()-1);
+		$("#total-dealer").text($("#total-dealer").text()-1);
+		$(".dealer-count").text(parseInt($(".dealer-count").eq(1).text())-1);
+		//alert($("#total-dealer").text()+"after delete");
+	},
+	
+	staticAddMerchantCount: function() {
+		//alert($("#total-dealer").text()+1);
+		$("#total-dealer").text($("#total-dealer").text()+1);
+		$(".dealer-count").text(parseInt($(".dealer-count").eq(1).text())+1);
+	},
     
     initialize: function() {
         this.bindEvents();
