@@ -424,71 +424,90 @@ var app = {
 			});*/
 			
 			$("#add_continue").on('click', function(e) {
-				$.ajax({
-					beforeSend: function() { $.mobile.loading("show"); }, //Show spinner
-					complete: function() { $.mobile.loading("hide"); }, //Hide spinner
-					url: web_url+"merchant/add_merchant.php",
-					data: { merchant_id: $("#merchant_name2").val(), imei: window.localStorage.getItem("mob_user_id")  },
-					type: "POST",
-					success: function(data) {	
-						$('#merchant_auto2').val('');
-						if(data!="0" && data!="2" && data!="3")
-						{
-							alert(data+" has been added successfully.");
-							$("#merchant_auto2").val('');
-							$("#merchant_auto2").focus();
-							app.staticAddMerchantCount();
-							//$( "#popupAddDealer" ).popup( "close" );
-							app.initListDealer();
+				if($("#merchant_name2").val().length > 0)
+				{
+					$.ajax({
+						beforeSend: function() { $.mobile.loading("show"); }, //Show spinner
+						complete: function() { $.mobile.loading("hide"); }, //Hide spinner
+						url: web_url+"merchant/add_merchant.php",
+						data: { merchant_id: $("#merchant_name2").val(), imei: window.localStorage.getItem("mob_user_id")  },
+						type: "POST",
+						success: function(data) {	
+							$('#merchant_auto2').val('');
+							if(data!="0" && data!="2" && data!="3")
+							{
+								alert(data+" has been added successfully.");
+								$("#merchant_auto2").val('');
+								$("#merchant_auto2").focus();
+								app.staticAddMerchantCount();
+								//$( "#popupAddDealer" ).popup( "close" );
+								app.initListDealer();
+							}
+							else if(data=="0")
+							{
+								alert( "Dealer not found or inactive with this id please check entered dealer id!" )
+							}
+							else if(data=="2")
+							{
+								alert( "Dealer already added in your account please find dealer in list dealer tab");
+							}
+							else if(data=="3")
+							{
+								alert( "Please enter dealer!");
+							}
+							$("#autocomplete-input").val("");
+							$("#merchant_name2").val("");
 						}
-						else if(data=="0")
-						{
-							alert( "Dealer not found or inactive with this id please check entered dealer id!" )
-						}
-						else if(data=="2")
-						{
-							alert( "Dealer already added in your account please find dealer in list dealer tab");
-						}
-						else if(data=="3")
-						{
-							alert( "Please enter dealer!");
-						}
-					}
-				});
-				e.preventDefault();				
+					});
+					//e.preventDefault();
+				}
+				else
+				{
+					alert("Please select dealer from list");
+				}
+				e.preventDefault();
 			});
 			
 			$("#add_close").on('click', function(e) {
 				//$(this).val("").textinput( "refresh" );				
-			 	$.ajax({
-					beforeSend: function() { $.mobile.loading("show"); }, //Show spinner
-					complete: function() { $.mobile.loading("hide"); }, //Hide spinner
-					url: web_url+"merchant/add_merchant.php",
-					data: { merchant_id: $("#merchant_name2").val(), imei: window.localStorage.getItem("mob_user_id")  },
-					type: "POST",
-					success: function(data) {	
-						$('#merchant_auto2').val('');
-						if(data!="0" && data!="2" && data!="3")
-						{
-							alert(data+" has been added successfully.");
-							app.staticAddMerchantCount();
-							app.initListDealer();
+				if($("#merchant_name2").val().length > 0)
+				{
+					$.ajax({
+						beforeSend: function() { $.mobile.loading("show"); }, //Show spinner
+						complete: function() { $.mobile.loading("hide"); }, //Hide spinner
+						url: web_url+"merchant/add_merchant.php",
+						data: { merchant_id: $("#merchant_name2").val(), imei: window.localStorage.getItem("mob_user_id")  },
+						type: "POST",
+						success: function(data) {	
+							$('#merchant_auto2').val('');
+							if(data!="0" && data!="2" && data!="3")
+							{
+								alert(data+" has been added successfully.");
+								app.staticAddMerchantCount();
+								app.initListDealer();
+							}
+							else if(data=="0")
+							{
+								alert( "Dealer not found or inactive with this id please check entered dealer id!" )
+							}
+							else if(data=="2")
+							{
+								alert( "Dealer already added in your account please find dealer in list dealer tab");
+							}
+							else if(data=="3")
+							{
+								alert( "Please enter dealer!");
+							}
+							$("#autocomplete-input").val("");
+							$("#merchant_name2").val("");
+							$( "#popupAddDealer" ).popup( "close" );
 						}
-						else if(data=="0")
-						{
-							alert( "Dealer not found or inactive with this id please check entered dealer id!" )
-						}
-						else if(data=="2")
-						{
-							alert( "Dealer already added in your account please find dealer in list dealer tab");
-						}
-						else if(data=="3")
-						{
-							alert( "Please enter dealer!");
-						}
-						$( "#popupAddDealer" ).popup( "close" );
-					}
-				});
+					});					
+				}
+				else
+				{
+					alert("Please select dealer from given list");
+				}
 				e.preventDefault();
 			});
 			
@@ -866,7 +885,7 @@ var app = {
 			// Show the confirmation popup
 			$( "#confirm2" ).popup( "open" );
 			// Proceed when the user confirms
-			$( "#confirm2 #yes2" ).on( "click", function() {
+			$( "#confirm2 #yes2" ).one( "click", function() {
 				// Remove with a transition							
 				listitem.slideUp('slow', function(){
 			    	listitem.remove();
