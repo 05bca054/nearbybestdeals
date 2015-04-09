@@ -93,8 +93,8 @@ function tokenHandler (result) {
     // Your iOS push server needs to know the token before it can push to this device
     // here is where you might want to send it the token for later use.
     //alert('device token = ' + result);
-    $("#app-status-ul").append('<li class="ui-icon-carat-r ui-btn-icon-right">Register Device Successfully</li>');
-	$("#app-status-ul").listview("refresh");
+    //$("#app-status-ul").append('<li class="ui-icon-carat-r ui-btn-icon-right">Register Device Successfully</li>');
+	//$("#app-status-ul").listview("refresh");
 	window.localStorage.setItem("gcm_id", result);
 	// Your GCM push server needs to know the regID before it can push to this device
 	
@@ -105,8 +105,8 @@ function tokenHandler (result) {
 	var device_info = 'Device Model: ' + device.model + 'Device Cordova: ' + device.cordova  + 'Device Platform: ' + device.platform + 'Device UUID: ' + device.uuid + 'Device Version: '  + device.version;
 	
 	//alert(web_url+"users/mob_user_reg.php");
-	$("#app-status-ul").append('<li class="ui-icon-location ui-btn-icon-right">Updating location information</li>');
-	$("#app-status-ul").listview("refresh");
+	//$("#app-status-ul").append('<li class="ui-icon-location ui-btn-icon-right">Updating location information</li>');
+	//$("#app-status-ul").listview("refresh");
 		
 	//alert(window.localStorage.getItem("mob_user_id"));
 	if(window.localStorage.getItem("mob_user_id") === null)
@@ -117,8 +117,8 @@ function tokenHandler (result) {
 			
 			window.localStorage.setItem("mob_user_id", data);
 			//app.countMerchants();
-			$("#app-status-ul").append('<li class="ui-icon-arrow-r ui-btn-icon-right">Update location info successfully</li>');
-			$("#app-status-ul").listview("refresh");
+			//$("#app-status-ul").append('<li class="ui-icon-arrow-r ui-btn-icon-right">Update location info successfully</li>');
+			//$("#app-status-ul").listview("refresh");
 			$.mobile.loading("hide");
 			var changewindow=window.localStorage.getItem("notification");
 			//navigator.splashscreen.hide();
@@ -146,8 +146,8 @@ function tokenHandler (result) {
 			//app.countMerchants();
 			
 			
-			$("#app-status-ul").append('<li class="ui-icon-arrow-r ui-btn-icon-right">Update location info successfully</li>');
-			$("#app-status-ul").listview("refresh");
+			//$("#app-status-ul").append('<li class="ui-icon-arrow-r ui-btn-icon-right">Update location info successfully</li>');
+			//$("#app-status-ul").listview("refresh");
 			$.mobile.loading("hide");
 			var changewindow=window.localStorage.getItem("notification");
 			//alert( "Data Loaded in set mob_user_id: " + changewindow +" : "+ window.localStorage.getItem("registration"));

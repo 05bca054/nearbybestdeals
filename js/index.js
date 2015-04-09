@@ -78,14 +78,14 @@ var app = {
 				pushNotification = window.plugins.pushNotification;
 				window.localStorage.setItem("notification", "no");
 				//alert("set local variable push notification to on and remove background mode plugin code");
-				$("#app-status-ul").append('<li class="ui-icon-search ui-btn-icon-right">Detecting Enviroment</li>');
+				//$("#app-status-ul").append('<li class="ui-icon-search ui-btn-icon-right">Detecting Enviroment</li>');
 
 				//alert(device.platform);
 				
 				if ( device.platform == 'android' || device.platform == 'Android' || device.platform == "amazon-fireos" || device.platform == 'ANDROID'){
 					//alert("Android machine");
-					$("#app-status-ul").append('<li class="ui-icon-android ui-btn-icon-right">Registering ' + device.platform + '....</li>');
-					$("#app-status-ul").listview("refresh");
+					//$("#app-status-ul").append('<li class="ui-icon-android ui-btn-icon-right">Registering ' + device.platform + '....</li>');
+					//$("#app-status-ul").listview("refresh");
 					//navigator.geolocation.getCurrentPosition(onSuccess1, onError1);
 					pushNotification.register(
 					successHandler,//Fist call success handler then call ecb(onNotification)
@@ -139,7 +139,8 @@ var app = {
 				//alert(icon);
 				window.localStorage.setItem("icon", icon);
 				initPages();
-				console.log("App finished loading");
+				//console.log("App finished loading");
+				navigator.splashscreen.hide();
 				app.app_loaded = true;
 				
 			});			
