@@ -650,16 +650,12 @@ var app = {
 					{
 						if($("#city_name").val()==1)
 						{
-							/*var date = Date.parse('t + 10 d');
-							var today = new Date();
-							var nextcoupon = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();*/
 							var date = Date.parse('t + 10 d');
 							var today = new Date();
-							var nextcoupon = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+"t"+today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
-							alert(nextcoupon);
-							
+							var nextcoupon = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
 							coupon.openDatabase();
-							coupon.createTable();							
+							coupon.createTable();
+							alert(nextcoupon);
 							coupon.addCoupon("Nearby best deals","Coffee deal", "Buy one get one free on Latte, Cappuccino and Expresso Coffee worth Rs.25(Coffee day)", "B1G1FR", nextcoupon, "31", "23.0452759", "72.5138078", "off");
 						}
 						$.ajax({
