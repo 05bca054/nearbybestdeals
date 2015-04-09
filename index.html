@@ -116,6 +116,95 @@
 			</div>
 		</div>-->
 		<!-- single coupon page-->
+		
+		<div data-role="page" id="coupon">
+			
+			<div data-role="popup" id="help-coupon" data-theme="b" data-dismissible="false" style="max-width:400px;">
+				
+				<div role="main" class="ui-content">
+					<h3 class="ui-title">Profile has been created successfully</h3>					
+					<p>Swipe left or right to delete any coupon or dealer</p>
+					<img src="img/swipe100.png">
+					<p>Touch to view coupon description or dealer information</p>
+					<img src="img/touch100.png">
+					<div class="mc-text-center">
+						<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5">OK</a>
+					</div>
+				</div>
+				
+			</div>
+			
+			<div data-role="header" data-position="fixed">
+				<div class="ui-grid-a">
+					<div class="ui-block-a" style="width:13%;">
+						<a href="#inside-coupon" style="float:left;">
+							<img src="img/menu24.png" style="margin:15%;">
+						</a>
+					</div>
+					<div class="ui-block-b" style="width:85%;padding:2% 0%;">
+						<h3 style="margin: 0% 0% 0% 10%;float:left;">Active Coupons</h3>
+						<a href="#" class="ui-btn-right ui-btn ui-btn-b ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-back" data-role="button" data-rel="back" data-icon="arrow-l" style="top: 0;">Back</a>
+					</div>
+				</div>
+			</div><!-- /header -->
+			
+			<!--Right panel-->
+			<div data-role="panel" id="inside-coupon" data-position="left" data-display="overlay" data-theme="b">
+				<ul data-role="listview">
+					<li data-icon="back"><a href="#" data-rel="close">Close</a></li>
+					<li><a href="#coupon" class="ui-link ui-btn ui-icon-home ui-btn-icon-left ui-btn-active ui-state-persist">Coupons<div class="ui-li-count count-coupon"></div></a></li>
+					<li>						
+						<div class='ui-sub-panel' id='submenu1'>
+						  <div class='ui-header' data-theme='b'>
+							<h1 class='ui-title'>Dealer</h1>
+						  </div>
+						  <div class="ui-content">
+							<!-- submenu contents here -->
+							<ul data-role="listview">
+								<li><a href="#" class="ui-link ui-btn ui-icon-plus ui-btn-icon-left addDealer">Add Dealer</a></li>
+								<li><a href="#listdealer" class="ui-link ui-btn ui-icon-grid ui-btn-icon-left">List Dealer<div class="ui-li-count dealer-count"></div></a></li>
+							</ul>
+						  </div>
+						</div>
+					</li>
+					<!--<li><a href="#nearbydeals" class="ui-link ui-btn ui-icon-location ui-btn-icon-left">Nearby Deals</a></li>-->					
+					<li><a href="#feedback" class="ui-link ui-btn ui-icon-mail ui-btn-icon-left">Feedback</a></li>
+					<li><a href="#profile" class="ui-link ui-btn ui-icon-gear ui-btn-icon-left">Profile settings</a></li>					
+					<!--<li>Exit</li>-->
+					<li><a href="#contact_us" class="ui-link ui-btn ui-icon-mail ui-btn-icon-left">Contact us</a></li>
+					<li><a href="#help" class="ui-link ui-btn ui-icon-info ui-btn-icon-left">Help</a></li>
+				</ul>
+			</div>
+			
+			<div role="main" class="ui-content">				
+				<form class="ui-filterable">
+				    <input id="coupon-input" data-type="search" placeholder="Dealer name,Coupon code or title...">
+				</form>
+				<h3 id="total-coupon"></h3><br>
+				<ul id="list" class="touch" data-role="listview" data-icon="false" data-split-icon="delete" data-filter="true" data-input="#coupon-input">
+				</ul>
+			</div><!-- /content -->
+						
+			<div id="confirm" class="ui-content" data-role="popup" data-theme="a">
+				<p id="question">Are you sure you want to delete:</p>
+				<div class="ui-grid-a">
+					<div class="ui-block-a">
+						<a id="yes" class="ui-btn ui-corner-all ui-mini ui-btn-a" data-rel="back">Yes</a>
+					</div>
+					<div class="ui-block-b">
+						<a id="cancel" class="ui-btn ui-corner-all ui-mini ui-btn-a" data-rel="back">Cancel</a>
+					</div>
+				</div>
+			</div><!-- /popup -->
+			<div data-role="footer" data-position="fixed">
+				<div data-role="navbar" data-iconpos="left">
+					<ul>						
+						<li><a href="#coupon" data-icon="home" class="ui-btn-b ui-btn-active ui-state-persist">Coupons</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div>			
+		</div>
+		
 		<div data-role="page" id="single_coupon">
 			<div data-role="header" data-position="fixed">
 				<!--<a href="#inside-single-coupon" data-icon="bullets" class="ui-btn-b" data-iconpos="notext">Menu</a>	-->
@@ -660,95 +749,7 @@
 					</ul>
 				</div><!-- /navbar -->
 			</div>
-		</div>
-		
-		<div data-role="page" id="coupon">
-			
-			<div data-role="popup" id="help-coupon" data-theme="b" data-dismissible="false" style="max-width:400px;">
-				
-				<div role="main" class="ui-content">
-					<h3 class="ui-title">Profile has been created successfully</h3>					
-					<p>Swipe left or right to delete any coupon or dealer</p>
-					<img src="img/swipe100.png">
-					<p>Touch to view coupon description or dealer information</p>
-					<img src="img/touch100.png">
-					<div class="mc-text-center">
-						<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-b mc-top-margin-1-5">OK</a>
-					</div>
-				</div>
-				
-			</div>
-			
-			<div data-role="header" data-position="fixed">
-				<div class="ui-grid-a">
-					<div class="ui-block-a" style="width:13%;">
-						<a href="#inside-coupon" style="float:left;">
-							<img src="img/menu24.png" style="margin:15%;">
-						</a>
-					</div>
-					<div class="ui-block-b" style="width:85%;padding:2% 0%;">
-						<h3 style="margin: 0% 0% 0% 10%;float:left;">Active Coupons</h3>
-						<a href="#" class="ui-btn-right ui-btn ui-btn-b ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-back" data-role="button" data-rel="back" data-icon="arrow-l" style="top: 0;">Back</a>
-					</div>
-				</div>
-			</div><!-- /header -->
-			
-			<!--Right panel-->
-			<div data-role="panel" id="inside-coupon" data-position="left" data-display="overlay" data-theme="b">
-				<ul data-role="listview">
-					<li data-icon="back"><a href="#" data-rel="close">Close</a></li>
-					<li><a href="#coupon" class="ui-link ui-btn ui-icon-home ui-btn-icon-left ui-btn-active ui-state-persist">Coupons<div class="ui-li-count count-coupon"></div></a></li>
-					<li>						
-						<div class='ui-sub-panel' id='submenu1'>
-						  <div class='ui-header' data-theme='b'>
-							<h1 class='ui-title'>Dealer</h1>
-						  </div>
-						  <div class="ui-content">
-							<!-- submenu contents here -->
-							<ul data-role="listview">
-								<li><a href="#" class="ui-link ui-btn ui-icon-plus ui-btn-icon-left addDealer">Add Dealer</a></li>
-								<li><a href="#listdealer" class="ui-link ui-btn ui-icon-grid ui-btn-icon-left">List Dealer<div class="ui-li-count dealer-count"></div></a></li>
-							</ul>
-						  </div>
-						</div>
-					</li>
-					<!--<li><a href="#nearbydeals" class="ui-link ui-btn ui-icon-location ui-btn-icon-left">Nearby Deals</a></li>-->					
-					<li><a href="#feedback" class="ui-link ui-btn ui-icon-mail ui-btn-icon-left">Feedback</a></li>
-					<li><a href="#profile" class="ui-link ui-btn ui-icon-gear ui-btn-icon-left">Profile settings</a></li>					
-					<!--<li>Exit</li>-->
-					<li><a href="#contact_us" class="ui-link ui-btn ui-icon-mail ui-btn-icon-left">Contact us</a></li>
-					<li><a href="#help" class="ui-link ui-btn ui-icon-info ui-btn-icon-left">Help</a></li>
-				</ul>
-			</div>
-			
-			<div role="main" class="ui-content">				
-				<form class="ui-filterable">
-				    <input id="coupon-input" data-type="search" placeholder="Dealer name,Coupon code or title...">
-				</form>
-				<h3 id="total-coupon"></h3><br>
-				<ul id="list" class="touch" data-role="listview" data-icon="false" data-split-icon="delete" data-filter="true" data-input="#coupon-input">
-				</ul>
-			</div><!-- /content -->
-						
-			<div id="confirm" class="ui-content" data-role="popup" data-theme="a">
-				<p id="question">Are you sure you want to delete:</p>
-				<div class="ui-grid-a">
-					<div class="ui-block-a">
-						<a id="yes" class="ui-btn ui-corner-all ui-mini ui-btn-a" data-rel="back">Yes</a>
-					</div>
-					<div class="ui-block-b">
-						<a id="cancel" class="ui-btn ui-corner-all ui-mini ui-btn-a" data-rel="back">Cancel</a>
-					</div>
-				</div>
-			</div><!-- /popup -->
-			<div data-role="footer" data-position="fixed">
-				<div data-role="navbar" data-iconpos="left">
-					<ul>						
-						<li><a href="#coupon" data-icon="home" class="ui-btn-b ui-btn-active ui-state-persist">Coupons</a></li>
-					</ul>
-				</div><!-- /navbar -->
-			</div>			
-		</div>
+		</div>		
 		
 		<div data-role="page" id="profile">
 			<div data-role="header" data-position="fixed">
