@@ -655,7 +655,7 @@ var app = {
 							var nextcoupon = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
 							coupon.openDatabase();
 							coupon.createTable();
-							alert(nextcoupon);
+							//alert(nextcoupon);
 							coupon.addCoupon("Nearby best deals","Coffee deal", "Buy one get one free on Latte, Cappuccino and Expresso Coffee worth Rs.25(Coffee day)", "B1G1FR", nextcoupon, "31", "23.0452759", "72.5138078", "off");
 						}
 						$.ajax({
