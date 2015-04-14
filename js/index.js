@@ -68,7 +68,7 @@ var app = {
 				StatusBar.styleLightContent();
 				StatusBar.backgroundColorByHexString("#1f1e2e");
 				
-				$.mobile.loading("show");  
+				//$.mobile.loading("show");  
 				
 				
 				FastClick.attach(document.body);
@@ -718,11 +718,26 @@ var app = {
 	},
     
     loadContent: function() {
-		//$(document).on("pagecreate",function(event){		
+		//$(document).on("pagecreate",function(event){
 				if(window.localStorage.getItem("registration")=="yes")
 				{
 					app.countMerchants();
-				}				
+				}
+				//Testing first time coupon load after implimenting splashscreen
+				coupon.openDatabase();
+				//coupon.openDatabase();
+				coupon.createTable();
+				//coupon.deleteAllExpires();
+				coupon.countCoupon();
+				coupon.getCoupons();
+				
+				if(coupon.countCoupon==0)
+				{
+					alert("No active coupon found!Please wait for coupon from your added dealers.");
+					//$("#list").append('<li class="ui-li-has-alt" id="coupon_empty"><a id="coupon_link_empty" href="#"><h3>No active coupon found!Please wait for coupon from your added dealers.</h3></a></li>');
+				}
+				//Testing first time coupon load after implimenting splashscreen ends
+				
 				app.cityFill();
 				app.swipeMerchantFunc();
 							
