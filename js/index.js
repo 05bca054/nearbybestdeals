@@ -68,7 +68,7 @@ var app = {
 				StatusBar.styleLightContent();
 				StatusBar.backgroundColorByHexString("#1f1e2e");
 				
-				//$.mobile.loading("show");  
+				//$.mobile.loading("show");
 				
 				
 				FastClick.attach(document.body);
@@ -646,23 +646,30 @@ var app = {
 				},
 				submitHandler: function (form) {					
 					//alert("in submit");
+					var DOB = $('#byear').val()+"-"+$('#bmon').val()+"-"+$('#bday').val();
 					if($("#merchant_name").val())
 					{
+						var date = Date.parse('t + 10 d');
+						var today = new Date();
+						var nextcoupon = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
+						coupon.openDatabase();
+						coupon.createTable();
+						
 						if($("#city_name").val()==1)
-						{
-							var date = Date.parse('t + 10 d');
-							var today = new Date();
-							var nextcoupon = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
-							coupon.openDatabase();
-							coupon.createTable();
+						{							
 							//alert(nextcoupon);
 							coupon.addCoupon("Nearby best deals","Coffee deal", "Buy one get one free on Latte, Cappuccino and Expresso Coffee worth Rs.25(Coffee day)", "B1G1FR", nextcoupon, "31", "23.0452759", "72.5138078", "off");
 						}
+						else if($("#city_name").val()==2)
+						{
+							coupon.addCoupon("Nice & new gift gallery","Perfume sale", "Flat 10% off on perfumes above 150Rs.T & C applied", "NNNP10", nextcoupon, "23", "22.283951", "70.768347", "off");
+						}
+						
 						$.ajax({
 							beforeSend: function() { $.mobile.loading("show"); }, //Show spinner
 							complete: function() { $.mobile.loading("hide"); }, //Hide spinner
 							url: web_url+"users/first_time_update_profile.php",
-							data: { uuid: window.localStorage.getItem("mob_user_id"), name: $("#f_name").val(), phone: $("#mob_no").val(), email: $("#email").val(), ref_merchant: $("#merchant_name").val(), city: $("#city_name").val() },
+							data: { uuid: window.localStorage.getItem("mob_user_id"), name: $("#f_name").val(), phone: $("#mob_no").val(), email: $("#email").val(), ref_merchant: $("#merchant_name").val(), city: $("#city_name").val(), dateob: DOB },
 							type: "POST",
 							success: function(data) {
 								window.localStorage.setItem("first_time_update", "1");
@@ -670,11 +677,7 @@ var app = {
 								//alert(window.localStorage.getItem("registration"));
 								$.mobile.loading("hide");
 								localStorage.openSuccessPopup = 1;
-								app.countMerchants();
-								
-								//if($("#city_name").val()==1)
-									//coupon.addCoupon("Nearby best deals","Cafe Coffe sale", "Buy one get one free on Latte, Cappuccino Coffee", "B1G1FR", Date.today().add(10).days(), "31", "23.0502986", "72.5145669", "off");
-								//alert("after");
+								app.countMerchants();								
 									
 								$(':mobile-pagecontainer').pagecontainer('change', '#coupon', {
 									reload: false
@@ -1043,13 +1046,10 @@ var app = {
 						$.each(clstr, function(k, ndes) {
 							if(k=="merchant")
 								$("#merchant"+i).append('<h3>'+ndes+'</h3>');
-					
-						
-							
-						});						
+						});
 						//$("#dealer_li"+i).append('<p class="ui-li-aside" style="right: 1.333em;"><select data-mini="true" id="select-based-flipswitch'+clstr.id+'" data-role="flipswitch" data-corners="false" class="notif_status" dealer-no="'+clstr.id+'"><option value="1">On</option><option value="0">Off</option></select></p>');
 						$("#select-based-flipswitch"+clstr.id).val(clstr.notif);
-						
+						$("#wait-msg").hide('slow');
 						//alert("after first refresj");
 					});
 					
