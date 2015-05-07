@@ -131,7 +131,7 @@ var coupon = {
 						$("#single_sharable").show("fast");
 					}
 					
-					$(".facebook-share").attr("onclick","event.preventDefault();$.mobile.loading('show');window.plugins.socialsharing.shareViaFacebookWithPasteMessageHint('Use Coupon code :"+row.coupon_code+" And get "+row.coupon_desc+" at "+row.merchant_name+" Locate merchant : http://maps.google.com/maps?q=loc:"+row.lat+","+row.lon+"', null, 'https://www.google.com/maps/@"+row.lat+","+row.lon+",18z', function() {$.mobile.loading('hide');}, function(errormsg){alert(errormsg);$.mobile.loading('hide');})");
+					$(".facebook-share").attr("onclick","event.preventDefault();$.mobile.loading('show');window.plugins.socialsharing.shareViaFacebookWithPasteMessageHint('Use Coupon code :"+row.coupon_code+" And get "+row.coupon_desc+" at "+row.merchant_name+" Locate merchant : http://maps.google.com/maps?q=loc:"+row.lat+","+row.lon+"', null, 'https://www.google.com/maps/@"+row.lat+","+row.lon+",18z', 'Paste it!',function() {$.mobile.loading('hide');}, function(errormsg){alert(errormsg);$.mobile.loading('hide');})");
 					
 					//alert(row.expire_time+"after alert");
 					//$(".twitter-share").attr("onclick","event.preventDefault();$.mobile.loading('show');window.plugins.socialsharing.shareViaTwitter('Use Coupon code :"+row.coupon_code+" And get "+row.coupon_desc+" at "+row.merchant_name+"', 'http://nearbybestdeals.com/wp-content/themes/enfold/images/layout/logo.jpg', 'https://www.google.com/maps/@"+row.lat+","+row.lon+",18z');$.mobile.loading('hide');");
